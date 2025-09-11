@@ -4,9 +4,9 @@
       <q-toolbar>
         <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title> {{ productName }} </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>v{{ version }}</div>
       </q-toolbar>
     </q-header>
 
@@ -27,6 +27,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
+
+import { productName, version } from '../../package.json';
 
 const linksList: EssentialLinkProps[] = [
   {
@@ -84,6 +86,8 @@ export default defineComponent({
     return {
       linksList,
       leftDrawerOpen: false,
+      productName,
+      version,
     };
   },
 
