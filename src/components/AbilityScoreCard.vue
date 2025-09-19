@@ -1,26 +1,85 @@
 <template>
-  <q-card class="row q-gutter-x-lg q-pr-lg q-py-sm justify-center col-auto">
-    <div class="column items-center" v-for="(stat, idx) in stats" :key="idx">
-      <div class="row justify-center">
-        <q-img v-if="stat.icon" :src="stat.icon" />
-        <span>{{ stat.name }}</span>
-      </div>
-      <div>{{ stat.value }}</div>
+  <q-card class="row q-gutter-x-lg q-pr-lg q-py-sm justify-evenly col-auto">
+    <div class="column items-center col">
+      <div>SIZE</div>
+      <div>{{ size }}</div>
+    </div>
+    <div class="column items-center col">
+      <div>SPEED</div>
+      <div>{{ speed }}</div>
+    </div>
+    <div class="column items-center col-auto">
+      <div>STR</div>
+      <div>{{ strModifier }}</div>
+    </div>
+    <div class="column items-center col-auto">
+      <div>DEX</div>
+      <div>{{ dexModifier }}</div>
+    </div>
+    <div class="column items-center col-auto">
+      <div>CON</div>
+      <div>{{ conModifier }}</div>
+    </div>
+    <div class="column items-center col-auto">
+      <div>INT</div>
+      <div>{{ intModifier }}</div>
+    </div>
+    <div class="column items-center col-auto">
+      <div>WIS</div>
+      <div>{{ wisModifier }}</div>
+    </div>
+    <div class="column items-center col-auto">
+      <div>CHA</div>
+      <div>{{ chaModifier }}</div>
     </div>
   </q-card>
 </template>
 
 <script lang="ts">
+import { useCharacterStore } from 'src/stores/character_store';
 import { defineComponent } from 'vue';
-import type { Stat } from '../types.js';
+
+const characterStore = useCharacterStore();
 
 export default defineComponent({
   name: 'AbilityScoreCard',
 
-  props: {
-    stats: {
-      type: Array<Stat>,
-      required: true,
+  computed: {
+    speed(): string {
+      return `${characterStore.speed} ft.`;
+    },
+    size(): string {
+      return characterStore.size.toUpperCase();
+    },
+    strModifier(): string {
+      const modifier = characterStore.getAbilityScoreModifier('str');
+      const sign = modifier >= 0 ? '+' : '';
+      return `${sign}${modifier}`;
+    },
+    dexModifier(): string {
+      const modifier = characterStore.getAbilityScoreModifier('dex');
+      const sign = modifier >= 0 ? '+' : '';
+      return `${sign}${modifier}`;
+    },
+    conModifier(): string {
+      const modifier = characterStore.getAbilityScoreModifier('con');
+      const sign = modifier >= 0 ? '+' : '';
+      return `${sign}${modifier}`;
+    },
+    intModifier(): string {
+      const modifier = characterStore.getAbilityScoreModifier('int');
+      const sign = modifier >= 0 ? '+' : '';
+      return `${sign}${modifier}`;
+    },
+    wisModifier(): string {
+      const modifier = characterStore.getAbilityScoreModifier('wis');
+      const sign = modifier >= 0 ? '+' : '';
+      return `${sign}${modifier}`;
+    },
+    chaModifier(): string {
+      const modifier = characterStore.getAbilityScoreModifier('cha');
+      const sign = modifier >= 0 ? '+' : '';
+      return `${sign}${modifier}`;
     },
   },
 });
