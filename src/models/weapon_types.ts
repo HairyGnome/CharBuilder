@@ -1,4 +1,4 @@
-import type { Die, LinkedProperty } from './types';
+import type { Die } from './types';
 
 export type Damage = {
   amount: Die;
@@ -6,13 +6,13 @@ export type Damage = {
 };
 
 export type Weapon = {
-  name: LinkedProperty;
+  name: string;
   damage: Damage;
   bulk: number;
-  properties: WeaponProperty[];
+  properties: string[];
   heft: number;
-  special: LinkedProperty;
-  mastery: LinkedProperty;
+  special: string;
+  mastery: string;
 };
 
 export enum DamageTypes {

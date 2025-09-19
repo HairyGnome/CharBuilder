@@ -1,3 +1,5 @@
+import type { Weapon } from './weapon_types';
+
 export type Stat = {
   name: string;
   value: string | number;
@@ -36,9 +38,40 @@ export type Skills = {
 
 export type CharacterState = {
   name: string;
+  ancestry: string;
   size: 'small' | 'medium' | 'large';
   speed: number;
   abilityScores: AbilityScores;
   dc: number;
   hp: HP;
+  weapons?: Weapon[];
+};
+
+export type Data = {
+  classes: { [key: string]: Class };
+};
+
+export type Class = {
+  label: string;
+  hitDie: number;
+  roles: string[];
+  proficiencies: {
+    armor: {
+      choose?: number;
+      granted: string[];
+    };
+    weapons: {
+      choose?: number;
+      granted: string[];
+    };
+    saves: string[];
+    skills: {
+      choose: number;
+      granted: string[];
+    };
+    tools: {
+      choose?: number;
+      granted: string[];
+    };
+  };
 };
