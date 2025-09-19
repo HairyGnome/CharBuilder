@@ -42,7 +42,6 @@ export type CharacterState = {
   size: 'small' | 'medium' | 'large';
   speed: number;
   abilityScores: AbilityScores;
-  dc: number;
   hp: HP;
   weapons?: Weapon[];
 };

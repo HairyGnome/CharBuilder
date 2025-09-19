@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import type { CharacterState } from 'src/models/types';
+import type { Weapon } from 'src/models/weapon_types';
 import { DamageTypes } from 'src/models/weapon_types';
 
 export const useCharacterStore = defineStore('characterStore', {
@@ -17,7 +18,6 @@ export const useCharacterStore = defineStore('characterStore', {
         wis: 10,
         cha: 10,
       },
-      dc: 14,
       hp: {
         currentHp: 14,
         maxHp: 22,
