@@ -8,101 +8,21 @@
 
 <script lang="ts">
 import type { Weapon } from 'src/models/weapon_types';
-import { DamageTypes } from 'src/models/weapon_types';
 import { defineComponent } from 'vue';
 import WeaponCard from './WeaponCard.vue';
+import { useCharacterStore } from 'src/stores/character_store';
+
+const characterStore = useCharacterStore();
 
 export default defineComponent({
   name: 'WeaponsPage',
 
   components: { WeaponCard },
 
-  data() {
-    return {
-      weapons: [
-        {
-          name: 'longsword',
-          damage: { amount: { amount: 1, type: 8 }, type: DamageTypes.SLASHING },
-          bulk: 1,
-          properties: [],
-          heft: 4,
-          special: 'Quick parry',
-          mastery: 'Prince slayer',
-        },
-        {
-          name: 'crowssow, heavy',
-          damage: { amount: { amount: 1, type: 10 }, type: DamageTypes.PIERCING },
-          bulk: 2,
-          properties: ['projectile (range 100/400)', 'loading'],
-          heft: 4,
-          special: 'Braced fire',
-          mastery: 'Fast hands',
-        },
-        {
-          name: 'longsword',
-          damage: { amount: { amount: 1, type: 8 }, type: DamageTypes.SLASHING },
-          bulk: 1,
-          properties: [],
-          heft: 4,
-          special: 'Quick parry',
-          mastery: 'Prince slayer',
-        },
-        {
-          name: 'longsword',
-          damage: { amount: { amount: 1, type: 8 }, type: DamageTypes.SLASHING },
-          bulk: 1,
-          properties: [],
-          heft: 4,
-          special: 'Quick parry',
-          mastery: 'Prince slayer',
-        },
-        {
-          name: 'crowssow, heavy',
-          damage: { amount: { amount: 1, type: 10 }, type: DamageTypes.PIERCING },
-          bulk: 2,
-          properties: ['projectile (range 100/400)', 'loading'],
-          heft: 4,
-          special: 'Braced fire',
-          mastery: 'Fast hands',
-        },
-        {
-          name: 'longsword',
-          damage: { amount: { amount: 1, type: 8 }, type: DamageTypes.SLASHING },
-          bulk: 1,
-          properties: [],
-          heft: 4,
-          special: 'Quick parry',
-          mastery: 'Prince slayer',
-        },
-        {
-          name: 'longsword',
-          damage: { amount: { amount: 1, type: 8 }, type: DamageTypes.SLASHING },
-          bulk: 1,
-          properties: [],
-          heft: 4,
-          special: 'Quick parry',
-          mastery: 'Prince slayer',
-        },
-        {
-          name: 'crowssow, heavy',
-          damage: { amount: { amount: 1, type: 10 }, type: DamageTypes.PIERCING },
-          bulk: 2,
-          properties: ['projectile (range 100/400)', 'loading'],
-          heft: 4,
-          special: 'Braced fire',
-          mastery: 'Fast hands',
-        },
-        {
-          name: 'longsword',
-          damage: { amount: { amount: 1, type: 8 }, type: DamageTypes.SLASHING },
-          bulk: 1,
-          properties: [],
-          heft: 4,
-          special: 'Quick parry',
-          mastery: 'Prince slayer',
-        },
-      ] as Weapon[],
-    };
+  computed: {
+    weapons(): Weapon[] {
+      return characterStore.weapons || [];
+    },
   },
 });
 </script>
