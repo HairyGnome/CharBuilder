@@ -1,34 +1,34 @@
 <template>
   <q-card class="row q-gutter-x-lg q-pr-lg q-py-sm justify-evenly col-auto">
-    <div class="column items-center col">
+    <div class="column items-center">
       <div>SIZE</div>
       <div>{{ size }}</div>
     </div>
-    <div class="column items-center col">
+    <div class="column items-center">
       <div>SPEED</div>
       <div>{{ speed }}</div>
     </div>
-    <div class="column items-center col-auto">
+    <div class="column items-center">
       <div>STR</div>
       <div>{{ strModifier }}</div>
     </div>
-    <div class="column items-center col-auto">
+    <div class="column items-center">
       <div>DEX</div>
       <div>{{ dexModifier }}</div>
     </div>
-    <div class="column items-center col-auto">
+    <div class="column items-center">
       <div>CON</div>
       <div>{{ conModifier }}</div>
     </div>
-    <div class="column items-center col-auto">
+    <div class="column items-center">
       <div>INT</div>
       <div>{{ intModifier }}</div>
     </div>
-    <div class="column items-center col-auto">
+    <div class="column items-center">
       <div>WIS</div>
       <div>{{ wisModifier }}</div>
     </div>
-    <div class="column items-center col-auto">
+    <div class="column items-center">
       <div>CHA</div>
       <div>{{ chaModifier }}</div>
     </div>
