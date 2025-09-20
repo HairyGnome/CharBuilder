@@ -46,7 +46,10 @@ export type CharacterState = {
   level: number;
   xp: number;
   class: string;
-  ancestry: string;
+  ancestry: {
+    ancestry: string;
+    lineage: string;
+  };
   speed: number;
   abilityScores: AbilityScores;
   hp: HP;

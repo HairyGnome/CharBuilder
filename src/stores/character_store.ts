@@ -2,6 +2,9 @@ import { defineStore } from 'pinia';
 import type { CharacterState } from 'src/models/types';
 import type { Weapon } from 'src/models/weapon_types';
 import { DamageTypes } from 'src/models/weapon_types';
+import { useDataStore } from './data-store';
+
+const dataStore = useDataStore();
 
 export const useCharacterStore = defineStore('characterStore', {
   state(): CharacterState {
@@ -10,7 +13,10 @@ export const useCharacterStore = defineStore('characterStore', {
       level: 1,
       xp: 0,
       class: 'fighter',
-      ancestry: 'human',
+      ancestry: {
+        ancestry: 'human',
+        lineage: 'sól',
+      },
       speed: 25,
       abilityScores: {
         str: 16,
@@ -56,5 +62,17 @@ export const useCharacterStore = defineStore('characterStore', {
       },
   },
 
-  actions: {},
+  actions: {
+    setAncestry(ancestry: string) {
+      ancestry = ancestry.toLowerCase();
+      this.ancestry.ancestry = ancestry;
+      this.ancestry.lineage = dataStore.ancestries[ancestry]?.lineages[0] || 'N/A';
+    },
+    setLineage(lineage: string) {
+      this.ancestry.lineage = lineage.toLowerCase();
+    },
+    setClass(className: string) {
+      this.class = className.toLowerCase();
+    },
+  },
 });

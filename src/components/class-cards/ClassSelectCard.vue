@@ -1,5 +1,25 @@
 <template>
   <q-card-section class="column q-gutter-y-md">
+    <div class="text-subtitle1">Ancestry</div>
+    <q-select
+      v-model="selectedAncestry"
+      :options="ancestryLabels"
+      label="Select Ancestry"
+      dense
+      outlined
+      class="col q-mt-none"
+    />
+    <div class="text-subtitle1">Lineage</div>
+    <q-select
+      v-model="selectedLineage"
+      :options="lineageLabels"
+      dense
+      outlined
+      class="col q-mt-none"
+    />
+  </q-card-section>
+  <q-separator class="q-my-md" />
+  <q-card-section class="column q-gutter-y-md">
     <div class="text-subtitle1">Class</div>
     <q-select
       v-model="selectedClass"
@@ -27,7 +47,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useDataStore } from 'src/stores/data-store';
-import type { ClassData } from 'src/models/types';
 import { useCharacterStore } from 'src/stores/character_store';
 
 const dataStore = useDataStore();
@@ -38,9 +57,18 @@ export default defineComponent({
 
   computed: {
     classLabels() {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return Object.entries(dataStore.classes).map(([key, _cls]: [string, ClassData]) =>
-        key.capitalize(),
+      return Object.keys(dataStore.classes).map((key: string) => key.capitalize());
+    },
+
+    ancestryLabels() {
+      return Object.keys(dataStore.ancestries).map((key) => key.capitalize());
+    },
+
+    lineageLabels() {
+      return (
+        dataStore.ancestries[characterStore.ancestry.ancestry]?.lineages.map((lineage) =>
+          lineage.capitalize(),
+        ) || []
       );
     },
 
@@ -54,7 +82,25 @@ export default defineComponent({
       },
       set(value: string) {
         console.log(typeof value);
-        characterStore.class = value.toLowerCase();
+        characterStore.setClass(value);
+      },
+    },
+
+    selectedAncestry: {
+      get() {
+        return characterStore.ancestry.ancestry.capitalize();
+      },
+      set(value: string) {
+        characterStore.setAncestry(value);
+      },
+    },
+
+    selectedLineage: {
+      get() {
+        return characterStore.ancestry.lineage.capitalize();
+      },
+      set(value: string) {
+        characterStore.setLineage(value);
       },
     },
   },
