@@ -53,7 +53,7 @@ export type Data = {
   classes: { [key: string]: Class };
 };
 
-export type Class = {
+export type ClassData = {
   label: string;
   hitDie: number;
   roles: string[];

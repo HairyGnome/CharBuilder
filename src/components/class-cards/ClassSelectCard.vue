@@ -27,7 +27,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useDataStore } from 'src/stores/data-store';
-import type { Class } from 'src/models/types';
+import type { ClassData } from 'src/models/types';
 import { useCharacterStore } from 'src/stores/character_store';
 
 const dataStore = useDataStore();
@@ -39,7 +39,7 @@ export default defineComponent({
   computed: {
     classLabels() {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      return Object.entries(dataStore.classes).map(([key, _cls]: [string, Class]) =>
+      return Object.entries(dataStore.classes).map(([key, _cls]: [string, ClassData]) =>
         key.capitalize(),
       );
     },
