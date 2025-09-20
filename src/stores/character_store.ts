@@ -10,8 +10,7 @@ export const useCharacterStore = defineStore('characterStore', {
       level: 1,
       xp: 0,
       class: 'fighter',
-      ancestry: 'Human',
-      size: 'medium',
+      ancestry: 'human',
       speed: 25,
       abilityScores: {
         str: 16,

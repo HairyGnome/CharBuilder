@@ -36,13 +36,17 @@ export type Skills = {
   value: number;
 };
 
+export type AncestryData = {
+  lineages: string[];
+  size: 'small' | 'medium' | 'large';
+};
+
 export type CharacterState = {
   name: string;
   level: number;
   xp: number;
   class: string;
   ancestry: string;
-  size: 'small' | 'medium' | 'large';
   speed: number;
   abilityScores: AbilityScores;
   hp: HP;
@@ -50,7 +54,8 @@ export type CharacterState = {
 };
 
 export type Data = {
-  classes: { [key: string]: Class };
+  classes: { [key: string]: ClassData };
+  ancestries: { [key: string]: AncestryData };
 };
 
 export type ClassData = {
