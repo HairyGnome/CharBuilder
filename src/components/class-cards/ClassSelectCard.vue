@@ -28,28 +28,34 @@
 import { defineComponent } from 'vue';
 import { useDataStore } from 'src/stores/data-store';
 import type { Class } from 'src/models/types';
+import { useCharacterStore } from 'src/stores/character_store';
 
 const dataStore = useDataStore();
+const characterStore = useCharacterStore();
 
 export default defineComponent({
   name: 'ClassSelectCard',
 
-  data() {
-    return {
-      selectedClass: { label: 'Fighter', value: 'fighter' },
-    };
-  },
-
   computed: {
     classLabels() {
-      return Object.entries(dataStore.classes).map(([key, cls]: [string, Class]) => ({
-        label: cls.label,
-        value: key,
-      }));
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      return Object.entries(dataStore.classes).map(([key, _cls]: [string, Class]) =>
+        key.capitalize(),
+      );
     },
 
     classRoles() {
-      return dataStore.classes[this.selectedClass.value]?.roles || [];
+      return dataStore.classes[characterStore.class]?.roles || [];
+    },
+
+    selectedClass: {
+      get() {
+        return characterStore.class.capitalize();
+      },
+      set(value: string) {
+        console.log(typeof value);
+        characterStore.class = value.toLowerCase();
+      },
     },
   },
 });
