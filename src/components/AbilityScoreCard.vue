@@ -51,7 +51,7 @@ export default defineComponent({
       return `${characterStore.speed} ft.`;
     },
     size(): string {
-      return dataStore.ancestries[characterStore.ancestry]?.size.toUpperCase() || 'N/A';
+      return dataStore.ancestries[characterStore.ancestry.ancestry]?.size.toUpperCase() || 'N/A';
     },
     strModifier(): string {
       const modifier = characterStore.getAbilityScoreModifier('str');
