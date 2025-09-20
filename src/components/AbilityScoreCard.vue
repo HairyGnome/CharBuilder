@@ -37,8 +37,10 @@
 
 <script lang="ts">
 import { useCharacterStore } from 'src/stores/character_store';
+import { useDataStore } from 'src/stores/data-store';
 import { defineComponent } from 'vue';
 
+const dataStore = useDataStore();
 const characterStore = useCharacterStore();
 
 export default defineComponent({
@@ -49,7 +51,7 @@ export default defineComponent({
       return `${characterStore.speed} ft.`;
     },
     size(): string {
-      return characterStore.size.toUpperCase();
+      return dataStore.ancestries[characterStore.ancestry]?.size.toUpperCase() || 'N/A';
     },
     strModifier(): string {
       const modifier = characterStore.getAbilityScoreModifier('str');
