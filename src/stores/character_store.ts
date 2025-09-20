@@ -7,6 +7,9 @@ export const useCharacterStore = defineStore('characterStore', {
   state(): CharacterState {
     return {
       name: 'Unknown advernturer',
+      level: 1,
+      xp: 0,
+      class: 'fighter',
       ancestry: 'Human',
       size: 'medium',
       speed: 25,

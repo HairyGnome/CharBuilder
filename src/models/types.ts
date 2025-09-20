@@ -38,6 +38,9 @@ export type Skills = {
 
 export type CharacterState = {
   name: string;
+  level: number;
+  xp: number;
+  class: string;
   ancestry: string;
   size: 'small' | 'medium' | 'large';
   speed: number;
