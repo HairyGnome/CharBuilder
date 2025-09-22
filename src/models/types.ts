@@ -36,9 +36,18 @@ export type Skills = {
   value: number;
 };
 
+export type Role = 'martial' | 'mundane' | 'magic' | 'wanderer';
+
 export type AncestryData = {
   lineages: string[];
   size: 'small' | 'medium' | 'large';
+  feature: string;
+  rolePassives: { [key: string]: string };
+};
+
+export type LineageData = {
+  name: string;
+  feature: string;
 };
 
 export type CharacterState = {

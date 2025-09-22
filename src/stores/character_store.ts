@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { CharacterState } from 'src/models/types';
+import type { AbilityScores, CharacterState } from 'src/models/types';
 import type { Weapon } from 'src/models/weapon_types';
 import { DamageTypes } from 'src/models/weapon_types';
 import { useDataStore } from './data-store';
@@ -15,7 +15,7 @@ export const useCharacterStore = defineStore('characterStore', {
       class: 'fighter',
       ancestry: {
         ancestry: 'human',
-        lineage: 'sól',
+        lineage: 'lún',
       },
       speed: 25,
       abilityScores: {
@@ -73,6 +73,9 @@ export const useCharacterStore = defineStore('characterStore', {
     },
     setClass(className: string) {
       this.class = className.toLowerCase();
+    },
+    setAbilityScores(abilityScores: AbilityScores) {
+      this.abilityScores = abilityScores;
     },
   },
 });

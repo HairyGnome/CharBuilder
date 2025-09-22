@@ -19,7 +19,7 @@
   "bard": {
     "label": "Bard",
     "hitDie": 8,
-    "roles": ["magical", "wanderer"],
+    "roles": ["magic", "wanderer"],
     "proficiencies": {
       "armor": ["light", "medium", "shield"],
       "weapons": ["simple", "longsword", "rapier", "shortsword", "shortbow"],
@@ -36,7 +36,7 @@
   "cleric": {
     "label": "Cleric",
     "hitDie": 8,
-    "roles": ["magical"],
+    "roles": ["magic"],
     "proficiencies": {
       "armor": ["light", "medium", "shield"],
       "weapons": ["simple"],

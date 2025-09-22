@@ -1,10 +1,24 @@
 {
   "human": {
-    "lineages": ["sól", "lún", "true"],
-    "size": "medium"
+    "lineages": ["lún", "sól", "true"],
+    "size": "medium",
+    "feature": "determination",
+    "rolePassives": {
+      "martial": "versatile_fighter",
+      "mundane": "versatile_backpack",
+      "magic": "versatile_magic",
+      "wanderer": "versatile_mastery"
+    }
   },
   "orc": {
-    "lineages": ["grey", "green", "red"],
-    "size": "medium"
+    "lineages": ["greyhand", "greenhand", "redhand"],
+    "size": "medium",
+    "feature": "relentless_endurance",
+    "rolePassives": {
+      "martial": "deadly_critical",
+      "mundane": "strong_grip",
+      "magic": "shamanic_ritual",
+      "wanderer": "sharp_instinct"
+    }
   }
 }
