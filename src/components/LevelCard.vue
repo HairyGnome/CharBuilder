@@ -1,8 +1,8 @@
 <template>
-  <q-card class="row q-py-sm q-col-gutter-x-md q-pr-md">
-    <q-input label="Character Name" v-model="characterName" dense class="col" />
-    <q-input label="Level" v-model="level" dense type="number" class="col-3" />
-    <q-input label="XP" v-model="xp" dense type="number" class="col-3" />
+  <q-card class="row q-py-sm q-pr-md">
+    <q-input label="Character Name" v-model="characterName" dense class="col q-ml-md" />
+    <q-input label="Level" v-model="level" dense type="number" class="col-3 q-ml-md" />
+    <q-btn label="Level up!" dense @click="incrementLevel" class="col-auto q-ml-md" />
   </q-card>
 </template>
 
@@ -30,17 +30,14 @@ export default defineComponent({
         return characterStore.level;
       },
       set(value: number) {
-        characterStore.level = Number(value);
+        characterStore.setLevel(value);
       },
     },
+  },
 
-    xp: {
-      get(): number {
-        return characterStore.xp;
-      },
-      set(value: number) {
-        characterStore.xp = Number(value);
-      },
+  methods: {
+    incrementLevel() {
+      characterStore.incrementLevel();
     },
   },
 });

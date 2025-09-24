@@ -53,7 +53,6 @@ export type LineageData = {
 export type CharacterState = {
   name: string;
   level: number;
-  xp: number;
   class: string;
   ancestry: {
     ancestry: string;
