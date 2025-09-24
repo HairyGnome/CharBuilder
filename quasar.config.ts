@@ -3,7 +3,7 @@
 
 import { defineConfig } from '#q-app/wrappers';
 
-const isWeb = process.env.PLATFORM === 'web';
+const isWeb = true; /* process.env.PLATFORM === 'web' */
 
 export default defineConfig((/* ctx */) => {
   return {
