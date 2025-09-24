@@ -1,55 +1,34 @@
 <template>
-  <q-page class="row items-center justify-evenly">
-    <example-component
-      title="Example component"
-      active
-      :todos="todos"
-      :meta="meta"
-    ></example-component>
+  <q-page>
+    <div class="row items-stretch justify-evenly q-pt-xl" style="height: 90vh">
+      <q-card class="q-pa-sm q-ml-lg">
+        <q-scroll-area style="height: 100%; width: 300px">
+          <class-select-card />
+        </q-scroll-area>
+      </q-card>
+      <div class="column col q-px-xl">
+        <div class="row items-center q-gutter-x-lg">
+          <level-card />
+          <ability-score-card class="col" />
+          <hp-card />
+        </div>
+        <gear-card class="q-mt-lg col-grow" />
+      </div>
+    </div>
   </q-page>
 </template>
 
 <script lang="ts">
+import AbilityScoreCard from 'src/components/AbilityScoreCard.vue';
+import GearCard from 'src/components/GearCard.vue';
+import HpCard from 'src/components/HpCard.vue';
+import LevelCard from 'src/components/LevelCard.vue';
+import ClassSelectCard from 'src/components/class-cards/ClassSelectCard.vue';
 import { defineComponent } from 'vue';
-import type { Todo, Meta } from 'components/models';
-import ExampleComponent from 'components/ExampleComponent.vue';
 
 export default defineComponent({
   name: 'IndexPage',
 
-  components: {
-    ExampleComponent,
-  },
-
-  data() {
-    const todos: Todo[] = [
-      {
-        id: 1,
-        content: 'ct1',
-      },
-      {
-        id: 2,
-        content: 'ct2',
-      },
-      {
-        id: 3,
-        content: 'ct3',
-      },
-      {
-        id: 4,
-        content: 'ct4',
-      },
-      {
-        id: 5,
-        content: 'ct5',
-      },
-    ];
-
-    const meta: Meta = {
-      totalCount: 1200,
-    };
-
-    return { todos, meta };
-  },
+  components: { AbilityScoreCard, HpCard, GearCard, LevelCard, ClassSelectCard },
 });
 </script>
