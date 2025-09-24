@@ -9,7 +9,6 @@ export const useCharacterStore = defineStore('characterStore', {
     return {
       name: 'Unknown advernturer',
       level: 1,
-      xp: 0,
       class: 'fighter',
       ancestry: {
         ancestry: 'human',
@@ -61,6 +60,18 @@ export const useCharacterStore = defineStore('characterStore', {
     },
     setAbilityScores(abilityScores: AbilityScores) {
       this.baseAbilityScores = abilityScores;
+    },
+
+    setLevel(value: number) {
+      if (value <= 10 && value >= 1) {
+        this.level = value;
+      }
+    },
+
+    incrementLevel() {
+      if (this.level < 10) {
+        this.level++;
+      }
     },
   },
 });
