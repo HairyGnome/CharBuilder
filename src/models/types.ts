@@ -1,4 +1,4 @@
-import type { Weapon } from './weapon_types';
+import type { WeaponData } from './weapon_types';
 
 export type Stat = {
   name: string;
@@ -60,14 +60,16 @@ export type CharacterState = {
     lineage: string;
   };
   speed: number;
-  abilityScores: AbilityScores;
+  selectedAbilityScoreArray: string;
+  baseAbilityScores: AbilityScores;
   hp: HP;
-  weapons?: Weapon[];
+  weapons: string[];
 };
 
 export type Data = {
   classes: { [key: string]: ClassData };
   ancestries: { [key: string]: AncestryData };
+  weapons: { [key: string]: WeaponData };
 };
 
 export type ClassData = {

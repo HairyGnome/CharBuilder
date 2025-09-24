@@ -5,7 +5,7 @@ export type Damage = {
   type: DamageTypes;
 };
 
-export type Weapon = {
+export type WeaponData = {
   name: string;
   damage: Damage;
   bulk: number;

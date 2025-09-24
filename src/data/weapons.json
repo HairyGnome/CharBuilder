@@ -1,0 +1,30 @@
+{
+  "longsword": {
+    "damage": {
+      "amount": {
+        "amount": 1,
+        "type": 8
+      },
+      "type": "slashing"
+    },
+    "bulk": 1,
+    "properties": [],
+    "heft": 4,
+    "special": "quick_parry",
+    "mastery": "prince_slayer"
+  },
+  "crossbow,_heavy": {
+    "damage": {
+      "amount": {
+        "amount": 1,
+        "type": 10
+      },
+      "type": "piercing"
+    },
+    "bulk": 2,
+    "properties": ["projectile (range 100/400)", "loading"],
+    "heft": 4,
+    "special": "braced_fire",
+    "mastery": "fast_hands"
+  }
+}
