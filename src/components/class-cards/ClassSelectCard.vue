@@ -64,7 +64,7 @@
   <div class="text-subtitle1 q-mt-lg">Level 1</div>
   <q-separator class="q-mb-lg" />
   <q-card-section class="column">
-    <q-btn label="Select ability scores" @click="openAbilityScoreArrayDialog" />
+    <q-btn label="Select base ability scores" @click="openAbilityScoreArrayDialog" />
     <ability-score-array-dialog v-model="showAbilityScoreArrayDialog" />
   </q-card-section>
 </template>

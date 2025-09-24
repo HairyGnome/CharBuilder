@@ -144,6 +144,24 @@ export default defineComponent({
       }
     },
 
+    setDefaultValues() {
+      this.selectedAbilityScoreArray = characterStore.selectedAbilityScoreArray
+        .unslugify()
+        .capitalize();
+      const arrayKey =
+        this.selectedAbilityScoreArray.toLowerCase() as keyof typeof this.abilityScoreArray;
+      if (this.abilityScoreArray[arrayKey]) {
+        this.abilityScoreArray[arrayKey] = [
+          characterStore.baseAbilityScores.str,
+          characterStore.baseAbilityScores.dex,
+          characterStore.baseAbilityScores.con,
+          characterStore.baseAbilityScores.int,
+          characterStore.baseAbilityScores.wis,
+          characterStore.baseAbilityScores.cha,
+        ];
+      }
+    },
+
     saveAbilityScoreArray() {
       characterStore.setAbilityScores({
         str: this.actualAbilityScoreArray[0] || 0,
@@ -153,6 +171,7 @@ export default defineComponent({
         wis: this.actualAbilityScoreArray[4] || 0,
         cha: this.actualAbilityScoreArray[5] || 0,
       } as AbilityScores);
+      characterStore.selectedAbilityScoreArray = this.selectedAbilityScoreArray.toLowerCase();
       this.$emit('update:modelValue', false);
     },
   },
