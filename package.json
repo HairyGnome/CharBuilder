@@ -13,10 +13,10 @@
     "dev": "quasar dev",
     "build": "quasar build",
     "postinstall": "quasar prepare",
-    "web:dev": "quasar dev PLATFORM=web -m pwa",
-    "web:build": "quasar build PLATFORM=web -m pwa",
-    "electron:dev": "quasar dev PLATFORM=electron -m electron",
-    "electron:build": "quasar build PLATFORM=electron -m electron"
+    "web:dev": "cross-env PLATFORM=web quasar dev -m pwa",
+    "web:build": "cross-env  PLATFORM=web quasar build -m pwa",
+    "electron:dev": "cross-env  PLATFORM=electron quasar dev -m electron",
+    "electron:build": "cross-env PLATFORM=electron quasar build -m electron"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
@@ -34,6 +34,7 @@
     "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/eslint-config-typescript": "^14.4.0",
     "autoprefixer": "^10.4.2",
+    "cross-env": "^10.0.0",
     "electron": "^38.1.0",
     "eslint": "^9.14.0",
     "eslint-plugin-vue": "^9.30.0",
