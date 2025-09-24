@@ -1,0 +1,1 @@
+import{J as e}from"./index-CODMONrL.js";const a=e("dataStore",{state:()=>({classes:{},ancestries:{},weapons:{}}),getters:{},actions:{setClasses(s){this.classes=s},setAncestries(s){this.ancestries=s},setWeapons(s){this.weapons=s}}});export{a as u};
