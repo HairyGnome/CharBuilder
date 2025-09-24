@@ -32,7 +32,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/spa  # Adjust if using SSR/PWA
+          publish_dir: dist/pwa  # Adjust if using SSR/PWA
           publish_branch: gh-pages
 
       # 6. Build Electron app
