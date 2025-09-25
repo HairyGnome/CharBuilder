@@ -1,0 +1,17 @@
+{
+  "lún": {
+    "feats": {
+      "lv1": "lúnar_descendant"
+    }
+  },
+  "sól": {
+    "feats": {
+      "lv1": "sólar_descendant"
+    }
+  },
+  "true_human": {
+    "feats": {
+      "lv1": "true_descendant"
+    }
+  }
+}

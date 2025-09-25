@@ -53,7 +53,7 @@ export const useCharacterStore = defineStore('characterStore', {
       this.ancestry.lineage = dataStore.ancestries[ancestry]?.lineages[0] || 'N/A';
     },
     setLineage(lineage: string) {
-      this.ancestry.lineage = lineage.toLowerCase();
+      this.ancestry.lineage = lineage.toLowerCase().replaceAll(' ', '_');
     },
     setClass(className: string) {
       this.class = className.toLowerCase();

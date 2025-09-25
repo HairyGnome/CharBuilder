@@ -2,6 +2,7 @@ import { boot } from 'quasar/wrappers';
 import { useDataStore } from 'src/stores/data-store';
 import classData from 'src/data/classes.json';
 import ancestryData from 'src/data/ancestries.json';
+import lineageData from 'src/data/lineages.json';
 import weaponData from 'src/data/weapons.json';
 
 export default boot(() => {
@@ -9,5 +10,6 @@ export default boot(() => {
 
   dataStore.setClasses(classData);
   dataStore.setAncestries(ancestryData);
+  dataStore.setLineages(lineageData);
   dataStore.setWeapons(weaponData);
 });

@@ -50,6 +50,7 @@
       readonly
       class="col"
     />
+    <q-input v-model="lineageFeature" label="Lineage Feature" dense outlined readonly class="col" />
     <q-input
       v-for="(passive, idx) in rolePassives"
       :model-value="passive"
@@ -101,7 +102,7 @@ export default defineComponent({
     lineageLabels() {
       return (
         dataStore.ancestries[characterStore.ancestry.ancestry]?.lineages.map((lineage) =>
-          lineage.capitalize(),
+          lineage.unslugify().capitalize(),
         ) || []
       );
     },
@@ -115,6 +116,12 @@ export default defineComponent({
         dataStore.ancestries[characterStore.ancestry.ancestry]?.feature.unslugify().capitalize() ||
         'N/A'
       );
+    },
+
+    lineageFeature() {
+      return dataStore.lineages[characterStore.ancestry.lineage]?.feats.lv1
+        .unslugify()
+        .capitalize();
     },
 
     rolePassives(): string[] {
@@ -145,7 +152,7 @@ export default defineComponent({
 
     selectedLineage: {
       get() {
-        return characterStore.ancestry.lineage.capitalize();
+        return characterStore.ancestry.lineage.unslugify().capitalize();
       },
       set(value: string) {
         characterStore.setLineage(value);

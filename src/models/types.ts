@@ -46,8 +46,10 @@ export type AncestryData = {
 };
 
 export type LineageData = {
-  name: string;
-  feature: string;
+  feats: {
+    lv1: string;
+    // TODO: add more level feats
+  };
 };
 
 export type CharacterState = {
@@ -68,6 +70,7 @@ export type CharacterState = {
 export type Data = {
   classes: { [key: string]: ClassData };
   ancestries: { [key: string]: AncestryData };
+  lineages: { [key: string]: LineageData };
   weapons: { [key: string]: WeaponData };
 };
 
