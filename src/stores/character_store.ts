@@ -73,5 +73,11 @@ export const useCharacterStore = defineStore('characterStore', {
         this.level++;
       }
     },
+
+    adjustHealth(value: number) {
+      this.hp.currentHp += value;
+      if (this.hp.currentHp < 0) this.hp.currentHp = 0;
+      if (this.hp.currentHp > this.hp.maxHp) this.hp.currentHp = this.hp.maxHp;
+    },
   },
 });
