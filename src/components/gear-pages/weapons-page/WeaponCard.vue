@@ -1,12 +1,12 @@
 <template>
   <q-card class="column q-px-md q-my-md" bordered flat>
     <q-card-section class="row justify-between text-center">
-      <div class="col">{{ weaponName.toUpperCase() }}</div>
+      <div class="col">{{ weaponName.unslugify().capitalize() }}</div>
       <div class="col">
         {{ weapon.damage.amount.amount }}d{{ weapon.damage.amount.type }}
-        {{ weapon.damage.type.toUpperCase() }}
+        {{ weapon.damage.type.capitalize() }}
       </div>
-      <div class="col">BULK: {{ weapon.bulk }}</div>
+      <div class="col">Bulk: {{ weapon.bulk }}</div>
       <div class="col">
         {{
           weapon.properties.length > 0
@@ -14,7 +14,7 @@
             : '-'
         }}
       </div>
-      <div class="col">HEFT: {{ weapon.heft }}</div>
+      <div class="col">Heft: {{ weapon.heft }}</div>
       <div class="col">{{ weapon.special.unslugify().capitalize() }}</div>
       <div class="col">{{ weapon.mastery.unslugify().capitalize() }}</div>
     </q-card-section>
