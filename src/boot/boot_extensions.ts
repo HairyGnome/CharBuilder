@@ -2,6 +2,7 @@ declare global {
   interface String {
     capitalize(): string;
     unslugify(): string;
+    slugify(): string;
   }
 }
 
@@ -11,6 +12,10 @@ String.prototype.capitalize = function () {
 
 String.prototype.unslugify = function () {
   return this.replaceAll('_', ' ');
+};
+
+String.prototype.slugify = function () {
+  return this.replaceAll(' ', '_');
 };
 
 export {};
