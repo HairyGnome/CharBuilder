@@ -14,6 +14,7 @@ export const useCharacterStore = defineStore('characterStore', {
         ancestry: 'human',
         lineage: 'lún',
       },
+      region: 'sleepless_sands',
       speed: 25,
       selectedAbilityScoreArray: 'specialist',
       baseAbilityScores: {
@@ -25,7 +26,7 @@ export const useCharacterStore = defineStore('characterStore', {
         cha: 8,
       },
       hp: {
-        currentHp: 14,
+        currentHp: 22,
         maxHp: 22,
         tempHp: 0,
       },
@@ -53,7 +54,10 @@ export const useCharacterStore = defineStore('characterStore', {
       this.ancestry.lineage = dataStore.ancestries[ancestry]?.lineages[0] || 'N/A';
     },
     setLineage(lineage: string) {
-      this.ancestry.lineage = lineage.toLowerCase().replaceAll(' ', '_');
+      this.ancestry.lineage = lineage.toLowerCase().slugify();
+    },
+    setRegion(region: string) {
+      this.region = region.toLocaleLowerCase().slugify();
     },
     setClass(className: string) {
       this.class = className.toLowerCase();
@@ -73,6 +77,10 @@ export const useCharacterStore = defineStore('characterStore', {
         this.level++;
       }
     },
+
+    // calculateMaxHealth() {
+    //   const maxHealth =
+    // }
 
     adjustHealth(value: number) {
       this.hp.currentHp += value;

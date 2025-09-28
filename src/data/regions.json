@@ -1,0 +1,18 @@
+{
+  "sleepless_sands": {
+    "feats": {
+      "martial": "fight_the_night",
+      "mundane": "withstand_the_night",
+      "magic": "conquer_the_night",
+      "wanderer": "survive_the_night"
+    }
+  },
+  "steppes_of_azul": {
+    "feats": {
+      "martial": "move_like_the_heard",
+      "mundane": "home_on_the_road",
+      "magic": "wind_of_the_steppes",
+      "wanderer": "the_long_march"
+    }
+  }
+}
