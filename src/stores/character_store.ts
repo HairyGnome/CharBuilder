@@ -14,6 +14,7 @@ export const useCharacterStore = defineStore('characterStore', {
         ancestry: 'human',
         lineage: 'lún',
       },
+      region: 'sleepless_sands',
       speed: 25,
       selectedAbilityScoreArray: 'specialist',
       baseAbilityScores: {
@@ -25,7 +26,7 @@ export const useCharacterStore = defineStore('characterStore', {
         cha: 8,
       },
       hp: {
-        currentHp: 14,
+        currentHp: 22,
         maxHp: 22,
         tempHp: 0,
       },
@@ -44,6 +45,26 @@ export const useCharacterStore = defineStore('characterStore', {
     getBaseAbilityScores(state: CharacterState) {
       return state.baseAbilityScores;
     },
+
+    getAncestryAndLineageFeats(state: CharacterState): string[] {
+      const ancestryFeat = dataStore.ancestries[state.ancestry.ancestry]?.feature;
+      const lineageFeatures: string[] = [];
+      const lineageFeatData = dataStore.lineages[state.ancestry.lineage]?.feats || {};
+      for (let i = 1; i <= state.level; i++) {
+        const levelTag = `lv${i}` as keyof typeof lineageFeatData;
+        const feat = lineageFeatData[levelTag];
+        lineageFeatures.push(feat);
+      }
+      return [...(ancestryFeat ? [ancestryFeat] : []), ...lineageFeatures];
+    },
+
+    getRoleFeatures(): string[] {
+      const roles = dataStore.classes[this.class]?.roles || [];
+      const rolePassives: { [key: string]: string } =
+        dataStore.ancestries[this.ancestry.ancestry]?.rolePassives || {};
+      const result = roles.map((role) => rolePassives[role] || '');
+      return result.filter((role) => role !== '');
+    },
   },
 
   actions: {
@@ -53,7 +74,10 @@ export const useCharacterStore = defineStore('characterStore', {
       this.ancestry.lineage = dataStore.ancestries[ancestry]?.lineages[0] || 'N/A';
     },
     setLineage(lineage: string) {
-      this.ancestry.lineage = lineage.toLowerCase();
+      this.ancestry.lineage = lineage.toLowerCase().slugify();
+    },
+    setRegion(region: string) {
+      this.region = region.toLocaleLowerCase().slugify();
     },
     setClass(className: string) {
       this.class = className.toLowerCase();
@@ -72,6 +96,16 @@ export const useCharacterStore = defineStore('characterStore', {
       if (this.level < 10) {
         this.level++;
       }
+    },
+
+    // calculateMaxHealth() {
+    //   const maxHealth =
+    // }
+
+    adjustHealth(value: number) {
+      this.hp.currentHp += value;
+      if (this.hp.currentHp < 0) this.hp.currentHp = 0;
+      if (this.hp.currentHp > this.hp.maxHp) this.hp.currentHp = this.hp.maxHp;
     },
   },
 });

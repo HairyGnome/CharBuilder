@@ -26,7 +26,7 @@
         <gear-page-not-implemented />
       </q-tab-panel>
       <q-tab-panel name="feats">
-        <gear-page-not-implemented />
+        <features-page />
       </q-tab-panel>
     </q-tab-panels>
   </q-card>
@@ -36,11 +36,12 @@
 import { defineComponent } from 'vue';
 import GearPageNotImplemented from './gear-pages/GearPageNotImplemented.vue';
 import WeaponsPage from './gear-pages/weapons-page/WeaponsPage.vue';
+import FeaturesPage from './gear-pages/features-page/FeaturesPage.vue';
 
 export default defineComponent({
   name: 'GearCard',
 
-  components: { GearPageNotImplemented, WeaponsPage },
+  components: { GearPageNotImplemented, WeaponsPage, FeaturesPage },
 
   data() {
     return {

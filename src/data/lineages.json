@@ -1,0 +1,32 @@
+{
+  "lún": {
+    "feats": {
+      "lv1": "lúnar_descendant"
+    }
+  },
+  "sól": {
+    "feats": {
+      "lv1": "sólar_descendant"
+    }
+  },
+  "true_human": {
+    "feats": {
+      "lv1": "true_descendant"
+    }
+  },
+  "greyhand": {
+    "feats": {
+      "lv1": "mark_of_the_gray"
+    }
+  },
+  "greenhand": {
+    "feats": {
+      "lv1": "mark_of_the_green"
+    }
+  },
+  "redhand": {
+    "feats": {
+      "lv1": "mark_of_the_red"
+    }
+  }
+}

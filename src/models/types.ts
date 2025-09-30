@@ -46,8 +46,19 @@ export type AncestryData = {
 };
 
 export type LineageData = {
-  name: string;
-  feature: string;
+  feats: {
+    lv1: string;
+    // TODO: add more level feats
+  };
+};
+
+export type RegionData = {
+  feats: {
+    martial: string;
+    mundane: string;
+    magic: string;
+    wanderer: string;
+  };
 };
 
 export type CharacterState = {
@@ -58,6 +69,7 @@ export type CharacterState = {
     ancestry: string;
     lineage: string;
   };
+  region: string;
   speed: number;
   selectedAbilityScoreArray: string;
   baseAbilityScores: AbilityScores;
@@ -68,7 +80,10 @@ export type CharacterState = {
 export type Data = {
   classes: { [key: string]: ClassData };
   ancestries: { [key: string]: AncestryData };
+  lineages: { [key: string]: LineageData };
+  regions: { [key: string]: RegionData };
   weapons: { [key: string]: WeaponData };
+  hyperlinks: { [key: string]: string };
 };
 
 export type ClassData = {

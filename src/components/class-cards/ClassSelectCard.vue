@@ -1,6 +1,8 @@
 <template>
-  <div class="text-subtitle1 q-mt-lg">Class</div>
-  <q-separator class="q-mb-md" />
+  <q-card-section class="text-subtitle1">
+    Class
+    <q-separator />
+  </q-card-section>
   <q-card-section class="column q-gutter-y-md">
     <q-select
       v-model="selectedClass"
@@ -23,8 +25,10 @@
       />
     </div>
   </q-card-section>
-  <div class="text-subtitle1 q-mt-lg">Ancestry</div>
-  <q-separator class="q-mb-md" />
+  <q-card-section class="text-subtitle1">
+    Ancestry
+    <q-separator />
+  </q-card-section>
   <q-card-section class="column q-gutter-y-md">
     <q-select
       v-model="selectedAncestry"
@@ -42,14 +46,24 @@
       outlined
       class="col"
     />
-    <q-input
-      v-model="ancestryFeature"
-      label="Ancestry Feature"
-      dense
-      outlined
-      readonly
-      class="col"
-    />
+    <div class="row q-col-gutter-x-sm">
+      <q-input
+        v-model="ancestryFeature"
+        label="Ancestry Feature"
+        dense
+        outlined
+        readonly
+        class="col"
+      />
+      <q-input
+        v-model="lineageFeature"
+        label="Lineage Feature"
+        dense
+        outlined
+        readonly
+        class="col"
+      />
+    </div>
     <q-input
       v-for="(passive, idx) in rolePassives"
       :model-value="passive"
@@ -61,8 +75,34 @@
       class="col"
     />
   </q-card-section>
-  <div class="text-subtitle1 q-mt-lg">Level 1</div>
-  <q-separator class="q-mb-lg" />
+  <q-card-section class="text-subtitle1">
+    Region
+    <q-separator />
+  </q-card-section>
+  <q-card-section class="column q-gutter-y-md">
+    <q-select
+      v-model="selectedRegion"
+      :options="regionLabels"
+      label="Region"
+      dense
+      outlined
+      class="col"
+    />
+    <q-input
+      v-for="(feat, idx) in regionFeats"
+      :model-value="feat"
+      :label="`Region Feat ${idx + 1}`"
+      dense
+      outlined
+      readonly
+      :key="idx"
+      class="col"
+    />
+  </q-card-section>
+  <q-card-section class="text-subtitle1">
+    Level 1
+    <q-separator />
+  </q-card-section>
   <q-card-section class="column">
     <q-btn label="Select base ability scores" @click="openAbilityScoreArrayDialog" />
     <ability-score-array-dialog v-model="showAbilityScoreArrayDialog" />
@@ -101,9 +141,13 @@ export default defineComponent({
     lineageLabels() {
       return (
         dataStore.ancestries[characterStore.ancestry.ancestry]?.lineages.map((lineage) =>
-          lineage.capitalize(),
+          lineage.unslugify().capitalize(),
         ) || []
       );
+    },
+
+    regionLabels() {
+      return Object.keys(dataStore.regions).map((key: string) => key.unslugify().capitalize());
     },
 
     classRoles() {
@@ -117,11 +161,23 @@ export default defineComponent({
       );
     },
 
+    lineageFeature() {
+      return dataStore.lineages[characterStore.ancestry.lineage]?.feats.lv1
+        .unslugify()
+        .capitalize();
+    },
+
     rolePassives(): string[] {
+      return characterStore.getRoleFeatures.map((feature) => feature.unslugify().capitalize());
+    },
+
+    regionFeats(): string[] {
+      const regionPassives: { [key: string]: string } =
+        dataStore.regions[characterStore.region]?.feats || {};
+      console.log(dataStore.regions);
+      console.log(characterStore.region);
       const roles = dataStore.classes[characterStore.class]?.roles || [];
-      const rolePassives: { [key: string]: string } =
-        dataStore.ancestries[characterStore.ancestry.ancestry]?.rolePassives || {};
-      return roles.map((role) => rolePassives[role]?.unslugify().capitalize() || 'N/A');
+      return roles.map((role) => regionPassives[role]?.unslugify().capitalize() || 'N/A');
     },
 
     selectedClass: {
@@ -145,10 +201,19 @@ export default defineComponent({
 
     selectedLineage: {
       get() {
-        return characterStore.ancestry.lineage.capitalize();
+        return characterStore.ancestry.lineage.unslugify().capitalize();
       },
       set(value: string) {
         characterStore.setLineage(value);
+      },
+    },
+
+    selectedRegion: {
+      get() {
+        return characterStore.region.unslugify().capitalize();
+      },
+      set(value: string) {
+        characterStore.setRegion(value);
       },
     },
   },

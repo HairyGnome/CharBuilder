@@ -4,22 +4,38 @@
       <div>DV</div>
       <div>{{ dodgeValue }}</div>
     </div>
-    <q-linear-progress :value="hpRatio" color="primary" class="col" style="height: 15px">
+    <q-linear-progress
+      :value="hpRatio"
+      color="primary"
+      class="col cursor-pointer"
+      style="height: 15px"
+      @click="showHealthDialog = true"
+    >
       <div class="absolute-full flex flex-center text-white text-caption" style="line-height: 15px">
         {{ currentHp }} / {{ maxHp }}
       </div>
     </q-linear-progress>
+    <health-bar-dialog v-model="showHealthDialog" />
   </q-card>
 </template>
 
 <script lang="ts">
 import { useCharacterStore } from 'src/stores/character_store';
 import { defineComponent } from 'vue';
+import HealthBarDialog from './dialogs/HealthBarDialog.vue';
 
 const characterStore = useCharacterStore();
 
 export default defineComponent({
   name: 'HpCard',
+
+  components: { HealthBarDialog },
+
+  data() {
+    return {
+      showHealthDialog: false,
+    };
+  },
 
   computed: {
     hpRatio(): number {
