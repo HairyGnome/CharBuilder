@@ -5,6 +5,7 @@ import ancestryData from 'src/data/ancestries.json';
 import lineageData from 'src/data/lineages.json';
 import regionData from 'src/data/regions.json';
 import weaponData from 'src/data/weapons.json';
+import hyperlinks from 'src/data/hyperlinks.json';
 
 export default boot(() => {
   const dataStore = useDataStore();
@@ -14,4 +15,5 @@ export default boot(() => {
   dataStore.setLineages(lineageData);
   dataStore.setRegions(regionData);
   dataStore.setWeapons(weaponData);
+  dataStore.setHyperlinks(hyperlinks);
 });

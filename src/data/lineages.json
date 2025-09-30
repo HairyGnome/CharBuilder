@@ -13,5 +13,20 @@
     "feats": {
       "lv1": "true_descendant"
     }
+  },
+  "greyhand": {
+    "feats": {
+      "lv1": "mark_of_the_gray"
+    }
+  },
+  "greenhand": {
+    "feats": {
+      "lv1": "mark_of_the_green"
+    }
+  },
+  "redhand": {
+    "feats": {
+      "lv1": "mark_of_the_red"
+    }
   }
 }

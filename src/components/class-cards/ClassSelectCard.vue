@@ -168,10 +168,7 @@ export default defineComponent({
     },
 
     rolePassives(): string[] {
-      const roles = dataStore.classes[characterStore.class]?.roles || [];
-      const rolePassives: { [key: string]: string } =
-        dataStore.ancestries[characterStore.ancestry.ancestry]?.rolePassives || {};
-      return roles.map((role) => rolePassives[role]?.unslugify().capitalize() || 'N/A');
+      return characterStore.getRoleFeatures.map((feature) => feature.unslugify().capitalize());
     },
 
     regionFeats(): string[] {

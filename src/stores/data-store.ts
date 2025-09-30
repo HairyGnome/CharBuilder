@@ -10,6 +10,7 @@ export const useDataStore = defineStore('dataStore', {
       lineages: {},
       regions: {},
       weapons: {},
+      hyperlinks: {},
     };
   },
 
@@ -30,6 +31,13 @@ export const useDataStore = defineStore('dataStore', {
     },
     setWeapons(weapons: object) {
       this.weapons = weapons as Record<string, WeaponData>;
+    },
+    setHyperlinks(hyperlinks: object) {
+      this.hyperlinks = hyperlinks as Record<string, string>;
+    },
+    getHyperlink(item: string): string | undefined {
+      const link = this.hyperlinks[item];
+      return link;
     },
   },
 });

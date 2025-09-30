@@ -45,6 +45,26 @@ export const useCharacterStore = defineStore('characterStore', {
     getBaseAbilityScores(state: CharacterState) {
       return state.baseAbilityScores;
     },
+
+    getAncestryAndLineageFeats(state: CharacterState): string[] {
+      const ancestryFeat = dataStore.ancestries[state.ancestry.ancestry]?.feature;
+      const lineageFeatures: string[] = [];
+      const lineageFeatData = dataStore.lineages[state.ancestry.lineage]?.feats || {};
+      for (let i = 1; i <= state.level; i++) {
+        const levelTag = `lv${i}` as keyof typeof lineageFeatData;
+        const feat = lineageFeatData[levelTag];
+        lineageFeatures.push(feat);
+      }
+      return [...(ancestryFeat ? [ancestryFeat] : []), ...lineageFeatures];
+    },
+
+    getRoleFeatures(): string[] {
+      const roles = dataStore.classes[this.class]?.roles || [];
+      const rolePassives: { [key: string]: string } =
+        dataStore.ancestries[this.ancestry.ancestry]?.rolePassives || {};
+      const result = roles.map((role) => rolePassives[role] || '');
+      return result.filter((role) => role !== '');
+    },
   },
 
   actions: {

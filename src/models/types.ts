@@ -83,6 +83,7 @@ export type Data = {
   lineages: { [key: string]: LineageData };
   regions: { [key: string]: RegionData };
   weapons: { [key: string]: WeaponData };
+  hyperlinks: { [key: string]: string };
 };
 
 export type ClassData = {
