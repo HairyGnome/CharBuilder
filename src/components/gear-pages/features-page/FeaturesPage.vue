@@ -19,6 +19,13 @@
           <linkable-item v-for="(feat, idx) in roleFeatures" :key="idx" :name="feat" />
         </div>
       </q-card-section>
+      <q-card-section>
+        <div class="text-h4">Class features</div>
+        <q-separator />
+        <div class="column q-mt-sm">
+          <linkable-item v-for="(feat, idx) in []" :key="idx" :name="feat" />
+        </div>
+      </q-card-section>
     </q-scroll-area>
   </q-card-section>
 </template>
