@@ -6,7 +6,7 @@
         <q-separator />
       </q-card-section>
       <q-card-section class="row justify-between">
-        <q-input v-model="targetHealth" label="Terget health" type="number" />
+        <q-input v-model="targetHealth" label="Target health" type="number" />
         <q-input v-model="tempHp" label="Temporary health" type="number">
           <q-tooltip>Not implemented, doesn't do anything</q-tooltip>
         </q-input>

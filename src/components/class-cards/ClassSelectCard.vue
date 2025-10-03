@@ -15,7 +15,7 @@
     <div class="row q-gutter-x-sm">
       <q-input
         v-for="(role, idx) in classRoles"
-        :model-value="role.toUpperCase()"
+        :model-value="role.unslugify().capitalize()"
         :label="`Role ${idx + 1}`"
         dense
         outlined
