@@ -15,7 +15,7 @@
     <div class="row q-gutter-x-sm">
       <q-input
         v-for="(role, idx) in classRoles"
-        :model-value="role.toUpperCase()"
+        :model-value="role.unslugify().capitalize()"
         :label="`Role ${idx + 1}`"
         dense
         outlined
@@ -174,8 +174,6 @@ export default defineComponent({
     regionFeats(): string[] {
       const regionPassives: { [key: string]: string } =
         dataStore.regions[characterStore.region]?.feats || {};
-      console.log(dataStore.regions);
-      console.log(characterStore.region);
       const roles = dataStore.classes[characterStore.class]?.roles || [];
       return roles.map((role) => regionPassives[role]?.unslugify().capitalize() || 'N/A');
     },
@@ -185,7 +183,6 @@ export default defineComponent({
         return characterStore.class.capitalize();
       },
       set(value: string) {
-        console.log(typeof value);
         characterStore.setClass(value);
       },
     },
