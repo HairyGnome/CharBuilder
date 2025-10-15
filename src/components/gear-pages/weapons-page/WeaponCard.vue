@@ -1,7 +1,7 @@
 <template>
   <q-card class="column q-px-md q-my-md" bordered flat>
     <q-card-section class="row justify-between text-center">
-      <div class="col">{{ weaponName.unslugify().capitalize() }}</div>
+      <linkable-item class="col" :name="weaponName" />
       <div class="col">
         {{ weapon.damage.amount.amount }}d{{ weapon.damage.amount.type }}
         {{ weapon.damage.type.capitalize() }}
@@ -15,8 +15,8 @@
         }}
       </div>
       <div class="col">Heft: {{ weapon.heft }}</div>
-      <div class="col">{{ weapon.special.unslugify().capitalize() }}</div>
-      <div class="col">{{ weapon.mastery.unslugify().capitalize() }}</div>
+      <linkable-item class="col" :name="weapon.special" />
+      <linkable-item class="col" :name="weapon.mastery" />
     </q-card-section>
     <q-card-section class="row"></q-card-section>
   </q-card>
@@ -26,11 +26,14 @@
 import { defineComponent } from 'vue';
 import type { WeaponData } from 'src/models/weapon_types';
 import { useDataStore } from 'src/stores/data-store';
+import LinkableItem from 'src/components/common/LinkableItem.vue';
 
 const dataStore = useDataStore();
 
 export default defineComponent({
   name: 'WeaponCard',
+
+  components: { LinkableItem },
 
   props: {
     weaponName: {
