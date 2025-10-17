@@ -77,6 +77,12 @@ export type CharacterState = {
   weapons: string[];
 };
 
+export type Roll = {
+  rolls: number[];
+  modifier: number;
+  sum: number;
+};
+
 export type Data = {
   classes: { [key: string]: ClassData };
   ancestries: { [key: string]: AncestryData };

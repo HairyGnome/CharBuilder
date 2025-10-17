@@ -8,9 +8,9 @@
       </q-card>
       <div class="column col q-px-xl">
         <div class="row items-center q-gutter-x-lg">
-          <level-card />
+          <level-card class="col" />
           <ability-score-card class="col" />
-          <hp-card />
+          <hp-card class="col" />
         </div>
         <gear-card class="q-mt-lg col-grow" />
       </div>
