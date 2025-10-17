@@ -85,8 +85,8 @@ export default defineComponent({
 
   methods: {
     adjustHealth() {
-      characterStore.setTempHp(Number(this.tempHp));
-      characterStore.adjustHealth(this.adjustment);
+      characterStore.setTempHp(this.tempHp);
+      characterStore.setCurrentHealth(this.health);
       this.adjustment = 0;
       this.health = characterStore.hp.currentHp;
       this.tempHp = characterStore.hp.tempHp;

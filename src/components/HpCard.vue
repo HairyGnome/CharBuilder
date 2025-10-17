@@ -4,17 +4,36 @@
       <div>DV</div>
       <div>{{ dodgeValue }}</div>
     </div>
-    <q-linear-progress
-      :value="hpRatio"
-      color="primary"
-      class="col cursor-pointer"
-      style="height: 15px"
-      @click="showHealthDialog = true"
-    >
-      <div class="absolute-full flex flex-center text-white text-caption" style="line-height: 15px">
-        {{ currentHp }} / {{ maxHp }}
-      </div>
-    </q-linear-progress>
+    <div class="row cursor-pointer col" @click="showHealthDialog = true">
+      <q-linear-progress
+        :value="hpRatio"
+        track-color="primary"
+        class="col"
+        style="height: 15px"
+        @click="showHealthDialog = true"
+      >
+        <div
+          class="absolute-full flex flex-center text-white text-caption"
+          style="line-height: 15px"
+        >
+          {{ currentHp }} / {{ maxHp }}
+        </div>
+      </q-linear-progress>
+      <q-linear-progress
+        v-if="tempHp > 0"
+        :model-value="1"
+        track-color="green-14"
+        class="col-3"
+        style="height: 15px"
+      >
+        <div
+          class="absolute-full flex flex-center text-white text-caption"
+          style="line-height: 15px"
+        >
+          +{{ tempHp }}
+        </div>
+      </q-linear-progress>
+    </div>
     <health-bar-dialog v-model="showHealthDialog" />
   </q-card>
 </template>
@@ -48,6 +67,10 @@ export default defineComponent({
 
     maxHp(): number {
       return characterStore.hp.maxHp;
+    },
+
+    tempHp(): number {
+      return characterStore.hp.tempHp;
     },
 
     dodgeValue(): number {

@@ -109,8 +109,14 @@ export const useCharacterStore = defineStore('characterStore', {
     },
 
     setTempHp(value: number) {
-      if (value > 0) {
+      if (value >= 0) {
         this.hp.tempHp = value;
+      }
+    },
+
+    setCurrentHealth(value: number) {
+      if (value > 0 && value < this.hp.maxHp) {
+        this.hp.currentHp = value;
       }
     },
   },
