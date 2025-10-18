@@ -125,11 +125,24 @@ export const useCharacterStore = defineStore('characterStore', {
         this.hp.currentHp = value;
       }
     },
-    addTransaction(transaction: Transaction) {
+    addTransaction(transaction: Transaction): boolean {
+      let totalCopper = this.money.gold * 10000 + this.money.silver * 100 + this.money.copper;
+
+      const transactionCopper =
+        transaction.goldChange * 10000 + transaction.silverChange * 100 + transaction.copperChange;
+
+      if (totalCopper + transactionCopper < 0) {
+        return false;
+      }
+
+      totalCopper += transactionCopper;
+      this.money.gold = Math.floor(totalCopper / 10000);
+      totalCopper %= 10000;
+      this.money.silver = Math.floor(totalCopper / 100);
+      this.money.copper = totalCopper % 100;
+
       this.money.transactionHistory.push(transaction);
-      this.money.gold += transaction.goldChange;
-      this.money.silver += transaction.silverChange;
-      this.money.copper += transaction.copperChange;
+      return true;
     },
 
     simplifyCurrency() {

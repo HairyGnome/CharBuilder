@@ -24,15 +24,22 @@
       icon="add_shopping_cart"
       @click="openAddTransactionDialog"
     />
-    <q-btn label="View Transaction History" color="primary" icon="history" />
+    <q-btn
+      label="View Transaction History"
+      color="primary"
+      icon="history"
+      @click="openTransactionHistoryDialog"
+    />
     <q-btn label="Simplify Currency" color="primary" icon="swap_horiz" @click="simplifyCurrency" />
   </q-card-actions>
-  <add-transaction-dialog v-model="showAddTransactionDialog" />
+  <add-transaction-dialog v-model:show="showAddTransactionDialog" />
+  <transaction-history-dialog v-model:show="showTransactionHistoryDialog" />
 </template>
 
 <script lang="ts">
 import { mapActions, mapState } from 'pinia';
 import AddTransactionDialog from 'src/components/dialogs/AddTransactionDialog.vue';
+import TransactionHistoryDialog from 'src/components/dialogs/TransactionHistoryDialog.vue';
 import type { CharacterState } from 'src/models/types';
 import { useCharacterStore } from 'src/stores/character_store';
 import { defineComponent } from 'vue';
@@ -40,11 +47,12 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'PursePage',
 
-  components: { AddTransactionDialog },
+  components: { AddTransactionDialog, TransactionHistoryDialog },
 
   data() {
     return {
       showAddTransactionDialog: false,
+      showTransactionHistoryDialog: false,
     };
   },
 
@@ -61,6 +69,10 @@ export default defineComponent({
 
     openAddTransactionDialog() {
       this.showAddTransactionDialog = true;
+    },
+
+    openTransactionHistoryDialog() {
+      this.showTransactionHistoryDialog = true;
     },
   },
 });

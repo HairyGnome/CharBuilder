@@ -1,6 +1,6 @@
 <template>
-  <q-dialog :model-value="modelValue" @hide="cancelTransaction">
-    <q-card style="min-width: 400px">
+  <q-dialog :model-value="show" @hide="cancelTransaction">
+    <q-card style="min-width: 600px; min-height: 500px">
       <q-card-section>
         <q-input
           v-model="transactionLabel"
@@ -38,9 +38,12 @@
           </template>
         </q-input>
       </q-card-section>
+      <q-card-section v-if="showError" class="text-negative text-h5 q-mx-md">
+        You do not have enough funds to complete this transaction.
+      </q-card-section>
       <q-card-actions align="right">
         <q-btn label="Add Transaction" color="primary" @click="addTransaction" />
-        <q-btn label="Cancel" color="primary" @click="$emit('update:modelValue', false)" />
+        <q-btn label="Cancel" color="primary" @click="cancelTransaction" />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -59,14 +62,15 @@ export default defineComponent({
   data() {
     return {
       transactionLabel: 'Unlabeled Transaction',
-      gold: characterStore.money.gold,
-      silver: characterStore.money.silver,
-      copper: characterStore.money.copper,
+      gold: 0,
+      silver: 0,
+      copper: 0,
+      showError: false,
     };
   },
 
   props: {
-    modelValue: {
+    show: {
       type: Boolean,
       required: true,
     },
@@ -77,20 +81,31 @@ export default defineComponent({
       const transaction: Transaction = {
         label: this.transactionLabel,
         timestamp: new Date(),
-        goldChange: this.gold - characterStore.money.gold,
-        silverChange: this.silver - characterStore.money.silver,
-        copperChange: this.copper - characterStore.money.copper,
+        goldChange: this.gold,
+        silverChange: this.silver,
+        copperChange: this.copper,
       };
 
-      characterStore.addTransaction(transaction);
-      this.$emit('update:modelValue', false);
+      const transactionSuccessful = characterStore.addTransaction(transaction);
+      if (transactionSuccessful) {
+        this.transactionLabel = 'Unlabeled Transaction';
+        this.gold = 0;
+        this.silver = 0;
+        this.copper = 0;
+        this.showError = false;
+        this.$emit('update:show', false);
+      } else {
+        this.showError = true;
+      }
     },
 
     cancelTransaction() {
-      this.gold = characterStore.money.gold;
-      this.silver = characterStore.money.silver;
-      this.copper = characterStore.money.copper;
-      this.$emit('update:modelValue', false);
+      this.transactionLabel = 'Unlabeled Transaction';
+      this.gold = 0;
+      this.silver = 0;
+      this.copper = 0;
+      this.showError = false;
+      this.$emit('update:show', false);
     },
   },
 });
