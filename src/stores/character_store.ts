@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { AbilityScores, CharacterState } from 'src/models/types';
+import type { AbilityScores, CharacterState, Transaction } from 'src/models/types';
 import { useDataStore } from './data-store';
 
 const dataStore = useDataStore();
@@ -31,6 +31,12 @@ export const useCharacterStore = defineStore('characterStore', {
         tempHp: 0,
       },
       weapons: ['longsword', 'crossbow,_heavy'] as string[],
+      money: {
+        gold: 0,
+        silver: 0,
+        copper: 0,
+        transactionHistory: [],
+      },
     };
   },
 
@@ -118,6 +124,43 @@ export const useCharacterStore = defineStore('characterStore', {
       if (value > 0 && value < this.hp.maxHp) {
         this.hp.currentHp = value;
       }
+    },
+    addTransaction(transaction: Transaction) {
+      this.money.transactionHistory.push(transaction);
+      this.money.gold += transaction.goldChange;
+      this.money.silver += transaction.silverChange;
+      this.money.copper += transaction.copperChange;
+    },
+
+    simplifyCurrency() {
+      let baseCopper = this.money.copper;
+      let baseSilver = this.money.silver;
+      let baseGold = this.money.gold;
+
+      while (baseCopper >= 100) {
+        baseCopper -= 100;
+        baseSilver += 1;
+      }
+      while (baseSilver >= 100) {
+        baseSilver -= 100;
+        baseGold += 1;
+      }
+      const copperChange = baseCopper - this.money.copper;
+      const silverChange = baseSilver - this.money.silver;
+      const goldChange = baseGold - this.money.gold;
+
+      if (copperChange === 0 && silverChange === 0 && goldChange === 0) {
+        return; // No changes needed
+      }
+
+      const transaction: Transaction = {
+        label: 'Simplify Currency',
+        timestamp: new Date(),
+        goldChange,
+        silverChange,
+        copperChange,
+      };
+      this.addTransaction(transaction);
     },
   },
 });

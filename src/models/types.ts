@@ -75,6 +75,20 @@ export type CharacterState = {
   baseAbilityScores: AbilityScores;
   hp: HP;
   weapons: string[];
+  money: {
+    gold: number;
+    silver: number;
+    copper: number;
+    transactionHistory: Array<Transaction>;
+  };
+};
+
+export type Transaction = {
+  label: string;
+  timestamp: Date;
+  goldChange: number;
+  silverChange: number;
+  copperChange: number;
 };
 
 export type Roll = {
