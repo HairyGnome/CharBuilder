@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import type { AbilityScores, CharacterState } from 'src/models/types';
+import type { AbilityScores, CharacterState, Transaction } from 'src/models/types';
 import { useDataStore } from './data-store';
 
 const dataStore = useDataStore();
@@ -31,6 +31,12 @@ export const useCharacterStore = defineStore('characterStore', {
         tempHp: 0,
       },
       weapons: ['longsword', 'crossbow,_heavy'] as string[],
+      money: {
+        gold: 0,
+        silver: 0,
+        copper: 0,
+        transactionHistory: [],
+      },
     };
   },
 
@@ -109,9 +115,65 @@ export const useCharacterStore = defineStore('characterStore', {
     },
 
     setTempHp(value: number) {
-      if (value > 0) {
+      if (value >= 0) {
         this.hp.tempHp = value;
       }
+    },
+
+    setCurrentHealth(value: number) {
+      if (value > 0 && value < this.hp.maxHp) {
+        this.hp.currentHp = value;
+      }
+    },
+    addTransaction(transaction: Transaction): boolean {
+      let totalCopper = this.money.gold * 10000 + this.money.silver * 100 + this.money.copper;
+
+      const transactionCopper =
+        transaction.goldChange * 10000 + transaction.silverChange * 100 + transaction.copperChange;
+
+      if (totalCopper + transactionCopper < 0) {
+        return false;
+      }
+
+      totalCopper += transactionCopper;
+      this.money.gold = Math.floor(totalCopper / 10000);
+      totalCopper %= 10000;
+      this.money.silver = Math.floor(totalCopper / 100);
+      this.money.copper = totalCopper % 100;
+
+      this.money.transactionHistory.push(transaction);
+      return true;
+    },
+
+    simplifyCurrency() {
+      let baseCopper = this.money.copper;
+      let baseSilver = this.money.silver;
+      let baseGold = this.money.gold;
+
+      while (baseCopper >= 100) {
+        baseCopper -= 100;
+        baseSilver += 1;
+      }
+      while (baseSilver >= 100) {
+        baseSilver -= 100;
+        baseGold += 1;
+      }
+      const copperChange = baseCopper - this.money.copper;
+      const silverChange = baseSilver - this.money.silver;
+      const goldChange = baseGold - this.money.gold;
+
+      if (copperChange === 0 && silverChange === 0 && goldChange === 0) {
+        return; // No changes needed
+      }
+
+      const transaction: Transaction = {
+        label: 'Simplify Currency',
+        timestamp: new Date(),
+        goldChange,
+        silverChange,
+        copperChange,
+      };
+      this.addTransaction(transaction);
     },
   },
 });

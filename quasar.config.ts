@@ -2,6 +2,7 @@
 // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file
 
 import { defineConfig } from '#q-app/wrappers';
+import path from 'path';
 
 const isWeb = true; /* process.env.PLATFORM === 'web' */
 
@@ -63,6 +64,10 @@ export default defineConfig((/* ctx */) => {
 
       // extendViteConf (viteConf) {},
       // viteVuePluginOptions: {},
+
+      alias: {
+        '@': path.resolve(__dirname, './src'),
+      },
 
       vitePlugins: [
         [
