@@ -16,6 +16,9 @@
           <q-card-section v-else class="text-subtitle1">No transactions recorded...</q-card-section>
         </q-card>
       </q-card-section>
+      <q-card-actions align="right" class="q-mt-sm q-mb-sm q-mr-sm">
+        <q-btn label="Close" color="primary" @click="$emit('update:show', false)" />
+      </q-card-actions>
     </q-card>
   </q-dialog>
 </template>
