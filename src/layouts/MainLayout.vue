@@ -23,7 +23,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" bordered>
+    <q-drawer v-model="menuShow" bordered>
       <q-list>
         <q-item-label header> Menu </q-item-label>
         <EssentialLink v-for="link in linksList" :key="link.title" v-bind="link" />
@@ -33,7 +33,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-drawer v-model="rightDrawerOpen" bordered side="right">
+    <q-drawer v-model="diceRollerShow" bordered side="right">
       <dice-roller />
     </q-drawer>
   </q-layout>
@@ -45,6 +45,8 @@ import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink
 
 import { productName, version } from '../../package.json';
 import DiceRoller from 'src/components/DiceRoller.vue';
+import { useUiStore } from 'src/stores/ui-store';
+import { mapWritableState } from 'pinia';
 
 const linksList: EssentialLinkProps[] = [
   // {
@@ -66,20 +68,22 @@ export default defineComponent({
   data() {
     return {
       linksList,
-      leftDrawerOpen: false,
-      rightDrawerOpen: false,
       productName,
       version,
     };
   },
 
+  computed: {
+    ...mapWritableState(useUiStore, ['menuShow', 'diceRollerShow']),
+  },
+
   methods: {
     toggleLeftDrawer() {
-      this.leftDrawerOpen = !this.leftDrawerOpen;
+      this.menuShow = !this.menuShow;
     },
 
     toggleRightDrawer() {
-      this.rightDrawerOpen = !this.rightDrawerOpen;
+      this.diceRollerShow = !this.diceRollerShow;
     },
   },
 });
