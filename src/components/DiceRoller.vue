@@ -2,7 +2,8 @@
   <q-card flat class="q-mt-xl">
     <q-card-section class="col q-col-gutter-y-sm justify-center">
       <q-input
-        v-model="amount"
+        :model-value="amount"
+        @update:model-value="setAmount"
         type="number"
         label="Amount"
         :rules="[rules.min(minAmount), rules.max(maxAmount)]"
@@ -46,7 +47,7 @@
     </q-card-section>
     <q-card-section class="row justify-evenly">
       <q-btn label="Roll" @click="roll" color="primary" />
-      <q-btn label="Close" color="primary" />
+      <q-btn label="Close" color="primary" @click="close" />
     </q-card-section>
   </q-card>
 </template>
@@ -55,6 +56,9 @@
 import { defineComponent } from 'vue';
 import { rules } from '../utils';
 import DiceRollCard from './subcomponents/DiceRollCard.vue';
+import { mapActions, mapState, mapWritableState } from 'pinia';
+import { useDiceRollStore } from 'src/stores/dice-roll-store';
+import { useUiStore } from 'src/stores/ui-store';
 
 export default defineComponent({
   name: 'DiceRoller',
@@ -63,12 +67,6 @@ export default defineComponent({
 
   data() {
     return {
-      amount: 1,
-      minAmount: 1,
-      maxAmount: 20,
-      dice: 20,
-      modifier: 0,
-      // Each roll will have a stable id to support keyed transitions
       prevRolls: [] as Array<{
         id: string;
         rolls: number[];
@@ -80,36 +78,36 @@ export default defineComponent({
   },
 
   computed: {
+    ...mapWritableState(useUiStore, ['diceRollerShow']),
+    ...mapWritableState(useDiceRollStore, ['dice', 'modifier']),
+    ...mapState(useDiceRollStore, ['amount', 'minAmount', 'maxAmount']),
+
     rules() {
       return rules;
     },
   },
+
   methods: {
+    ...mapActions(useDiceRollStore, ['rollDice', 'setAmount']),
+
     roll() {
-      if (this.amount < this.minAmount || this.amount > this.maxAmount) {
-        return;
-      }
-      const rolls = [];
-      for (let i = 0; i < Number(this.amount); i++) {
-        const roll = Math.floor(Math.random() * Number(this.dice) + 1);
-        rolls.push(Number(roll));
-      }
-      let sum = rolls.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue;
-      }, 0);
-      sum += Number(this.modifier);
+      const { rolls, modifier, sum } = this.rollDice();
       // create a compact unique id using timestamp + random suffix
       const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
       this.prevRolls.push({
         id,
         rolls: rolls,
-        modifier: this.modifier,
+        modifier: modifier,
         sum,
       });
     },
 
     clearRolls() {
       this.prevRolls = [];
+    },
+
+    close() {
+      this.diceRollerShow = false;
     },
   },
 });
