@@ -7,7 +7,7 @@
         <q-toolbar-title> {{ productName }} </q-toolbar-title>
 
         <div class="q-mr-md">v{{ version }}</div>
-        <!-- <q-btn
+        <q-btn
           flat
           dense
           round
@@ -19,7 +19,7 @@
           <template v-slot:default>
             <q-img src="@/assets/icons/D20.svg" />
           </template>
-        </q-btn> -->
+        </q-btn>
       </q-toolbar>
     </q-header>
 
