@@ -5,6 +5,7 @@ export const useUiStore = defineStore('uiStore', {
     return {
       diceRollerShow: false,
       menuShow: false,
+      storeDialogShow: false,
     };
   },
 });
