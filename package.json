@@ -16,12 +16,15 @@
     "web:dev": "cross-env PLATFORM=web quasar dev -m pwa",
     "web:build": "cross-env  PLATFORM=web quasar build -m pwa",
     "electron:dev": "cross-env  PLATFORM=electron quasar dev -m electron",
-    "electron:build": "cross-env PLATFORM=electron quasar build -m electron"
+    "electron:build": "cross-env PLATFORM=electron quasar build -m electron",
+    "gen": "tsx src/modules/scraping/WebScraper.ts"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@mdi/js": "^7.4.47",
     "@quasar/extras": "^1.16.4",
+    "dom-parser": "^1.1.5",
+    "linkedom": "^0.18.12",
     "pinia": "^3.0.1",
     "quasar": "^2.16.0",
     "register-service-worker": "^1.7.2",
