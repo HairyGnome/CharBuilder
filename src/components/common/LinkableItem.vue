@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import RemotePartialLoader from 'src/modules/RemotePartialLoader';
+import RemotePartialLoader from 'src/modules/scraping/RemotePartialLoader';
 import { useDataStore } from 'src/stores/data-store';
 import { defineComponent } from 'vue';
 
