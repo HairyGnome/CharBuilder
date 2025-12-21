@@ -87,8 +87,7 @@ export default defineComponent({
     },
 
     weapon(): WeaponData {
-      const name = this.weaponName as keyof typeof dataStore.weapons;
-      const weapon: WeaponData | undefined = dataStore.weapons[name];
+      const weapon: WeaponData | null = dataStore.getWeaponByName(this.weaponName);
       if (!weapon) {
         throw new Error('Error: weapon not found');
       }

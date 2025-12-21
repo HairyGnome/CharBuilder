@@ -102,7 +102,7 @@ export type Data = {
   ancestries: { [key: string]: AncestryData };
   lineages: { [key: string]: LineageData };
   regions: { [key: string]: RegionData };
-  weapons: { [key: string]: WeaponData };
+  weapons: WeaponData[];
   hyperlinks: { [key: string]: string };
 };
 

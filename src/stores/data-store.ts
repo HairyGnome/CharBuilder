@@ -9,7 +9,7 @@ export const useDataStore = defineStore('dataStore', {
       ancestries: {},
       lineages: {},
       regions: {},
-      weapons: {},
+      weapons: [],
       hyperlinks: {},
     };
   },
@@ -30,7 +30,7 @@ export const useDataStore = defineStore('dataStore', {
       this.regions = regions as Record<string, RegionData>;
     },
     setWeapons(weapons: object) {
-      this.weapons = weapons as Record<string, WeaponData>;
+      this.weapons = weapons as WeaponData[];
     },
     setHyperlinks(hyperlinks: object) {
       this.hyperlinks = hyperlinks as Record<string, string>;
@@ -38,6 +38,11 @@ export const useDataStore = defineStore('dataStore', {
     getHyperlink(item: string): string | undefined {
       const link = this.hyperlinks[item];
       return link;
+    },
+
+    getWeaponByName(name: string): WeaponData | null {
+      const weapon = this.weapons.find((w) => w.name === name);
+      return weapon || null;
     },
   },
 });

@@ -1,5 +1,6 @@
-{
-  "longsword": {
+[
+  {
+    "name": "longsword",
     "damage": {
       "amount": {
         "amount": 1,
@@ -13,7 +14,8 @@
     "special": "mordhau",
     "mastery": "prince_slayer"
   },
-  "crossbow,_heavy": {
+  {
+    "name": "crossbow,_heavy",
     "damage": {
       "amount": {
         "amount": 1,
@@ -27,4 +29,4 @@
     "special": "braced_fire",
     "mastery": "fast_hands"
   }
-}
+]
