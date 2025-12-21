@@ -7,7 +7,7 @@
       </q-card-section>
 
       <q-card-section>
-        <q-tabs>
+        <q-tabs v-model="tabName">
           <q-tab name="weapons" label="Weapons" icon="mdi-sword" class="col" />
           <q-tab name="armor" label="Armor" icon="mdi-shield" class="col" />
           <q-tab name="items" label="Items" icon="mdi-sack" class="col" />
