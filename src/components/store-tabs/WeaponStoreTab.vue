@@ -13,6 +13,9 @@
         <div>Heft: {{ displayItem?.heft }}</div>
         <div>Special: {{ displayItem?.special }}</div>
         <div>Mastery: {{ displayItem?.mastery }}</div>
+        <div class="row justify-end">
+          <q-btn align="right" label="Purchase" color="primary" />
+        </div>
       </q-card-section>
       <q-card-section
         v-else
