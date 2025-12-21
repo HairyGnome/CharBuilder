@@ -19,8 +19,8 @@
           <q-tab-panel name="weapons" class="q-py-none">
             <weapon-store-tab />
           </q-tab-panel>
-          <q-tab-panel name="armor">
-            <div class="text-h6 q-pa-md">Armor Store Coming Soon!</div>
+          <q-tab-panel name="armor" class="q-py-none">
+            <armor-store-tab />
           </q-tab-panel>
           <q-tab-panel name="items">
             <div class="text-h6 q-pa-md">Item Store Coming Soon!</div>
@@ -47,11 +47,12 @@ import { mapWritableState } from 'pinia';
 import { useUiStore } from 'src/stores/ui-store';
 import { defineComponent } from 'vue';
 import WeaponStoreTab from '../store-tabs/WeaponStoreTab.vue';
+import ArmorStoreTab from '../store-tabs/ArmorStoreTab.vue';
 
 export default defineComponent({
   name: 'StoreDialog',
 
-  components: { WeaponStoreTab },
+  components: { WeaponStoreTab, ArmorStoreTab },
 
   data() {
     return {
