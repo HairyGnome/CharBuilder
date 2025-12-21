@@ -1,3 +1,4 @@
+import type { ArmorData } from './armor_types';
 import type { WeaponData } from './weapon_types';
 
 export type Stat = {
@@ -103,6 +104,7 @@ export type Data = {
   lineages: { [key: string]: LineageData };
   regions: { [key: string]: RegionData };
   weapons: WeaponData[];
+  armors: ArmorData[];
   hyperlinks: { [key: string]: string };
 };
 

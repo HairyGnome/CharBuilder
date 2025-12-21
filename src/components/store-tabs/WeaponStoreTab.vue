@@ -33,7 +33,7 @@ import { defineComponent } from 'vue';
 import BaseStoreTab from './BaseStoreTab.vue';
 import { useDataStore } from 'src/stores/data-store';
 import { mapState } from 'pinia';
-import type { WeaponData } from 'src/models/weapon_types';
+import type { ItemData, WeaponData } from 'src/models/weapon_types';
 
 export default defineComponent({
   name: 'WeaponStoreTab',
@@ -69,8 +69,22 @@ export default defineComponent({
   },
 
   methods: {
-    onSelectItem(item: WeaponData) {
-      this.selectedItem = item;
+    onSelectItem(item: ItemData) {
+      if (this.isWeaponData(item)) {
+        this.selectedItem = item;
+      } else {
+        console.warn('Selected item is not a WeaponData type.');
+      }
+    },
+
+    isWeaponData(item: ItemData): item is WeaponData {
+      return (
+        'damage' in item &&
+        'properties' in item &&
+        'heft' in item &&
+        'special' in item &&
+        'mastery' in item
+      );
     },
   },
 });

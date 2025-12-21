@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import type { ArmorData } from 'src/models/armor_types';
 import type { AncestryData, ClassData, Data, LineageData, RegionData } from 'src/models/types';
 import type { WeaponData } from 'src/models/weapon_types';
 
@@ -10,6 +11,7 @@ export const useDataStore = defineStore('dataStore', {
       lineages: {},
       regions: {},
       weapons: [],
+      armors: [],
       hyperlinks: {},
     };
   },
@@ -31,6 +33,9 @@ export const useDataStore = defineStore('dataStore', {
     },
     setWeapons(weapons: object) {
       this.weapons = weapons as WeaponData[];
+    },
+    setArmors(armors: object) {
+      this.armors = armors as ArmorData[];
     },
     setHyperlinks(hyperlinks: object) {
       this.hyperlinks = hyperlinks as Record<string, string>;

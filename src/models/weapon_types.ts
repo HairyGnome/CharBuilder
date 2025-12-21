@@ -5,15 +5,18 @@ export type Damage = {
   type: DamageTypes;
 };
 
-export type WeaponData = {
+export interface ItemData {
   name: string;
-  damage: Damage;
   bulk: number;
+}
+
+export interface WeaponData extends ItemData {
+  damage: Damage;
   properties: string[];
   heft: number;
   special: string;
   mastery: string;
-};
+}
 
 export enum DamageTypes {
   BLUDGEONING = 'bludgeoning',

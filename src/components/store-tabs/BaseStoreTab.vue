@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import type { WeaponData } from 'src/models/weapon_types';
+import type { ItemData } from 'src/models/weapon_types';
 import { defineComponent, type PropType } from 'vue';
 
 export default defineComponent({
@@ -26,11 +26,11 @@ export default defineComponent({
 
   props: {
     items: {
-      type: Array as PropType<WeaponData[]>,
+      type: Array as PropType<ItemData[]>,
       required: true,
     },
     selectItem: {
-      type: Function as PropType<(item: WeaponData) => void>,
+      type: Function as PropType<(item: ItemData) => void>,
       required: true,
     },
   },

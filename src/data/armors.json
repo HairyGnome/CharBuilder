@@ -1,0 +1,28 @@
+[
+  {
+    "name": "half_plate",
+    "armor": {
+      "amount": 6,
+      "type": 8
+    },
+    "bulk": 3,
+    "vigor": 3,
+    "clumsy": 2,
+    "properties": [],
+    "special": "form_fitting",
+    "mastery": "superior_defense"
+  },
+  {
+    "name": "chain_mail",
+    "armor": {
+      "amount": 7,
+      "type": 10
+    },
+    "bulk": 2,
+    "vigor": 4,
+    "clumsy": 2,
+    "properties": [],
+    "special": "hidden_sleeves",
+    "mastery": "quieted_metal"
+  }
+]
