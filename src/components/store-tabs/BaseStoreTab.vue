@@ -1,38 +1,44 @@
 <template>
-  <q-splitter v-model="ratio" disable style="height: 420px">
+  <q-splitter v-model="ratio" disable style="height: 60vh">
     <template v-slot:before>
       <q-scroll-area style="height: 100%">
         <q-btn
           v-for="(item, idx) in items"
           :key="idx"
           class="full-width q-mb-sm"
-          :label="item"
+          :label="item.name.unslugify()"
           flat
           unelevated
+          @click="selectItem(item)"
         />
       </q-scroll-area>
     </template>
-    <template v-slot:after> </template>
+    <template v-slot:after><slot name="details" /></template>
   </q-splitter>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import type { WeaponData } from 'src/models/weapon_types';
+import { defineComponent, type PropType } from 'vue';
 
 export default defineComponent({
   name: 'BaseStoreTab',
 
-  data() {
-    return {
-      ratio: 25,
-    };
-  },
-
   props: {
     items: {
-      type: Array<string>,
+      type: Array as PropType<WeaponData[]>,
       required: true,
     },
+    selectItem: {
+      type: Function as PropType<(item: WeaponData) => void>,
+      required: true,
+    },
+  },
+
+  data() {
+    return {
+      ratio: 24.45,
+    };
   },
 });
 </script>
