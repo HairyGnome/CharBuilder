@@ -7,7 +7,7 @@
       </q-card-section>
 
       <q-card-section class="q-py-none">
-        <q-tabs v-model="tabName">
+        <q-tabs v-model="tabName" style="border-bottom: 1px solid gray">
           <q-tab name="weapons" label="Weapons" icon="mdi-sword" class="col" />
           <q-tab name="armor" label="Armor" icon="mdi-shield" class="col" />
           <q-tab name="items" label="Items" icon="mdi-sack" class="col" />
@@ -15,7 +15,7 @@
           <!-- <q-tab name="misc" label="Miscellaneous" icon="mdi-diamond-stone" class="col" /> -->
         </q-tabs>
 
-        <q-tab-panels v-model="tabName" animated class="q-mb-none">
+        <q-tab-panels v-model="tabName" class="q-mb-none">
           <q-tab-panel name="weapons" class="q-py-none">
             <weapon-store-tab />
           </q-tab-panel>
