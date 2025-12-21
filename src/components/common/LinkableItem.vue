@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts">
-import RemotePartialLoader from 'src/modules/scraping/RemotePartialLoader';
 import { useDataStore } from 'src/stores/data-store';
 import { defineComponent } from 'vue';
 
@@ -45,18 +44,6 @@ export default defineComponent({
     hyperlink() {
       return dataStore.getHyperlink(this.name);
     },
-  },
-
-  mounted() {
-    const loader = new RemotePartialLoader(this.hyperlink || '', 'article');
-    loader
-      .getPartialHtml()
-      .then((el) => {
-        this.tooltipEl = el;
-      })
-      .catch((err) => {
-        console.warn('Failed to load partial:', err);
-      });
   },
 });
 </script>
