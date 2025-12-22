@@ -37,7 +37,7 @@ export default defineComponent({
 
   data() {
     return {
-      ratio: 24.45,
+      ratio: 19.4,
     };
   },
 });

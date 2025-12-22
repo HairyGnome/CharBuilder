@@ -10,20 +10,23 @@
         <q-tabs v-model="tabName" style="border-bottom: 1px solid gray">
           <q-tab name="weapons" label="Weapons" icon="mdi-sword" class="col" />
           <q-tab name="armor" label="Armor" icon="mdi-shield" class="col" />
-          <q-tab name="items" label="Items" icon="mdi-sack" class="col" />
+          <q-tab name="tools" label="Tools" icon="mdi-hammer-wrench" class="col" />
+          <q-tab name="foci" label="Spell Foci" icon="mdi-diamond-stone" class="col" />
           <q-tab name="potions" label="Potions" icon="mdi-flask" class="col" />
-          <!-- <q-tab name="misc" label="Miscellaneous" icon="mdi-diamond-stone" class="col" /> -->
         </q-tabs>
 
         <q-tab-panels v-model="tabName" class="q-mb-none">
-          <q-tab-panel name="weapons" class="q-py-none">
+          <q-tab-panel name="weapons" class="q-py-none q-pl-none">
             <weapon-store-tab />
           </q-tab-panel>
-          <q-tab-panel name="armor" class="q-py-none">
+          <q-tab-panel name="armor" class="q-py-none q-pl-none">
             <armor-store-tab />
           </q-tab-panel>
-          <q-tab-panel name="items">
-            <div class="text-h6 q-pa-md">Item Store Coming Soon!</div>
+          <q-tab-panel name="tools" class="q-py-none q-pl-none">
+            <tool-store-tab />
+          </q-tab-panel>
+          <q-tab-panel name="foci">
+            <div class="text-h6 q-pa-md">Tool Store Coming Soon!</div>
           </q-tab-panel>
           <q-tab-panel name="potions">
             <div class="text-h6 q-pa-md">Potion Store Coming Soon!</div>
@@ -48,11 +51,12 @@ import { useUiStore } from 'src/stores/ui-store';
 import { defineComponent } from 'vue';
 import WeaponStoreTab from '../store-tabs/WeaponStoreTab.vue';
 import ArmorStoreTab from '../store-tabs/ArmorStoreTab.vue';
+import ToolStoreTab from '../store-tabs/ToolStoreTab.vue';
 
 export default defineComponent({
   name: 'StoreDialog',
 
-  components: { WeaponStoreTab, ArmorStoreTab },
+  components: { WeaponStoreTab, ArmorStoreTab, ToolStoreTab },
 
   data() {
     return {
