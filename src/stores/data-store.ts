@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia';
-import type { ArmorData } from 'src/models/armor_types';
-import type { ToolData } from 'src/models/tool_types';
+import type { ArmorData } from 'src/models/items/armor_types';
+import type { ToolData } from 'src/models/items/tool_types';
 import type { AncestryData, ClassData, Data, LineageData, RegionData } from 'src/models/types';
-import type { WeaponData } from 'src/models/weapon_types';
+import type { WeaponData } from 'src/models/items/weapon_types';
+import type { FociData } from 'src/models/items/foci_types';
 
 export const useDataStore = defineStore('dataStore', {
   state: (): Data => {
@@ -14,6 +15,7 @@ export const useDataStore = defineStore('dataStore', {
       weapons: [],
       armors: [],
       tools: [],
+      foci: [],
       hyperlinks: {},
     };
   },
@@ -41,6 +43,9 @@ export const useDataStore = defineStore('dataStore', {
     },
     setTools(tools: object) {
       this.tools = tools as ToolData[];
+    },
+    setFoci(foci: object) {
+      this.foci = foci as FociData[];
     },
     setHyperlinks(hyperlinks: object) {
       this.hyperlinks = hyperlinks as Record<string, string>;
