@@ -17,16 +17,16 @@
 
         <q-tab-panels v-model="tabName" class="q-mb-none">
           <q-tab-panel name="weapons" class="q-py-none q-pl-none">
-            <weapon-store-tab />
+            <base-store-tab :items="weapons" />
           </q-tab-panel>
           <q-tab-panel name="armor" class="q-py-none q-pl-none">
-            <armor-store-tab />
+            <base-store-tab :items="armors" />
           </q-tab-panel>
           <q-tab-panel name="tools" class="q-py-none q-pl-none">
-            <tool-store-tab />
+            <base-store-tab :items="tools" />
           </q-tab-panel>
           <q-tab-panel name="foci">
-            <div class="text-h6 q-pa-md">Tool Store Coming Soon!</div>
+            <div class="text-h6 q-pa-md full-height full-width">Tool Store Coming Soon!</div>
           </q-tab-panel>
           <q-tab-panel name="potions">
             <div class="text-h6 q-pa-md">Potion Store Coming Soon!</div>
@@ -46,17 +46,16 @@
 </template>
 
 <script lang="ts">
-import { mapWritableState } from 'pinia';
+import { mapState, mapWritableState } from 'pinia';
 import { useUiStore } from 'src/stores/ui-store';
 import { defineComponent } from 'vue';
-import WeaponStoreTab from '../store-tabs/WeaponStoreTab.vue';
-import ArmorStoreTab from '../store-tabs/ArmorStoreTab.vue';
-import ToolStoreTab from '../store-tabs/ToolStoreTab.vue';
+import BaseStoreTab from '../store-tabs/BaseStoreTab.vue';
+import { useDataStore } from 'src/stores/data-store';
 
 export default defineComponent({
   name: 'StoreDialog',
 
-  components: { WeaponStoreTab, ArmorStoreTab, ToolStoreTab },
+  components: { BaseStoreTab },
 
   data() {
     return {
@@ -66,6 +65,7 @@ export default defineComponent({
 
   computed: {
     ...mapWritableState(useUiStore, ['storeDialogShow']),
+    ...mapState(useDataStore, ['weapons', 'armors', 'tools']),
   },
 
   methods: {

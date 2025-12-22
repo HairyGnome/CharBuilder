@@ -5,17 +5,27 @@ export type Damage = {
   type: DamageTypes;
 };
 
-export interface ItemData {
+export interface WeaponData {
   name: string;
-  bulk: number;
-}
-
-export interface WeaponData extends ItemData {
   damage: Damage;
+  bulk: number;
   properties: string[];
   heft: number;
   special: string;
   mastery: string;
+}
+
+export function isWeaponData(item: unknown): item is WeaponData {
+  const weaponItem = item as WeaponData;
+  return (
+    weaponItem.name !== undefined &&
+    weaponItem.damage !== undefined &&
+    weaponItem.bulk !== undefined &&
+    weaponItem.properties !== undefined &&
+    weaponItem.heft !== undefined &&
+    weaponItem.special !== undefined &&
+    weaponItem.mastery !== undefined
+  );
 }
 
 export enum DamageTypes {
