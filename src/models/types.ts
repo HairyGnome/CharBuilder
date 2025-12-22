@@ -1,4 +1,5 @@
 import type { ArmorData } from './armor_types';
+import type { ToolData } from './tool_types';
 import type { WeaponData } from './weapon_types';
 
 export type Stat = {
@@ -105,6 +106,7 @@ export type Data = {
   regions: { [key: string]: RegionData };
   weapons: WeaponData[];
   armors: ArmorData[];
+  tools: ToolData[];
   hyperlinks: { [key: string]: string };
 };
 
