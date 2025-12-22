@@ -36,51 +36,51 @@
 </template>
 
 <script lang="ts">
-import { useCharacterStore } from 'src/stores/character_store';
-import { useDataStore } from 'src/stores/data-store';
-import { defineComponent } from 'vue';
+import { useCharacterStore } from "src/stores/character_store";
+import { useDataStore } from "src/stores/data-store";
+import { defineComponent } from "vue";
 
 const dataStore = useDataStore();
 const characterStore = useCharacterStore();
 
 export default defineComponent({
-  name: 'AbilityScoreCard',
+  name: "AbilityScoreCard",
 
   computed: {
     speed(): string {
       return `${characterStore.speed} ft.`;
     },
     size(): string {
-      return dataStore.ancestries[characterStore.ancestry.ancestry]?.size.toUpperCase() || 'N/A';
+      return dataStore.ancestries[characterStore.ancestry.ancestry]?.size.toUpperCase() || "N/A";
     },
     strModifier(): string {
-      const modifier = characterStore.getAbilityScoreModifier('str');
-      const sign = modifier >= 0 ? '+' : '';
+      const modifier = characterStore.getAbilityScoreModifier("str");
+      const sign = modifier >= 0 ? "+" : "";
       return `${sign}${modifier}`;
     },
     dexModifier(): string {
-      const modifier = characterStore.getAbilityScoreModifier('dex');
-      const sign = modifier >= 0 ? '+' : '';
+      const modifier = characterStore.getAbilityScoreModifier("dex");
+      const sign = modifier >= 0 ? "+" : "";
       return `${sign}${modifier}`;
     },
     conModifier(): string {
-      const modifier = characterStore.getAbilityScoreModifier('con');
-      const sign = modifier >= 0 ? '+' : '';
+      const modifier = characterStore.getAbilityScoreModifier("con");
+      const sign = modifier >= 0 ? "+" : "";
       return `${sign}${modifier}`;
     },
     intModifier(): string {
-      const modifier = characterStore.getAbilityScoreModifier('int');
-      const sign = modifier >= 0 ? '+' : '';
+      const modifier = characterStore.getAbilityScoreModifier("int");
+      const sign = modifier >= 0 ? "+" : "";
       return `${sign}${modifier}`;
     },
     wisModifier(): string {
-      const modifier = characterStore.getAbilityScoreModifier('wis');
-      const sign = modifier >= 0 ? '+' : '';
+      const modifier = characterStore.getAbilityScoreModifier("wis");
+      const sign = modifier >= 0 ? "+" : "";
       return `${sign}${modifier}`;
     },
     chaModifier(): string {
-      const modifier = characterStore.getAbilityScoreModifier('cha');
-      const sign = modifier >= 0 ? '+' : '';
+      const modifier = characterStore.getAbilityScoreModifier("cha");
+      const sign = modifier >= 0 ? "+" : "";
       return `${sign}${modifier}`;
     },
   },

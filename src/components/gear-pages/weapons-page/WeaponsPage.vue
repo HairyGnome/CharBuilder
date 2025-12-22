@@ -7,14 +7,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import WeaponCard from './WeaponCard.vue';
-import { useCharacterStore } from 'src/stores/character_store';
+import { defineComponent } from "vue";
+import WeaponCard from "./WeaponCard.vue";
+import { useCharacterStore } from "src/stores/character_store";
 
 const characterStore = useCharacterStore();
 
 export default defineComponent({
-  name: 'WeaponsPage',
+  name: "WeaponsPage",
 
   components: { WeaponCard },
 

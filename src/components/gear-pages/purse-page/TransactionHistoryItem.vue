@@ -56,11 +56,11 @@
 </template>
 
 <script lang="ts">
-import type { Transaction } from 'src/models/types';
-import { defineComponent } from 'vue';
+import type { Transaction } from "src/models/types";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'TransactionHistoryItem',
+  name: "TransactionHistoryItem",
 
   props: {
     transaction: {

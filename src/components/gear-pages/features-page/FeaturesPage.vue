@@ -37,14 +37,14 @@
 </template>
 
 <script lang="ts">
-import { useCharacterStore } from 'src/stores/character_store';
-import { defineComponent } from 'vue';
-import LinkableItem from 'src/components/common/LinkableItem.vue';
+import { useCharacterStore } from "src/stores/character_store";
+import { defineComponent } from "vue";
+import LinkableItem from "src/components/common/LinkableItem.vue";
 
 const characterStore = useCharacterStore();
 
 export default defineComponent({
-  name: 'FeaturesPage',
+  name: "FeaturesPage",
 
   components: { LinkableItem },
 

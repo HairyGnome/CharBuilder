@@ -1,4 +1,4 @@
-import type { Die } from '../types';
+import type { Die } from "../types";
 
 export type Damage = {
   amount: Die;
@@ -29,56 +29,56 @@ export function isWeaponData(item: unknown): item is WeaponData {
 }
 
 export enum DamageTypes {
-  BLUDGEONING = 'bludgeoning',
-  PIERCING = 'piercing',
-  SLASHING = 'slashing',
+  BLUDGEONING = "bludgeoning",
+  PIERCING = "piercing",
+  SLASHING = "slashing",
 }
 
 export type WeaponProperty =
   | {
-      name: 'light';
-      hyperlink: 'https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/light';
+      name: "light";
+      hyperlink: "https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/light";
     }
-  | { name: 'finesse'; hyperlink: 'https://balint0928.github.io/quartz/Finesse' }
+  | { name: "finesse"; hyperlink: "https://balint0928.github.io/quartz/Finesse" }
   | {
-      name: 'thrown';
+      name: "thrown";
       range: string;
-      hyperlink: 'https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/thrown';
+      hyperlink: "https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/thrown";
     }
   | {
-      name: 'twin';
-      hyperlink: 'https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/twin';
+      name: "twin";
+      hyperlink: "https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/twin";
     }
   | {
-      name: 'versatile';
-      hyperlink: 'https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/versatile';
+      name: "versatile";
+      hyperlink: "https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/versatile";
     }
   | {
-      name: 'reach';
-      hypelink: 'https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/reach';
+      name: "reach";
+      hypelink: "https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/reach";
     }
   | {
-      name: 'projectile';
+      name: "projectile";
       range: string;
-      hyperlink: 'https://balint0928.github.io/quartz/Projectile';
+      hyperlink: "https://balint0928.github.io/quartz/Projectile";
     }
   | {
-      name: 'loading';
-      hyperlink: 'https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/loading';
+      name: "loading";
+      hyperlink: "https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/loading";
     }
   | {
-      name: 'two-handed';
-      hyperlink: 'https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/two-handed';
+      name: "two-handed";
+      hyperlink: "https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/two-handed";
     }
-  | { name: 'special' }
-  | { name: 'dueling'; hyperlink: 'https://balint0928.github.io/quartz/Dueling' }
-  | { name: 'armor value'; hyperlink: 'https://balint0928.github.io/quartz/1d6' }
-  | { name: 'vigor'; hyperlink: 'https://balint0928.github.io/quartz/3' }
+  | { name: "special" }
+  | { name: "dueling"; hyperlink: "https://balint0928.github.io/quartz/Dueling" }
+  | { name: "armor value"; hyperlink: "https://balint0928.github.io/quartz/1d6" }
+  | { name: "vigor"; hyperlink: "https://balint0928.github.io/quartz/3" }
   | {
-      name: 'interchangeable';
-      hyperlink: 'https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/Interchangeable';
+      name: "interchangeable";
+      hyperlink: "https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/Interchangeable";
     }
   | {
-      name: 'composite';
-      hyperlink: 'https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/Composite';
+      name: "composite";
+      hyperlink: "https://balint0928.github.io/quartz/Core-Rules/f_Equipment/f_Weapon-Properties/Composite";
     };

@@ -38,14 +38,14 @@
 </template>
 
 <script lang="ts">
-import { isArmorData, type ArmorData } from 'src/models/items/armor_types';
-import { isFociData, type FociData } from 'src/models/items/foci_types';
-import { isToolData, type ToolData } from 'src/models/items/tool_types';
-import { isWeaponData, type WeaponData } from 'src/models/items/weapon_types';
-import { defineComponent, type PropType } from 'vue';
+import { isArmorData, type ArmorData } from "src/models/items/armor_types";
+import { isFociData, type FociData } from "src/models/items/foci_types";
+import { isToolData, type ToolData } from "src/models/items/tool_types";
+import { isWeaponData, type WeaponData } from "src/models/items/weapon_types";
+import { defineComponent, type PropType } from "vue";
 
 export default defineComponent({
-  name: 'BaseStoreTab',
+  name: "BaseStoreTab",
 
   props: {
     items: {
@@ -66,7 +66,7 @@ export default defineComponent({
       if (this.selectedItem === null) {
         return undefined;
       }
-      if ('description' in this.selectedItem) {
+      if ("description" in this.selectedItem) {
         return this.selectedItem.description;
       }
 
@@ -81,11 +81,11 @@ export default defineComponent({
         return {
           name: this.selectedItem.name.unslugify().capitalize(),
           damage: `${this.selectedItem.damage.amount.amount}d${this.selectedItem.damage.amount.type} ${this.selectedItem.damage.type.unslugify().capitalize()}`,
-          bulk: this.selectedItem.bulk === 0.1 ? 'L' : this.selectedItem.bulk,
+          bulk: this.selectedItem.bulk === 0.1 ? "L" : this.selectedItem.bulk,
           properties:
             this.selectedItem.properties.length > 0
-              ? this.selectedItem.properties.map((p) => p.unslugify().capitalize()).join(', ')
-              : '-',
+              ? this.selectedItem.properties.map((p) => p.unslugify().capitalize()).join(", ")
+              : "-",
           heft: this.selectedItem.heft,
           special: this.selectedItem.special.unslugify().capitalize(),
           mastery: this.selectedItem.mastery.unslugify().capitalize(),
@@ -95,13 +95,13 @@ export default defineComponent({
         return {
           name: this.selectedItem.name.unslugify().capitalize(),
           armor: `${this.selectedItem.armor.amount}d${this.selectedItem.armor.type}`,
-          bulk: this.selectedItem.bulk === 0.1 ? 'L' : this.selectedItem.bulk,
+          bulk: this.selectedItem.bulk === 0.1 ? "L" : this.selectedItem.bulk,
           vigor: this.selectedItem.vigor,
           clumsy: this.selectedItem.clumsy,
           properties:
             this.selectedItem.properties.length > 0
-              ? this.selectedItem.properties.map((p) => p.unslugify().capitalize()).join(', ')
-              : '-',
+              ? this.selectedItem.properties.map((p) => p.unslugify().capitalize()).join(", ")
+              : "-",
           special: this.selectedItem.special.unslugify().capitalize(),
           mastery: this.selectedItem.mastery.unslugify().capitalize(),
         };

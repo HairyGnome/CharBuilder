@@ -1,11 +1,11 @@
-import { defineStore } from 'pinia';
-import type { ArmorData } from 'src/models/items/armor_types';
-import type { ToolData } from 'src/models/items/tool_types';
-import type { AncestryData, ClassData, Data, LineageData, RegionData } from 'src/models/types';
-import type { WeaponData } from 'src/models/items/weapon_types';
-import type { FociData } from 'src/models/items/foci_types';
+import { defineStore } from "pinia";
+import type { ArmorData } from "src/models/items/armor_types";
+import type { ToolData } from "src/models/items/tool_types";
+import type { AncestryData, ClassData, Data, LineageData, RegionData } from "src/models/types";
+import type { WeaponData } from "src/models/items/weapon_types";
+import type { FociData } from "src/models/items/foci_types";
 
-export const useDataStore = defineStore('dataStore', {
+export const useDataStore = defineStore("dataStore", {
   state: (): Data => {
     return {
       classes: {},

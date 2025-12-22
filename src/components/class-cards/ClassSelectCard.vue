@@ -110,16 +110,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { useDataStore } from 'src/stores/data-store';
-import { useCharacterStore } from 'src/stores/character_store';
-import AbilityScoreArrayDialog from '../dialogs/AbilityScoreArrayDialog.vue';
+import { defineComponent } from "vue";
+import { useDataStore } from "src/stores/data-store";
+import { useCharacterStore } from "src/stores/character_store";
+import AbilityScoreArrayDialog from "../dialogs/AbilityScoreArrayDialog.vue";
 
 const dataStore = useDataStore();
 const characterStore = useCharacterStore();
 
 export default defineComponent({
-  name: 'ClassSelectCard',
+  name: "ClassSelectCard",
 
   components: { AbilityScoreArrayDialog },
 
@@ -157,7 +157,7 @@ export default defineComponent({
     ancestryFeature() {
       return (
         dataStore.ancestries[characterStore.ancestry.ancestry]?.feature.unslugify().capitalize() ||
-        'N/A'
+        "N/A"
       );
     },
 
@@ -175,7 +175,7 @@ export default defineComponent({
       const regionPassives: { [key: string]: string } =
         dataStore.regions[characterStore.region]?.feats || {};
       const roles = dataStore.classes[characterStore.class]?.roles || [];
-      return roles.map((role) => regionPassives[role]?.unslugify().capitalize() || 'N/A');
+      return roles.map((role) => regionPassives[role]?.unslugify().capitalize() || "N/A");
     },
 
     selectedClass: {

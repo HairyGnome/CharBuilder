@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia';
+import { defineStore } from "pinia";
 
-export const useUiStore = defineStore('uiStore', {
+export const useUiStore = defineStore("uiStore", {
   state() {
     return {
       diceRollerShow: false,

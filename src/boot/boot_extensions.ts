@@ -11,11 +11,11 @@ String.prototype.capitalize = function () {
 };
 
 String.prototype.unslugify = function () {
-  return this.replaceAll('_', ' ');
+  return this.replaceAll("_", " ");
 };
 
 String.prototype.slugify = function () {
-  return this.replaceAll(' ', '_');
+  return this.replaceAll(" ", "_");
 };
 
 export {};

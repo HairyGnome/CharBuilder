@@ -1,22 +1,22 @@
-import { defineStore } from 'pinia';
-import type { AbilityScores, CharacterState, Transaction } from 'src/models/types';
-import { useDataStore } from './data-store';
+import { defineStore } from "pinia";
+import type { AbilityScores, CharacterState, Transaction } from "src/models/types";
+import { useDataStore } from "./data-store";
 
 const dataStore = useDataStore();
 
-export const useCharacterStore = defineStore('characterStore', {
+export const useCharacterStore = defineStore("characterStore", {
   state(): CharacterState {
     return {
-      name: 'Unknown advernturer',
+      name: "Unknown advernturer",
       level: 1,
-      class: 'fighter',
+      class: "fighter",
       ancestry: {
-        ancestry: 'human',
-        lineage: 'lún',
+        ancestry: "human",
+        lineage: "lún",
       },
-      region: 'sleepless_sands',
+      region: "sleepless_sands",
       speed: 25,
-      selectedAbilityScoreArray: 'specialist',
+      selectedAbilityScoreArray: "specialist",
       baseAbilityScores: {
         str: 16,
         dex: 12,
@@ -30,7 +30,7 @@ export const useCharacterStore = defineStore('characterStore', {
         maxHp: 22,
         tempHp: 0,
       },
-      weapons: ['longsword', 'crossbow,_heavy'] as string[],
+      weapons: ["longsword", "crossbow,_heavy"] as string[],
       money: {
         gold: 0,
         silver: 0,
@@ -43,7 +43,7 @@ export const useCharacterStore = defineStore('characterStore', {
   getters: {
     getAbilityScoreModifier:
       (state: CharacterState) =>
-      (ability: keyof CharacterState['baseAbilityScores']): number => {
+      (ability: keyof CharacterState["baseAbilityScores"]): number => {
         // TODO: add ability scores from all sources
         return Math.floor((state.baseAbilityScores[ability] - 10) / 2);
       },
@@ -68,8 +68,8 @@ export const useCharacterStore = defineStore('characterStore', {
       const roles = dataStore.classes[this.class]?.roles || [];
       const rolePassives: { [key: string]: string } =
         dataStore.ancestries[this.ancestry.ancestry]?.rolePassives || {};
-      const result = roles.map((role) => rolePassives[role] || '');
-      return result.filter((role) => role !== '');
+      const result = roles.map((role) => rolePassives[role] || "");
+      return result.filter((role) => role !== "");
     },
   },
 
@@ -77,7 +77,7 @@ export const useCharacterStore = defineStore('characterStore', {
     setAncestry(ancestry: string) {
       ancestry = ancestry.toLowerCase();
       this.ancestry.ancestry = ancestry;
-      this.ancestry.lineage = dataStore.ancestries[ancestry]?.lineages[0] || 'N/A';
+      this.ancestry.lineage = dataStore.ancestries[ancestry]?.lineages[0] || "N/A";
     },
     setLineage(lineage: string) {
       this.ancestry.lineage = lineage.toLowerCase().slugify();
@@ -167,7 +167,7 @@ export const useCharacterStore = defineStore('characterStore', {
       }
 
       const transaction: Transaction = {
-        label: 'Simplify Currency',
+        label: "Simplify Currency",
         timestamp: new Date(),
         goldChange,
         silverChange,

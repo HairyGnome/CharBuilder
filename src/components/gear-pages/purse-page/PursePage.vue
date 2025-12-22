@@ -40,17 +40,17 @@
 </template>
 
 <script lang="ts">
-import { mapActions, mapState, mapWritableState } from 'pinia';
-import AddTransactionDialog from 'src/components/dialogs/AddTransactionDialog.vue';
-import StoreDialog from 'src/components/dialogs/StoreDialog.vue';
-import TransactionHistoryDialog from 'src/components/dialogs/TransactionHistoryDialog.vue';
-import type { CharacterState } from 'src/models/types';
-import { useCharacterStore } from 'src/stores/character_store';
-import { useUiStore } from 'src/stores/ui-store';
-import { defineComponent } from 'vue';
+import { mapActions, mapState, mapWritableState } from "pinia";
+import AddTransactionDialog from "src/components/dialogs/AddTransactionDialog.vue";
+import StoreDialog from "src/components/dialogs/StoreDialog.vue";
+import TransactionHistoryDialog from "src/components/dialogs/TransactionHistoryDialog.vue";
+import type { CharacterState } from "src/models/types";
+import { useCharacterStore } from "src/stores/character_store";
+import { useUiStore } from "src/stores/ui-store";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'PursePage',
+  name: "PursePage",
 
   components: { AddTransactionDialog, TransactionHistoryDialog, StoreDialog },
 
@@ -69,10 +69,10 @@ export default defineComponent({
       transactionHistory: (state: CharacterState) => state.money.transactionHistory,
     }),
 
-    ...mapWritableState(useUiStore, ['storeDialogShow']),
+    ...mapWritableState(useUiStore, ["storeDialogShow"]),
   },
   methods: {
-    ...mapActions(useCharacterStore, ['simplifyCurrency']),
+    ...mapActions(useCharacterStore, ["simplifyCurrency"]),
 
     openAddTransactionDialog() {
       this.showAddTransactionDialog = true;

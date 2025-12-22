@@ -1,7 +1,7 @@
-import type { ArmorData } from './items/armor_types';
-import type { FociData } from './items/foci_types';
-import type { ToolData } from './items/tool_types';
-import type { WeaponData } from './items/weapon_types';
+import type { ArmorData } from "./items/armor_types";
+import type { FociData } from "./items/foci_types";
+import type { ToolData } from "./items/tool_types";
+import type { WeaponData } from "./items/weapon_types";
 
 export type Stat = {
   name: string;
@@ -39,11 +39,11 @@ export type Skills = {
   value: number;
 };
 
-export type Role = 'martial' | 'mundane' | 'magic' | 'wanderer';
+export type Role = "martial" | "mundane" | "magic" | "wanderer";
 
 export type AncestryData = {
   lineages: string[];
-  size: 'small' | 'medium' | 'large';
+  size: "small" | "medium" | "large";
   feature: string;
   rolePassives: { [key: string]: string };
 };

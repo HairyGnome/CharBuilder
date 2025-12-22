@@ -40,13 +40,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
+import { defineComponent } from "vue";
+import EssentialLink, { type EssentialLinkProps } from "components/EssentialLink.vue";
 
-import { productName, version } from '../../package.json';
-import DiceRoller from 'src/components/DiceRoller.vue';
-import { useUiStore } from 'src/stores/ui-store';
-import { mapWritableState } from 'pinia';
+import { productName, version } from "../../package.json";
+import DiceRoller from "src/components/DiceRoller.vue";
+import { useUiStore } from "src/stores/ui-store";
+import { mapWritableState } from "pinia";
 
 const linksList: EssentialLinkProps[] = [
   // {
@@ -58,7 +58,7 @@ const linksList: EssentialLinkProps[] = [
 ];
 
 export default defineComponent({
-  name: 'MainLayout',
+  name: "MainLayout",
 
   components: {
     EssentialLink,
@@ -74,7 +74,7 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapWritableState(useUiStore, ['menuShow', 'diceRollerShow']),
+    ...mapWritableState(useUiStore, ["menuShow", "diceRollerShow"]),
   },
 
   methods: {

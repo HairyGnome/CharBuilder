@@ -39,14 +39,14 @@
 </template>
 
 <script lang="ts">
-import { useCharacterStore } from 'src/stores/character_store';
-import { defineComponent } from 'vue';
-import HealthBarDialog from './dialogs/HealthBarDialog.vue';
+import { useCharacterStore } from "src/stores/character_store";
+import { defineComponent } from "vue";
+import HealthBarDialog from "./dialogs/HealthBarDialog.vue";
 
 const characterStore = useCharacterStore();
 
 export default defineComponent({
-  name: 'HpCard',
+  name: "HpCard",
 
   components: { HealthBarDialog },
 
@@ -74,7 +74,7 @@ export default defineComponent({
     },
 
     dodgeValue(): number {
-      const dexMod = characterStore.getAbilityScoreModifier('dex');
+      const dexMod = characterStore.getAbilityScoreModifier("dex");
       return 10 + dexMod;
     },
   },

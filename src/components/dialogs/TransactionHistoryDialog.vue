@@ -24,13 +24,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import TransactionHistoryItem from '../gear-pages/purse-page/TransactionHistoryItem.vue';
-import { useCharacterStore } from 'src/stores/character_store';
-import { mapState } from 'pinia';
+import { defineComponent } from "vue";
+import TransactionHistoryItem from "../gear-pages/purse-page/TransactionHistoryItem.vue";
+import { useCharacterStore } from "src/stores/character_store";
+import { mapState } from "pinia";
 
 export default defineComponent({
-  name: 'TransactionHistoryDialog',
+  name: "TransactionHistoryDialog",
 
   components: { TransactionHistoryItem },
 

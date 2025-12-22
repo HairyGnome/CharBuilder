@@ -46,26 +46,26 @@
 </template>
 
 <script lang="ts">
-import { mapState, mapWritableState } from 'pinia';
-import { useUiStore } from 'src/stores/ui-store';
-import { defineComponent } from 'vue';
-import BaseStoreTab from '../store-tabs/BaseStoreTab.vue';
-import { useDataStore } from 'src/stores/data-store';
+import { mapState, mapWritableState } from "pinia";
+import { useUiStore } from "src/stores/ui-store";
+import { defineComponent } from "vue";
+import BaseStoreTab from "../store-tabs/BaseStoreTab.vue";
+import { useDataStore } from "src/stores/data-store";
 
 export default defineComponent({
-  name: 'StoreDialog',
+  name: "StoreDialog",
 
   components: { BaseStoreTab },
 
   data() {
     return {
-      tabName: 'weapons',
+      tabName: "weapons",
     };
   },
 
   computed: {
-    ...mapWritableState(useUiStore, ['storeDialogShow']),
-    ...mapState(useDataStore, ['weapons', 'armors', 'tools', 'foci']),
+    ...mapWritableState(useUiStore, ["storeDialogShow"]),
+    ...mapState(useDataStore, ["weapons", "armors", "tools", "foci"]),
   },
 
   methods: {

@@ -74,21 +74,21 @@
 </template>
 
 <script lang="ts">
-import type { AbilityScores } from 'src/models/types';
-import { useCharacterStore } from 'src/stores/character_store';
-import { defineComponent } from 'vue';
+import type { AbilityScores } from "src/models/types";
+import { useCharacterStore } from "src/stores/character_store";
+import { defineComponent } from "vue";
 
 const characterStore = useCharacterStore();
 
 export default defineComponent({
-  name: 'AbilityScoreArrayDialog',
+  name: "AbilityScoreArrayDialog",
 
   props: {},
 
   data() {
     return {
-      selectedAbilityScoreArray: 'Specialist',
-      abilityScoreArrays: ['Specialist', 'Balanced', 'Generalist'],
+      selectedAbilityScoreArray: "Specialist",
+      abilityScoreArrays: ["Specialist", "Balanced", "Generalist"],
       abilityScoreArray: {
         specialist: [16, 12, 12, 10, 10, 8],
         balanced: [14, 14, 12, 12, 10, 10],
@@ -101,13 +101,13 @@ export default defineComponent({
     actualAbilityScoreArray(): number[] {
       let array: number[] = [];
       switch (this.selectedAbilityScoreArray) {
-        case 'Specialist':
+        case "Specialist":
           array = this.abilityScoreArray.specialist;
           break;
-        case 'Balanced':
+        case "Balanced":
           array = this.abilityScoreArray.balanced;
           break;
-        case 'Generalist':
+        case "Generalist":
           array = this.abilityScoreArray.generalist;
           break;
         default:
@@ -121,8 +121,8 @@ export default defineComponent({
     moveToRight(idx: number) {
       if (
         idx < this.actualAbilityScoreArray.length - 1 &&
-        typeof this.actualAbilityScoreArray[idx] === 'number' &&
-        typeof this.actualAbilityScoreArray[idx + 1] === 'number'
+        typeof this.actualAbilityScoreArray[idx] === "number" &&
+        typeof this.actualAbilityScoreArray[idx + 1] === "number"
       ) {
         [this.actualAbilityScoreArray[idx], this.actualAbilityScoreArray[idx + 1]] = [
           this.actualAbilityScoreArray[idx + 1] as number,
@@ -134,8 +134,8 @@ export default defineComponent({
     moveToLeft(idx: number) {
       if (
         idx > 0 &&
-        typeof this.actualAbilityScoreArray[idx] === 'number' &&
-        typeof this.actualAbilityScoreArray[idx - 1] === 'number'
+        typeof this.actualAbilityScoreArray[idx] === "number" &&
+        typeof this.actualAbilityScoreArray[idx - 1] === "number"
       ) {
         [this.actualAbilityScoreArray[idx], this.actualAbilityScoreArray[idx - 1]] = [
           this.actualAbilityScoreArray[idx - 1] as number,
@@ -172,7 +172,7 @@ export default defineComponent({
         cha: this.actualAbilityScoreArray[5] || 0,
       } as AbilityScores);
       characterStore.selectedAbilityScoreArray = this.selectedAbilityScoreArray.toLowerCase();
-      this.$emit('update:modelValue', false);
+      this.$emit("update:modelValue", false);
     },
   },
 });
