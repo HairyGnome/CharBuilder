@@ -47,7 +47,7 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapState(useDataStore, { weapons: (store) => Object.values(store.weapons) }),
+    ...mapState(useDataStore, ['weapons']),
 
     displayItem() {
       if (this.selectedItem === null) {

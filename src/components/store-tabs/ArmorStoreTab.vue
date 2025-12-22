@@ -49,7 +49,7 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapState(useDataStore, { armors: (store) => Object.values(store.armors) }),
+    ...mapState(useDataStore, ['armors']),
 
     displayItem() {
       if (this.selectedItem === null) {
