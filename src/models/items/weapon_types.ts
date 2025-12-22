@@ -1,4 +1,4 @@
-import type { Die } from './types';
+import type { Die } from '../types';
 
 export type Damage = {
   amount: Die;

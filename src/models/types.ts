@@ -1,6 +1,7 @@
-import type { ArmorData } from './armor_types';
-import type { ToolData } from './tool_types';
-import type { WeaponData } from './weapon_types';
+import type { ArmorData } from './items/armor_types';
+import type { FociData } from './items/foci_types';
+import type { ToolData } from './items/tool_types';
+import type { WeaponData } from './items/weapon_types';
 
 export type Stat = {
   name: string;
@@ -107,6 +108,7 @@ export type Data = {
   weapons: WeaponData[];
   armors: ArmorData[];
   tools: ToolData[];
+  foci: FociData[];
   hyperlinks: { [key: string]: string };
 };
 
