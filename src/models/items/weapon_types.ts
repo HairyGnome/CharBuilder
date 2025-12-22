@@ -1,11 +1,11 @@
-import type { Die } from './types';
+import type { Die } from '../types';
 
 export type Damage = {
   amount: Die;
   type: DamageTypes;
 };
 
-export type WeaponData = {
+export interface WeaponData {
   name: string;
   damage: Damage;
   bulk: number;
@@ -13,7 +13,20 @@ export type WeaponData = {
   heft: number;
   special: string;
   mastery: string;
-};
+}
+
+export function isWeaponData(item: unknown): item is WeaponData {
+  const weaponItem = item as WeaponData;
+  return (
+    weaponItem.name !== undefined &&
+    weaponItem.damage !== undefined &&
+    weaponItem.bulk !== undefined &&
+    weaponItem.properties !== undefined &&
+    weaponItem.heft !== undefined &&
+    weaponItem.special !== undefined &&
+    weaponItem.mastery !== undefined
+  );
+}
 
 export enum DamageTypes {
   BLUDGEONING = 'bludgeoning',

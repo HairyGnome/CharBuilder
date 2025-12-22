@@ -1,0 +1,16 @@
+[
+  {
+    "name": "mason's_tool",
+    "charges": -1,
+    "special": "experienced_stoner",
+    "mastery": "stone_saboteur",
+    "description": "Allows you to craft stone structures, including walls and buildings crafted from brick."
+  },
+  {
+    "name": "disguise_kit",
+    "charges": 5,
+    "special": "fast_change",
+    "mastery": "camouflage",
+    "description": "This pouch of cosmetics, hair dye, and small props lets you create disguises that change your physical appearance. Proficiency with this kit lets you add your proficiency bonus to any ability checks you make to create a visual disguise."
+  }
+]
