@@ -38,9 +38,10 @@
 </template>
 
 <script lang="ts">
-import { isArmorData, type ArmorData } from 'src/models/armor_types';
-import { isToolData, type ToolData } from 'src/models/tool_types';
-import { isWeaponData, type WeaponData } from 'src/models/weapon_types';
+import { isArmorData, type ArmorData } from 'src/models/items/armor_types';
+import { isFociData, type FociData } from 'src/models/items/foci_types';
+import { isToolData, type ToolData } from 'src/models/items/tool_types';
+import { isWeaponData, type WeaponData } from 'src/models/items/weapon_types';
 import { defineComponent, type PropType } from 'vue';
 
 export default defineComponent({
@@ -48,15 +49,15 @@ export default defineComponent({
 
   props: {
     items: {
-      type: Array as PropType<WeaponData[] | ArmorData[] | ToolData[]>,
+      type: Array as PropType<WeaponData[] | ArmorData[] | ToolData[] | FociData[]>,
       required: true,
     },
   },
 
   data() {
     return {
-      ratio: 19.4,
-      selectedItem: null as WeaponData | ArmorData | ToolData | null,
+      ratio: 25.3,
+      selectedItem: null as WeaponData | ArmorData | ToolData | FociData | null,
     };
   },
 
@@ -113,7 +114,12 @@ export default defineComponent({
           mastery: this.selectedItem.mastery.unslugify().capitalize(),
         };
       }
-
+      if (isFociData(this.selectedItem)) {
+        return {
+          name: this.selectedItem.name.unslugify().capitalize(),
+          mastery: this.selectedItem.mastery.unslugify().capitalize(),
+        };
+      }
       return {};
     },
   },

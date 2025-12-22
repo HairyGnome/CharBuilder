@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import type { WeaponData } from 'src/models/weapon_types';
+import type { WeaponData } from 'src/models/items/weapon_types';
 import { useDataStore } from 'src/stores/data-store';
 import LinkableItem from 'src/components/common/LinkableItem.vue';
 import { mapActions } from 'pinia';

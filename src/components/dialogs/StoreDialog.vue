@@ -12,7 +12,7 @@
           <q-tab name="armor" label="Armor" icon="mdi-shield" class="col" />
           <q-tab name="tools" label="Tools" icon="mdi-hammer-wrench" class="col" />
           <q-tab name="foci" label="Spell Foci" icon="mdi-diamond-stone" class="col" />
-          <q-tab name="potions" label="Potions" icon="mdi-flask" class="col" />
+          <!-- <q-tab name="potions" label="Potions" icon="mdi-flask" class="col" /> -->
         </q-tabs>
 
         <q-tab-panels v-model="tabName" class="q-mb-none">
@@ -25,12 +25,12 @@
           <q-tab-panel name="tools" class="q-py-none q-pl-none">
             <base-store-tab :items="tools" />
           </q-tab-panel>
-          <q-tab-panel name="foci">
-            <div class="text-h6 q-pa-md full-height full-width">Tool Store Coming Soon!</div>
+          <q-tab-panel name="foci" class="q-py-none q-pl-none">
+            <base-store-tab :items="foci" />
           </q-tab-panel>
-          <q-tab-panel name="potions">
+          <!-- <q-tab-panel name="potions">
             <div class="text-h6 q-pa-md">Potion Store Coming Soon!</div>
-          </q-tab-panel>
+          </q-tab-panel> -->
         </q-tab-panels>
       </q-card-section>
 
@@ -65,7 +65,7 @@ export default defineComponent({
 
   computed: {
     ...mapWritableState(useUiStore, ['storeDialogShow']),
-    ...mapState(useDataStore, ['weapons', 'armors', 'tools']),
+    ...mapState(useDataStore, ['weapons', 'armors', 'tools', 'foci']),
   },
 
   methods: {
