@@ -17,13 +17,23 @@ export const useCharacterStore = defineStore("characterStore", {
       region: "sleepless_sands",
       speed: 25,
       selectedAbilityScoreArray: "specialist",
-      baseAbilityScores: {
-        str: 16,
-        dex: 12,
-        con: 12,
-        int: 10,
-        wis: 10,
-        cha: 8,
+      abilityScores: {
+        baseScores: {
+          str: 16,
+          dex: 12,
+          con: 12,
+          int: 10,
+          wis: 10,
+          cha: 8,
+        },
+        lv4Improvement: {
+          str: 0,
+          dex: 0,
+          con: 0,
+          int: 0,
+          wis: 0,
+          cha: 0,
+        },
       },
       hp: {
         currentHp: 22,
@@ -43,13 +53,14 @@ export const useCharacterStore = defineStore("characterStore", {
   getters: {
     getAbilityScoreModifier:
       (state: CharacterState) =>
-      (ability: keyof CharacterState["baseAbilityScores"]): number => {
-        // TODO: add ability scores from all sources
-        return Math.floor((state.baseAbilityScores[ability] - 10) / 2);
+      (ability: keyof AbilityScores): number => {
+        const abilityScore =
+          state.abilityScores.baseScores[ability] + state.abilityScores.lv4Improvement[ability];
+        return Math.floor((abilityScore - 10) / 2);
       },
 
     getBaseAbilityScores(state: CharacterState) {
-      return state.baseAbilityScores;
+      return state.abilityScores.baseScores;
     },
 
     getAncestryAndLineageFeats(state: CharacterState): string[] {
@@ -65,9 +76,9 @@ export const useCharacterStore = defineStore("characterStore", {
     },
 
     getRoleFeatures(): string[] {
-      const roles = dataStore.classes[this.class]?.roles || [];
+      const roles = dataStore.getClassByName(this.class)?.roles ?? [];
       const rolePassives: { [key: string]: string } =
-        dataStore.ancestries[this.ancestry.ancestry]?.rolePassives || {};
+        dataStore.ancestries[this.ancestry.ancestry]?.rolePassives ?? {};
       const result = roles.map((role) => rolePassives[role] || "");
       return result.filter((role) => role !== "");
     },
@@ -88,8 +99,12 @@ export const useCharacterStore = defineStore("characterStore", {
     setClass(className: string) {
       this.class = className.toLowerCase();
     },
-    setAbilityScores(abilityScores: AbilityScores) {
-      this.baseAbilityScores = abilityScores;
+    setBaseAbilityScores(abilityScores: AbilityScores) {
+      this.abilityScores.baseScores = abilityScores;
+    },
+
+    setLv4Improvement(abilityScores: AbilityScores) {
+      this.abilityScores.lv4Improvement = abilityScores;
     },
 
     setLevel(value: number) {

@@ -152,18 +152,18 @@ export default defineComponent({
         this.selectedAbilityScoreArray.toLowerCase() as keyof typeof this.abilityScoreArray;
       if (this.abilityScoreArray[arrayKey]) {
         this.abilityScoreArray[arrayKey] = [
-          characterStore.baseAbilityScores.str,
-          characterStore.baseAbilityScores.dex,
-          characterStore.baseAbilityScores.con,
-          characterStore.baseAbilityScores.int,
-          characterStore.baseAbilityScores.wis,
-          characterStore.baseAbilityScores.cha,
+          characterStore.abilityScores.baseScores.str,
+          characterStore.abilityScores.baseScores.dex,
+          characterStore.abilityScores.baseScores.con,
+          characterStore.abilityScores.baseScores.int,
+          characterStore.abilityScores.baseScores.wis,
+          characterStore.abilityScores.baseScores.cha,
         ];
       }
     },
 
     saveAbilityScoreArray() {
-      characterStore.setAbilityScores({
+      characterStore.setBaseAbilityScores({
         str: this.actualAbilityScoreArray[0] || 0,
         dex: this.actualAbilityScoreArray[1] || 0,
         con: this.actualAbilityScoreArray[2] || 0,

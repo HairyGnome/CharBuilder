@@ -75,7 +75,10 @@ export type CharacterState = {
   region: string;
   speed: number;
   selectedAbilityScoreArray: string;
-  baseAbilityScores: AbilityScores;
+  abilityScores: {
+    baseScores: AbilityScores;
+    lv4Improvement: AbilityScores;
+  };
   hp: HP;
   weapons: string[];
   money: {
@@ -101,7 +104,7 @@ export type Roll = {
 };
 
 export type Data = {
-  classes: { [key: string]: ClassData };
+  classes: ClassData[];
   ancestries: { [key: string]: AncestryData };
   lineages: { [key: string]: LineageData };
   regions: { [key: string]: RegionData };
@@ -113,6 +116,7 @@ export type Data = {
 };
 
 export type ClassData = {
+  name: string;
   label: string;
   hitDie: number;
   roles: string[];
@@ -134,5 +138,8 @@ export type ClassData = {
       choose?: number;
       granted: string[];
     };
+  };
+  feats: {
+    [level: number]: string[];
   };
 };

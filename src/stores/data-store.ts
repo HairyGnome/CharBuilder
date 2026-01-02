@@ -8,7 +8,7 @@ import type { FociData } from "src/models/items/foci_types";
 export const useDataStore = defineStore("dataStore", {
   state: (): Data => {
     return {
-      classes: {},
+      classes: [],
       ancestries: {},
       lineages: {},
       regions: {},
@@ -24,7 +24,7 @@ export const useDataStore = defineStore("dataStore", {
 
   actions: {
     setClasses(classes: object) {
-      this.classes = classes as Record<string, ClassData>;
+      this.classes = classes as ClassData[];
     },
     setAncestries(ancestries: object) {
       this.ancestries = ancestries as Record<string, AncestryData>;
@@ -58,6 +58,11 @@ export const useDataStore = defineStore("dataStore", {
     getWeaponByName(name: string): WeaponData | null {
       const weapon = this.weapons.find((w) => w.name === name);
       return weapon || null;
+    },
+
+    getClassByName(name: string): ClassData | null {
+      const classData = this.classes.find((c) => c.name === name);
+      return classData || null;
     },
   },
 });

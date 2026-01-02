@@ -99,14 +99,40 @@
       class="col"
     />
   </q-card-section>
-  <q-card-section class="text-subtitle1">
-    Level 1
-    <q-separator />
-  </q-card-section>
-  <q-card-section class="column">
-    <q-btn label="Select base ability scores" @click="openAbilityScoreArrayDialog" />
-    <ability-score-array-dialog v-model="showAbilityScoreArrayDialog" />
-  </q-card-section>
+  <level-up-section v-for="level in 5" :key="level" :req-level="level">
+    <template #extra>
+      <div class="col" v-if="level === 1">
+        <q-btn
+          v-if="level === 1"
+          label="Select base ability scores"
+          @click="openAbilityScoreArrayDialog"
+        />
+        <ability-score-array-dialog v-model="showAbilityScoreArrayDialog" />
+      </div>
+      <div v-else-if="level === 4" class="column q-gutter-y-md">
+        <q-select v-model="lv4Selection" :options="lv4SelectOptions" dense outlined />
+        <q-btn
+          v-if="abilityScoreSelected"
+          label="Select Ability Score Improvement"
+          dense
+          @click="openAbilityScoreImprovementDialog"
+        />
+        <q-btn v-else label="Select Feat" dense outlined />
+      </div>
+      <div v-else>
+        <q-input
+          v-for="feat in classData?.feats[level] || []"
+          :model-value="feat.unslugify().capitalize()"
+          :key="feat"
+          readonly
+          dense
+          outlined
+          label="Feat"
+          class="q-mb-md"
+        />
+      </div>
+    </template>
+  </level-up-section>
 </template>
 
 <script lang="ts">
@@ -114,6 +140,9 @@ import { defineComponent } from "vue";
 import { useDataStore } from "src/stores/data-store";
 import { useCharacterStore } from "src/stores/character_store";
 import AbilityScoreArrayDialog from "../dialogs/AbilityScoreArrayDialog.vue";
+import LevelUpSection from "./LevelUpSection.vue";
+import { mapActions, mapState } from "pinia";
+import { useUiStore } from "src/stores/ui-store";
 
 const dataStore = useDataStore();
 const characterStore = useCharacterStore();
@@ -121,17 +150,43 @@ const characterStore = useCharacterStore();
 export default defineComponent({
   name: "ClassSelectCard",
 
-  components: { AbilityScoreArrayDialog },
+  components: { AbilityScoreArrayDialog, LevelUpSection },
 
   data() {
     return {
       showAbilityScoreArrayDialog: false,
+      lv4Selection: {
+        id: "ability_score",
+        label: "Ability Score Improvement",
+      },
+      lv4SelectOptions: [
+        {
+          id: "ability_score",
+          label: "Ability Score Improvement",
+        },
+        {
+          id: "feat",
+          label: "Feat",
+        },
+      ],
     };
   },
 
   computed: {
+    ...mapState(useDataStore, ["classes"]),
+    ...mapState(useCharacterStore, ["class", "ancestry", "region"]),
+
+    abilityScoreSelected() {
+      return this.lv4Selection.id === "ability_score";
+    },
+
+    classData() {
+      const className = characterStore.class;
+      return dataStore.getClassByName(className);
+    },
+
     classLabels() {
-      return Object.keys(dataStore.classes).map((key: string) => key.capitalize());
+      return dataStore.classes.map((cls) => cls.name.unslugify().capitalize());
     },
 
     ancestryLabels() {
@@ -151,7 +206,7 @@ export default defineComponent({
     },
 
     classRoles() {
-      return dataStore.classes[characterStore.class]?.roles || [];
+      return dataStore.getClassByName(characterStore.class)?.roles || [];
     },
 
     ancestryFeature() {
@@ -173,9 +228,9 @@ export default defineComponent({
 
     regionFeats(): string[] {
       const regionPassives: { [key: string]: string } =
-        dataStore.regions[characterStore.region]?.feats || {};
-      const roles = dataStore.classes[characterStore.class]?.roles || [];
-      return roles.map((role) => regionPassives[role]?.unslugify().capitalize() || "N/A");
+        dataStore.regions[characterStore.region]?.feats ?? {};
+      const roles = dataStore.getClassByName(characterStore.class)?.roles ?? [];
+      return roles.map((role) => regionPassives[role]?.unslugify().capitalize() ?? "N/A");
     },
 
     selectedClass: {
@@ -219,6 +274,7 @@ export default defineComponent({
     openAbilityScoreArrayDialog() {
       this.showAbilityScoreArrayDialog = true;
     },
+    ...mapActions(useUiStore, ["openAbilityScoreImprovementDialog"]),
   },
 });
 </script>
