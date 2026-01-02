@@ -6,6 +6,15 @@ export const useUiStore = defineStore("uiStore", {
       diceRollerShow: false,
       menuShow: false,
       storeDialogShow: false,
+      abilityScoreImprovementDialogShow: false,
     };
+  },
+
+  getters: {},
+
+  actions: {
+    openAbilityScoreImprovementDialog() {
+      this.abilityScoreImprovementDialogShow = true;
+    },
   },
 });
