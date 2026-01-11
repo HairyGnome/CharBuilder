@@ -10,8 +10,8 @@
       <div class="col">
         {{
           weapon.properties.length > 0
-            ? weapon.properties.map((p) => p.unslugify().capitalize()).join(', ')
-            : '-'
+            ? weapon.properties.map((p) => p.unslugify().capitalize()).join(", ")
+            : "-"
         }}
       </div>
       <div class="col">Heft: {{ weapon.heft }}</div>
@@ -46,17 +46,17 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import type { WeaponData } from 'src/models/items/weapon_types';
-import { useDataStore } from 'src/stores/data-store';
-import LinkableItem from 'src/components/common/LinkableItem.vue';
-import { mapActions } from 'pinia';
-import { useDiceRollStore } from 'src/stores/dice-roll-store';
+import { defineComponent } from "vue";
+import type { WeaponData } from "src/models/items/weapon_types";
+import { useDataStore } from "src/stores/data-store";
+import LinkableItem from "src/components/common/LinkableItem.vue";
+import { mapActions } from "pinia";
+import { useDiceRollStore } from "src/stores/dice-roll-store";
 
 const dataStore = useDataStore();
 
 export default defineComponent({
-  name: 'WeaponCard',
+  name: "WeaponCard",
 
   components: { LinkableItem },
 
@@ -89,14 +89,14 @@ export default defineComponent({
     weapon(): WeaponData {
       const weapon: WeaponData | null = dataStore.getWeaponByName(this.weaponName);
       if (!weapon) {
-        throw new Error('Error: weapon not found');
+        throw new Error("Error: weapon not found");
       }
       return weapon;
     },
   },
 
   methods: {
-    ...mapActions(useDiceRollStore, ['sendParamsAndOpen']),
+    ...mapActions(useDiceRollStore, ["sendParamsAndOpen"]),
 
     rollAttack() {
       this.sendParamsAndOpen(this.attackRollParams);

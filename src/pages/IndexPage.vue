@@ -19,15 +19,15 @@
 </template>
 
 <script lang="ts">
-import AbilityScoreCard from 'src/components/AbilityScoreCard.vue';
-import GearCard from 'src/components/GearCard.vue';
-import HpCard from 'src/components/HpCard.vue';
-import LevelCard from 'src/components/LevelCard.vue';
-import ClassSelectCard from 'src/components/class-cards/ClassSelectCard.vue';
-import { defineComponent } from 'vue';
+import AbilityScoreCard from "src/components/AbilityScoreCard.vue";
+import GearCard from "src/components/GearCard.vue";
+import HpCard from "src/components/HpCard.vue";
+import LevelCard from "src/components/LevelCard.vue";
+import ClassSelectCard from "src/components/class-cards/ClassSelectCard.vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: 'IndexPage',
+  name: "IndexPage",
 
   components: { AbilityScoreCard, HpCard, GearCard, LevelCard, ClassSelectCard },
 });

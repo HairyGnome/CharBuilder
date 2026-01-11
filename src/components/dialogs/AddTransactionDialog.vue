@@ -50,18 +50,18 @@
 </template>
 
 <script lang="ts">
-import type { Transaction } from 'src/models/types';
-import { useCharacterStore } from 'src/stores/character_store';
-import { defineComponent } from 'vue';
+import type { Transaction } from "src/models/types";
+import { useCharacterStore } from "src/stores/character_store";
+import { defineComponent } from "vue";
 
 const characterStore = useCharacterStore();
 
 export default defineComponent({
-  name: 'AddTransactionDialog',
+  name: "AddTransactionDialog",
 
   data() {
     return {
-      transactionLabel: 'Unlabeled Transaction',
+      transactionLabel: "Unlabeled Transaction",
       gold: 0,
       silver: 0,
       copper: 0,
@@ -88,24 +88,24 @@ export default defineComponent({
 
       const transactionSuccessful = characterStore.addTransaction(transaction);
       if (transactionSuccessful) {
-        this.transactionLabel = 'Unlabeled Transaction';
+        this.transactionLabel = "Unlabeled Transaction";
         this.gold = 0;
         this.silver = 0;
         this.copper = 0;
         this.showError = false;
-        this.$emit('update:show', false);
+        this.$emit("update:show", false);
       } else {
         this.showError = true;
       }
     },
 
     cancelTransaction() {
-      this.transactionLabel = 'Unlabeled Transaction';
+      this.transactionLabel = "Unlabeled Transaction";
       this.gold = 0;
       this.silver = 0;
       this.copper = 0;
       this.showError = false;
-      this.$emit('update:show', false);
+      this.$emit("update:show", false);
     },
   },
 });

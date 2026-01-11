@@ -1,14 +1,21 @@
-import { defineStore } from 'pinia';
-import type { ArmorData } from 'src/models/items/armor_types';
-import type { ToolData } from 'src/models/items/tool_types';
-import type { AncestryData, ClassData, Data, LineageData, RegionData } from 'src/models/types';
-import type { WeaponData } from 'src/models/items/weapon_types';
-import type { FociData } from 'src/models/items/foci_types';
+import { defineStore } from "pinia";
+import type { ArmorData } from "src/models/items/armor_types";
+import type { ToolData } from "src/models/items/tool_types";
+import type {
+  AncestryData,
+  ClassData,
+  Data,
+  Feat,
+  LineageData,
+  RegionData,
+} from "src/models/types";
+import type { WeaponData } from "src/models/items/weapon_types";
+import type { FociData } from "src/models/items/foci_types";
 
-export const useDataStore = defineStore('dataStore', {
+export const useDataStore = defineStore("dataStore", {
   state: (): Data => {
     return {
-      classes: {},
+      classes: [],
       ancestries: {},
       lineages: {},
       regions: {},
@@ -16,6 +23,7 @@ export const useDataStore = defineStore('dataStore', {
       armors: [],
       tools: [],
       foci: [],
+      feats: [],
       hyperlinks: {},
     };
   },
@@ -24,7 +32,7 @@ export const useDataStore = defineStore('dataStore', {
 
   actions: {
     setClasses(classes: object) {
-      this.classes = classes as Record<string, ClassData>;
+      this.classes = classes as ClassData[];
     },
     setAncestries(ancestries: object) {
       this.ancestries = ancestries as Record<string, AncestryData>;
@@ -47,6 +55,9 @@ export const useDataStore = defineStore('dataStore', {
     setFoci(foci: object) {
       this.foci = foci as FociData[];
     },
+    setFeats(feats: object) {
+      this.feats = feats as Feat[];
+    },
     setHyperlinks(hyperlinks: object) {
       this.hyperlinks = hyperlinks as Record<string, string>;
     },
@@ -58,6 +69,11 @@ export const useDataStore = defineStore('dataStore', {
     getWeaponByName(name: string): WeaponData | null {
       const weapon = this.weapons.find((w) => w.name === name);
       return weapon || null;
+    },
+
+    getClassByName(name: string): ClassData | null {
+      const classData = this.classes.find((c) => c.name === name);
+      return classData || null;
     },
   },
 });

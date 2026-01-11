@@ -1,56 +1,6 @@
-{
-  "barbarian": {
-    "label": "Barbarian",
-    "hitDie": 12,
-    "roles": ["martial", "mundane"],
-    "proficiencies": {
-      "armor": ["light", "medium"],
-      "weapons": ["simple", "martial"],
-      "saves": ["str", "con"],
-      "skills": {
-        "choose": 1
-      },
-      "tools": {
-        "choose": 1,
-        "granted": []
-      }
-    }
-  },
-  "bard": {
-    "label": "Bard",
-    "hitDie": 8,
-    "roles": ["magic", "wanderer"],
-    "proficiencies": {
-      "armor": ["light", "medium", "shield"],
-      "weapons": ["simple", "longsword", "rapier", "shortsword", "shortbow"],
-      "saves": ["dex", "cha"],
-      "skills": {
-        "choose": 1
-      },
-      "tools": {
-        "choose": 1,
-        "granted": []
-      }
-    }
-  },
-  "cleric": {
-    "label": "Cleric",
-    "hitDie": 8,
-    "roles": ["magic"],
-    "proficiencies": {
-      "armor": ["light", "medium", "shield"],
-      "weapons": ["simple"],
-      "saves": ["wis", "cha"],
-      "skills": {
-        "choose": 1
-      },
-      "tools": {
-        "choose": 1,
-        "granted": []
-      }
-    }
-  },
-  "fighter": {
+[
+  {
+    "name": "fighter",
     "label": "Fighter",
     "hitDie": 10,
     "roles": ["martial", "mundane"],
@@ -65,6 +15,12 @@
         "choose": 1,
         "granted": []
       }
+    },
+    "feats": {
+      "1": ["second_wind", "warrior's_soul"],
+      "2": ["action_surge"],
+      "3": ["martial_archetype"],
+      "5": ["glory", "indomitable"]
     }
   }
-}
+]

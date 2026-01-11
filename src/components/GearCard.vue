@@ -37,20 +37,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import GearPageNotImplemented from './gear-pages/GearPageNotImplemented.vue';
-import WeaponsPage from './gear-pages/weapons-page/WeaponsPage.vue';
-import FeaturesPage from './gear-pages/features-page/FeaturesPage.vue';
-import PursePage from './gear-pages/purse-page/PursePage.vue';
+import { defineComponent } from "vue";
+import GearPageNotImplemented from "./gear-pages/GearPageNotImplemented.vue";
+import WeaponsPage from "./gear-pages/weapons-page/WeaponsPage.vue";
+import FeaturesPage from "./gear-pages/features-page/FeaturesPage.vue";
+import PursePage from "./gear-pages/purse-page/PursePage.vue";
 
 export default defineComponent({
-  name: 'GearCard',
+  name: "GearCard",
 
   components: { GearPageNotImplemented, WeaponsPage, PursePage, FeaturesPage },
 
   data() {
     return {
-      tab: 'weapons',
+      tab: "weapons",
     };
   },
 });

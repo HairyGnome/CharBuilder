@@ -15,13 +15,13 @@
 </template>
 
 <script lang="ts">
-import { useDataStore } from 'src/stores/data-store';
-import { defineComponent } from 'vue';
+import { useDataStore } from "src/stores/data-store";
+import { defineComponent } from "vue";
 
 const dataStore = useDataStore();
 
 export default defineComponent({
-  name: 'LinkableItem',
+  name: "LinkableItem",
 
   data() {
     return {

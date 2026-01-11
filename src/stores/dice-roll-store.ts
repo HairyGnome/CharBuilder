@@ -1,10 +1,10 @@
-import { defineStore } from 'pinia';
-import type { Roll } from 'src/models/types';
-import { useUiStore } from './ui-store';
+import { defineStore } from "pinia";
+import type { Roll } from "src/models/types";
+import { useUiStore } from "./ui-store";
 
 const uiStore = useUiStore();
 
-export const useDiceRollStore = defineStore('diceRollStore', {
+export const useDiceRollStore = defineStore("diceRollStore", {
   state() {
     return {
       amount: 1,

@@ -1,7 +1,7 @@
-import type { ArmorData } from './items/armor_types';
-import type { FociData } from './items/foci_types';
-import type { ToolData } from './items/tool_types';
-import type { WeaponData } from './items/weapon_types';
+import type { ArmorData } from "./items/armor_types";
+import type { FociData } from "./items/foci_types";
+import type { ToolData } from "./items/tool_types";
+import type { WeaponData } from "./items/weapon_types";
 
 export type Stat = {
   name: string;
@@ -39,11 +39,11 @@ export type Skills = {
   value: number;
 };
 
-export type Role = 'martial' | 'mundane' | 'magic' | 'wanderer';
+export type Role = "martial" | "mundane" | "magic" | "wanderer";
 
 export type AncestryData = {
   lineages: string[];
-  size: 'small' | 'medium' | 'large';
+  size: "small" | "medium" | "large";
   feature: string;
   rolePassives: { [key: string]: string };
 };
@@ -64,6 +64,12 @@ export type RegionData = {
   };
 };
 
+export interface Feat {
+  name: string;
+  prerequisite?: string;
+  description: string;
+}
+
 export type CharacterState = {
   name: string;
   level: number;
@@ -75,7 +81,13 @@ export type CharacterState = {
   region: string;
   speed: number;
   selectedAbilityScoreArray: string;
-  baseAbilityScores: AbilityScores;
+  abilityScores: {
+    baseScores: AbilityScores;
+    lv4Improvement: AbilityScores;
+  };
+  selectedFeats: {
+    lv4: string | null;
+  };
   hp: HP;
   weapons: string[];
   money: {
@@ -101,7 +113,7 @@ export type Roll = {
 };
 
 export type Data = {
-  classes: { [key: string]: ClassData };
+  classes: ClassData[];
   ancestries: { [key: string]: AncestryData };
   lineages: { [key: string]: LineageData };
   regions: { [key: string]: RegionData };
@@ -109,10 +121,12 @@ export type Data = {
   armors: ArmorData[];
   tools: ToolData[];
   foci: FociData[];
+  feats: Feat[];
   hyperlinks: { [key: string]: string };
 };
 
 export type ClassData = {
+  name: string;
   label: string;
   hitDie: number;
   roles: string[];
@@ -134,5 +148,8 @@ export type ClassData = {
       choose?: number;
       granted: string[];
     };
+  };
+  feats: {
+    [level: number]: string[];
   };
 };

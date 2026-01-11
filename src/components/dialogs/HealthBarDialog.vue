@@ -21,13 +21,13 @@
 </template>
 
 <script lang="ts">
-import { useCharacterStore } from 'src/stores/character_store';
-import { defineComponent } from 'vue';
+import { useCharacterStore } from "src/stores/character_store";
+import { defineComponent } from "vue";
 
 const characterStore = useCharacterStore();
 
 export default defineComponent({
-  name: 'HealthBarDialog',
+  name: "HealthBarDialog",
 
   data() {
     return {
@@ -90,14 +90,14 @@ export default defineComponent({
       this.adjustment = 0;
       this.health = characterStore.hp.currentHp;
       this.tempHp = characterStore.hp.tempHp;
-      this.$emit('update:modelValue', false);
+      this.$emit("update:modelValue", false);
     },
 
     cancelAdjustment() {
       this.adjustment = 0;
       this.health = characterStore.hp.currentHp;
       this.tempHp = characterStore.hp.tempHp;
-      this.$emit('update:modelValue', false);
+      this.$emit("update:modelValue", false);
     },
   },
 });

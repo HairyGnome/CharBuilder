@@ -1,5 +1,5 @@
 // app global css in SCSS form
-@import '@mdi/font/css/materialdesignicons.css';
+@import "@mdi/font/css/materialdesignicons.css";
 
 a {
   color: #ffffff;
@@ -11,18 +11,18 @@ a:hover {
 }
 
 /* Minimal styling for number inputs: hide native spinners and show small colored chevrons */
-input[type='number'] {
+input[type="number"] {
   padding-right: 1.8rem; /* space for chevrons */
   background-color: transparent;
 }
 
 /* hide native spinners */
-input[type='number']::-webkit-inner-spin-button,
-input[type='number']::-webkit-outer-spin-button {
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-input[type='number'] {
+input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
 }

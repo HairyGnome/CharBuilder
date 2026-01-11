@@ -43,7 +43,7 @@
     </q-card-section>
     <q-card-section class="col justify-center text-center">
       <div class="text-h5">Result</div>
-      <div class="text-h3">{{ prevRolls.at(-1)?.sum || '-' }}</div>
+      <div class="text-h3">{{ prevRolls.at(-1)?.sum || "-" }}</div>
     </q-card-section>
     <q-card-section class="row justify-evenly">
       <q-btn label="Roll" @click="roll" color="primary" />
@@ -53,15 +53,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { rules } from '../utils';
-import DiceRollCard from './subcomponents/DiceRollCard.vue';
-import { mapActions, mapState, mapWritableState } from 'pinia';
-import { useDiceRollStore } from 'src/stores/dice-roll-store';
-import { useUiStore } from 'src/stores/ui-store';
+import { defineComponent } from "vue";
+import { rules } from "../utils";
+import DiceRollCard from "./subcomponents/DiceRollCard.vue";
+import { mapActions, mapState, mapWritableState } from "pinia";
+import { useDiceRollStore } from "src/stores/dice-roll-store";
+import { useUiStore } from "src/stores/ui-store";
 
 export default defineComponent({
-  name: 'DiceRoller',
+  name: "DiceRoller",
 
   components: { DiceRollCard },
 
@@ -78,9 +78,9 @@ export default defineComponent({
   },
 
   computed: {
-    ...mapWritableState(useUiStore, ['diceRollerShow']),
-    ...mapWritableState(useDiceRollStore, ['dice', 'modifier']),
-    ...mapState(useDiceRollStore, ['amount', 'minAmount', 'maxAmount']),
+    ...mapWritableState(useUiStore, ["diceRollerShow"]),
+    ...mapWritableState(useDiceRollStore, ["dice", "modifier"]),
+    ...mapState(useDiceRollStore, ["amount", "minAmount", "maxAmount"]),
 
     rules() {
       return rules;
@@ -88,7 +88,7 @@ export default defineComponent({
   },
 
   methods: {
-    ...mapActions(useDiceRollStore, ['rollDice', 'setAmount']),
+    ...mapActions(useDiceRollStore, ["rollDice", "setAmount"]),
 
     roll() {
       const { rolls, modifier, sum } = this.rollDice();
