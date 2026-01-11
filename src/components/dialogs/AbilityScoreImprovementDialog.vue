@@ -1,5 +1,9 @@
 <template>
-  <q-dialog v-model="abilityScoreImprovementDialogShow" @dismiss="closeDialog">
+  <q-dialog
+    v-model="abilityScoreImprovementDialogShow"
+    @dismiss="closeDialog"
+    @before-show="onBeforeShow"
+  >
     <q-card style="min-width: 1000px">
       <q-card-section class="text-h5"> Ability Score Improvement </q-card-section>
       <q-separator class="q-mx-md" />
@@ -51,8 +55,8 @@
         </table>
       </q-card-section>
       <q-card-actions align="right" class="q-mb-sm q-mr-sm">
-        <q-btn label="Save" color="primary" @click="saveImprovements" />
         <q-btn label="Close" color="primary" @click="closeDialog" />
+        <q-btn label="Save" color="primary" @click="saveImprovements" />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -113,6 +117,26 @@ export default defineComponent({
 
   methods: {
     ...mapActions(useCharacterStore, ["setLv4Improvement"]),
+
+    onBeforeShow() {
+      console.log("mounted");
+      this.allocatedImprovement = {
+        str: this.abilityScores.lv4Improvement.str,
+        dex: this.abilityScores.lv4Improvement.dex,
+        con: this.abilityScores.lv4Improvement.con,
+        int: this.abilityScores.lv4Improvement.int,
+        wis: this.abilityScores.lv4Improvement.wis,
+        cha: this.abilityScores.lv4Improvement.cha,
+      };
+      this.improvementLeft =
+        4 -
+        (this.abilityScores.lv4Improvement.str +
+          this.abilityScores.lv4Improvement.dex +
+          this.abilityScores.lv4Improvement.con +
+          this.abilityScores.lv4Improvement.int +
+          this.abilityScores.lv4Improvement.wis +
+          this.abilityScores.lv4Improvement.cha);
+    },
 
     saveImprovements() {
       this.setLv4Improvement({

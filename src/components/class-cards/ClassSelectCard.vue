@@ -289,6 +289,7 @@ export default defineComponent({
 
   methods: {
     ...mapActions(useUiStore, ["openAbilityScoreImprovementDialog", "openFeatSelectDialog"]),
+    ...mapActions(useCharacterStore, ["resetLv4AbilityScoreImprovements"]),
 
     openAbilityScoreArrayDialog() {
       this.showAbilityScoreArrayDialog = true;
