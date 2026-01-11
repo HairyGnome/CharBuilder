@@ -33,6 +33,9 @@ export const useCharacterStore = defineStore("characterStore", {
           cha: 0,
         },
       },
+      selectedFeats: {
+        lv4: null,
+      },
       hp: {
         currentHp: 22,
         maxHp: 22,
@@ -190,6 +193,16 @@ export const useCharacterStore = defineStore("characterStore", {
         copperChange,
       };
       this.addTransaction(transaction);
+    },
+    resetLv4AbilityScoreImprovements() {
+      this.abilityScores.lv4Improvement = {
+        str: 0,
+        dex: 0,
+        con: 0,
+        int: 0,
+        wis: 0,
+        cha: 0,
+      };
     },
   },
 });

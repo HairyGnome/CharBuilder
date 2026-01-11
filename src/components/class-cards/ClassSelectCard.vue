@@ -101,7 +101,7 @@
   </q-card-section>
   <level-up-section v-for="level in 5" :key="level" :req-level="level">
     <template #extra>
-      <div class="col" v-if="level === 1">
+      <div class="column col" v-if="level === 1">
         <q-btn
           v-if="level === 1"
           label="Select base ability scores"
@@ -110,14 +110,31 @@
         <ability-score-array-dialog v-model="showAbilityScoreArrayDialog" />
       </div>
       <div v-else-if="level === 4" class="column q-gutter-y-md">
-        <q-select v-model="lv4Selection" :options="lv4SelectOptions" dense outlined />
+        <q-select
+          v-model="lv4Selection"
+          :options="lv4SelectOptions"
+          dense
+          outlined
+          @update:model-value="onLv4SelectionUpdate"
+        />
         <q-btn
           v-if="abilityScoreSelected"
           label="Select Ability Score Improvement"
           dense
           @click="openAbilityScoreImprovementDialog"
         />
-        <q-btn v-else label="Select Feat" dense outlined @click="openFeatSelectDialog" />
+        <div v-else class="column">
+          <q-input
+            :model-value="selectedFeats.lv4.unslugify().capitalize()"
+            v-if="selectedFeats.lv4 !== null"
+            readonly
+            dense
+            outlined
+            label="Feat"
+            class="q-mb-md"
+          />
+          <q-btn label="Select Feat" dense outlined @click="openFeatSelectDialog" />
+        </div>
       </div>
       <div v-else>
         <q-input
@@ -174,7 +191,7 @@ export default defineComponent({
 
   computed: {
     ...mapState(useDataStore, ["classes"]),
-    ...mapState(useCharacterStore, ["class", "ancestry", "region"]),
+    ...mapState(useCharacterStore, ["class", "ancestry", "region", "selectedFeats"]),
 
     abilityScoreSelected() {
       return this.lv4Selection.id === "ability_score";
@@ -271,10 +288,16 @@ export default defineComponent({
   },
 
   methods: {
+    ...mapActions(useUiStore, ["openAbilityScoreImprovementDialog", "openFeatSelectDialog"]),
+
     openAbilityScoreArrayDialog() {
       this.showAbilityScoreArrayDialog = true;
     },
-    ...mapActions(useUiStore, ["openAbilityScoreImprovementDialog", "openFeatSelectDialog"]),
+
+    onLv4SelectionUpdate() {
+      characterStore.selectedFeats.lv4 = null;
+      characterStore.resetLv4AbilityScoreImprovements();
+    },
   },
 });
 </script>

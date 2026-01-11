@@ -64,6 +64,12 @@ export type RegionData = {
   };
 };
 
+export interface Feat {
+  name: string;
+  prerequisite?: string;
+  description: string;
+}
+
 export type CharacterState = {
   name: string;
   level: number;
@@ -78,6 +84,9 @@ export type CharacterState = {
   abilityScores: {
     baseScores: AbilityScores;
     lv4Improvement: AbilityScores;
+  };
+  selectedFeats: {
+    lv4: string | null;
   };
   hp: HP;
   weapons: string[];
@@ -112,6 +121,7 @@ export type Data = {
   armors: ArmorData[];
   tools: ToolData[];
   foci: FociData[];
+  feats: Feat[];
   hyperlinks: { [key: string]: string };
 };
 

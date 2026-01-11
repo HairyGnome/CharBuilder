@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Sermon of Balance",
+    "prerequisite": "Deity with equal amount of C and L focus",
+    "description": "When you use your Hymn feature, you still benefit from Aether Channel as normal."
+  },
+  {
+    "name": "Skill adept",
+    "description": "You gain Skill Mastery with a skill you have proficiency with."
+  }
+]
