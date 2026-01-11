@@ -2,8 +2,6 @@ import { defineStore } from "pinia";
 import type { AbilityScores, CharacterState, Transaction } from "src/models/types";
 import { useDataStore } from "./data-store";
 
-const dataStore = useDataStore();
-
 export const useCharacterStore = defineStore("characterStore", {
   state(): CharacterState {
     return {
@@ -64,6 +62,7 @@ export const useCharacterStore = defineStore("characterStore", {
     },
 
     getAncestryAndLineageFeats(state: CharacterState): string[] {
+      const dataStore = useDataStore();
       const ancestryFeat = dataStore.ancestries[state.ancestry.ancestry]?.feature;
       const lineageFeatures: string[] = [];
       const lineageFeatData = dataStore.lineages[state.ancestry.lineage]?.feats || {};
@@ -76,6 +75,7 @@ export const useCharacterStore = defineStore("characterStore", {
     },
 
     getRoleFeatures(): string[] {
+      const dataStore = useDataStore();
       const roles = dataStore.getClassByName(this.class)?.roles ?? [];
       const rolePassives: { [key: string]: string } =
         dataStore.ancestries[this.ancestry.ancestry]?.rolePassives ?? {};
@@ -88,6 +88,7 @@ export const useCharacterStore = defineStore("characterStore", {
     setAncestry(ancestry: string) {
       ancestry = ancestry.toLowerCase();
       this.ancestry.ancestry = ancestry;
+      const dataStore = useDataStore();
       this.ancestry.lineage = dataStore.ancestries[ancestry]?.lineages[0] || "N/A";
     },
     setLineage(lineage: string) {

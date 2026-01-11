@@ -117,7 +117,7 @@
           dense
           @click="openAbilityScoreImprovementDialog"
         />
-        <q-btn v-else label="Select Feat" dense outlined />
+        <q-btn v-else label="Select Feat" dense outlined @click="openFeatSelectDialog" />
       </div>
       <div v-else>
         <q-input
@@ -274,7 +274,7 @@ export default defineComponent({
     openAbilityScoreArrayDialog() {
       this.showAbilityScoreArrayDialog = true;
     },
-    ...mapActions(useUiStore, ["openAbilityScoreImprovementDialog"]),
+    ...mapActions(useUiStore, ["openAbilityScoreImprovementDialog", "openFeatSelectDialog"]),
   },
 });
 </script>

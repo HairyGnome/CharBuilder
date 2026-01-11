@@ -7,6 +7,7 @@ export const useUiStore = defineStore("uiStore", {
       menuShow: false,
       storeDialogShow: false,
       abilityScoreImprovementDialogShow: false,
+      featSelectDialogShow: false,
     };
   },
 
@@ -15,6 +16,10 @@ export const useUiStore = defineStore("uiStore", {
   actions: {
     openAbilityScoreImprovementDialog() {
       this.abilityScoreImprovementDialogShow = true;
+    },
+
+    openFeatSelectDialog() {
+      this.featSelectDialogShow = true;
     },
   },
 });
