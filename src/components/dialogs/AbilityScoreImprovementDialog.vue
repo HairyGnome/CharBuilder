@@ -50,7 +50,7 @@
           </tbody>
         </table>
       </q-card-section>
-      <q-card-actions align="right">
+      <q-card-actions align="right" class="q-mb-sm q-mr-sm">
         <q-btn label="Save" color="primary" @click="saveImprovements" />
         <q-btn label="Close" color="primary" @click="closeDialog" />
       </q-card-actions>
@@ -65,12 +65,11 @@ import { useCharacterStore } from "src/stores/character_store";
 import { useUiStore } from "src/stores/ui-store";
 import { defineComponent } from "vue";
 
-const characterStore = useCharacterStore();
-
 export default defineComponent({
   name: "AbilityScoreImprovementDialog",
 
   data() {
+    const characterStore = useCharacterStore();
     return {
       allocatedImprovement: {
         str: characterStore.abilityScores.lv4Improvement.str,
@@ -80,7 +79,14 @@ export default defineComponent({
         wis: characterStore.abilityScores.lv4Improvement.wis,
         cha: characterStore.abilityScores.lv4Improvement.cha,
       } as AbilityScores,
-      improvementLeft: 4,
+      improvementLeft:
+        4 -
+        (characterStore.abilityScores.lv4Improvement.str +
+          characterStore.abilityScores.lv4Improvement.dex +
+          characterStore.abilityScores.lv4Improvement.con +
+          characterStore.abilityScores.lv4Improvement.int +
+          characterStore.abilityScores.lv4Improvement.wis +
+          characterStore.abilityScores.lv4Improvement.cha),
     };
   },
 
