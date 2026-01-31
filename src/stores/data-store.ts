@@ -75,5 +75,9 @@ export const useDataStore = defineStore("dataStore", {
       const classData = this.classes.find((c) => c.name === name);
       return classData || null;
     },
+    getArmorByName(name: string): ArmorData | null {
+      const armor = this.armors.find((a) => a.name === name);
+      return armor || null;
+    },
   },
 });
