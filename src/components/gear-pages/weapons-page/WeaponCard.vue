@@ -6,7 +6,7 @@
         {{ weapon.damage.amount.amount }}d{{ weapon.damage.amount.type }}
         {{ weapon.damage.type.capitalize() }}
       </div>
-      <div class="col">Bulk: {{ weapon.bulk }}</div>
+      <div class="col">{{ weapon.bulk }}</div>
       <div class="col">
         {{
           weapon.properties.length > 0
@@ -14,7 +14,7 @@
             : "-"
         }}
       </div>
-      <div class="col">Heft: {{ weapon.heft }}</div>
+      <div class="col">{{ weapon.heft }}</div>
       <linkable-item class="col" :name="weapon.special" />
       <linkable-item class="col" :name="weapon.mastery" />
     </q-card-section>

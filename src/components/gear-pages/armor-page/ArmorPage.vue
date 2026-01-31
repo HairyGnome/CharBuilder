@@ -1,32 +1,31 @@
 <template>
-  <q-card-section class="weapons-page">
+  <q-card-section class="armor-page">
     <q-card class="q-px-md" flat>
       <q-card-section class="row justify-between text-center text-h5">
         <div class="col">Name</div>
-        <div class="col">Damage</div>
+        <div class="col">Armor</div>
         <div class="col">Bulk</div>
         <div class="col">Properties</div>
-        <div class="col">Heft</div>
         <div class="col">Special</div>
         <div class="col">Mastery</div>
       </q-card-section>
     </q-card>
     <q-separator />
-    <q-scroll-area class="weapons-scroll column">
-      <weapon-card v-for="(weapon, idx) in weapons" :key="idx" :weaponName="weapon" />
+    <q-scroll-area class="armor-scroll column">
+      <armor-card v-for="(armor, idx) in armors" :key="idx" :armorName="armor" />
     </q-scroll-area>
   </q-card-section>
 </template>
 
 <style scoped>
-.weapons-page {
+.armor-page {
   height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-.weapons-scroll {
+.armor-scroll {
   flex: 1 1 auto;
   min-height: 0;
 }
@@ -34,19 +33,19 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import WeaponCard from "./WeaponCard.vue";
+import ArmorCard from "./ArmorCard.vue";
 import { useCharacterStore } from "src/stores/character_store";
 
 const characterStore = useCharacterStore();
 
 export default defineComponent({
-  name: "WeaponsPage",
+  name: "ArmorPage",
 
-  components: { WeaponCard },
+  components: { ArmorCard },
 
   computed: {
-    weapons(): string[] {
-      return characterStore.weapons;
+    armors() {
+      return characterStore.armors;
     },
   },
 });

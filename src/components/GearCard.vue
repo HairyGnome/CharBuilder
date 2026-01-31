@@ -15,7 +15,7 @@
         <weapons-page style="height: 100%" />
       </q-tab-panel>
       <q-tab-panel name="defense">
-        <gear-page-not-implemented />
+        <armor-page style="height: 100%" />
       </q-tab-panel>
       <q-tab-panel name="gear">
         <gear-page-not-implemented />
@@ -42,12 +42,11 @@ import GearPageNotImplemented from "./gear-pages/GearPageNotImplemented.vue";
 import WeaponsPage from "./gear-pages/weapons-page/WeaponsPage.vue";
 import FeaturesPage from "./gear-pages/features-page/FeaturesPage.vue";
 import PursePage from "./gear-pages/purse-page/PursePage.vue";
-
+import ArmorPage from "./gear-pages/armor-page/ArmorPage.vue";
 export default defineComponent({
   name: "GearCard",
 
-  components: { GearPageNotImplemented, WeaponsPage, PursePage, FeaturesPage },
-
+  components: { GearPageNotImplemented, WeaponsPage, PursePage, FeaturesPage, ArmorPage },
   data() {
     return {
       tab: "weapons",

@@ -93,11 +93,10 @@ export default defineComponent({
       }
       if (isArmorData(this.selectedItem)) {
         return {
+          cost: this.selectedItem.cost,
           name: this.selectedItem.name.unslugify().capitalize(),
           armor: `${this.selectedItem.armor.amount}d${this.selectedItem.armor.type}`,
           bulk: this.selectedItem.bulk === 0.1 ? "L" : this.selectedItem.bulk,
-          vigor: this.selectedItem.vigor,
-          clumsy: this.selectedItem.clumsy,
           properties:
             this.selectedItem.properties.length > 0
               ? this.selectedItem.properties.map((p) => p.unslugify().capitalize()).join(", ")

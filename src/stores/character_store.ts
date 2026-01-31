@@ -42,6 +42,7 @@ export const useCharacterStore = defineStore("characterStore", {
         tempHp: 0,
       },
       weapons: ["longsword", "crossbow,_heavy"] as string[],
+      armors: ["half_plate"] as string[],
       money: {
         gold: 0,
         silver: 0,
