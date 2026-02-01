@@ -37,7 +37,10 @@ jobs:
           path: dist/pwa
 
   build-electron:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     env:
       NODE_VERSION: 24
     steps:
@@ -59,9 +62,12 @@ jobs:
 
       # 5. Create archives and rename for release
       - name: Create Archives
+        shell: bash
         run: |
-          sudo apt-get update
-          sudo apt-get install -y zip
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            sudo apt-get update
+            sudo apt-get install -y zip
+          fi
           BASE_DIR="dist/electron"
           if [ -d "dist/electron/Packaged" ]; then
             BASE_DIR="dist/electron/Packaged"
@@ -84,7 +90,7 @@ jobs:
       # 6. Upload electron build artifact
       - uses: actions/upload-artifact@v4
         with:
-          name: electron-build
+          name: electron-build-${{ matrix.os }}
           path: dist/electron/releases/*.zip
 
   deploy-web:
@@ -113,7 +119,8 @@ jobs:
       # 1. Download electron build
       - uses: actions/download-artifact@v4
         with:
-          name: electron-build
+          pattern: electron-build-*
+          merge-multiple: true
           path: dist/electron/releases
 
       # 2. Create Release and Upload Artifacts
