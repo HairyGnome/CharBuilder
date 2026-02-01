@@ -93,19 +93,27 @@ jobs:
           if (Test-Path "dist/electron/Packaged") {
             $BASE_DIR = "dist/electron/Packaged"
           }
+          Write-Host "BASE_DIR: $BASE_DIR"
+          Write-Host "Contents of $BASE_DIR:"
+          Get-ChildItem -Path $BASE_DIR -Directory | ForEach-Object { Write-Host "  $_" }
+
           if (-not (Test-Path "$BASE_DIR/releases")) {
             New-Item -ItemType Directory -Path "$BASE_DIR/releases" | Out-Null
           }
           Get-ChildItem -Path $BASE_DIR -Directory | Where-Object { $_.Name -ne "UnPackaged" -and $_.Name -ne "releases" } | ForEach-Object {
             $name = $_.Name
+            Write-Host "Archiving: $name"
             $out = switch -Wildcard ($name) {
               "*win32*" { "Windows-x64.zip" }
               "*linux*" { "Linux-x64.zip" }
               "*darwin*" { "macOS-x64.zip" }
               default { "$name.zip" }
             }
+            Write-Host "Output: $out"
             Compress-Archive -Path "$BASE_DIR/$name" -DestinationPath "$BASE_DIR/releases/$out" -Force
           }
+          Write-Host "Final contents of releases:"
+          Get-ChildItem -Path "$BASE_DIR/releases" | ForEach-Object { Write-Host "  $_" }
 
       # 6. Upload electron build artifact
       - uses: actions/upload-artifact@v4
