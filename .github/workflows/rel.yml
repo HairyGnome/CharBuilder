@@ -64,28 +64,48 @@ jobs:
       - name: Create Archives
         shell: bash
         run: |
-          if [ "$RUNNER_OS" = "Linux" ]; then
-            sudo apt-get update
-            sudo apt-get install -y zip
+          if [ "$RUNNER_OS" = "Linux" ] || [ "$RUNNER_OS" = "macOS" ]; then
+            BASE_DIR="dist/electron"
+            if [ -d "dist/electron/Packaged" ]; then
+              BASE_DIR="dist/electron/Packaged"
+            fi
+            cd "$BASE_DIR"
+            mkdir -p ../releases
+            for dir in */; do
+              [ "$dir" = "releases/" ] && continue
+              [ "$dir" = "UnPackaged/" ] && continue
+              name="${dir%/}"
+              case "$name" in
+                *win32*) out="Windows-x64.zip" ;;
+                *linux*) out="Linux-x64.zip" ;;
+                *darwin*|*mac*) out="macOS-x64.zip" ;;
+                *) out="${name}.zip" ;;
+              esac
+              zip -r "../releases/$out" "$name"
+            done
           fi
-          BASE_DIR="dist/electron"
-          if [ -d "dist/electron/Packaged" ]; then
-            BASE_DIR="dist/electron/Packaged"
-          fi
-          cd "$BASE_DIR"
-          mkdir -p ../releases
-          for dir in */; do
-            [ "$dir" = "releases/" ] && continue
-            [ "$dir" = "UnPackaged/" ] && continue
-            name="${dir%/}"
-            case "$name" in
-              *win32*) out="Windows-x64.zip" ;;
-              *linux*) out="Linux-x64.zip" ;;
-              *darwin*|*mac*) out="macOS-x64.zip" ;;
-              *) out="${name}.zip" ;;
-            esac
-            zip -r "../releases/$out" "$name"
-          done
+
+      - name: Create Archives (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $BASE_DIR = "dist/electron"
+          if (Test-Path "dist/electron/Packaged") {
+            $BASE_DIR = "dist/electron/Packaged"
+          }
+          if (-not (Test-Path "$BASE_DIR/releases")) {
+            New-Item -ItemType Directory -Path "$BASE_DIR/releases" | Out-Null
+          }
+          Get-ChildItem -Path $BASE_DIR -Directory | Where-Object { $_.Name -ne "UnPackaged" -and $_.Name -ne "releases" } | ForEach-Object {
+            $name = $_.Name
+            $out = switch -Wildcard ($name) {
+              "*win32*" { "Windows-x64.zip" }
+              "*linux*" { "Linux-x64.zip" }
+              "*darwin*" { "macOS-x64.zip" }
+              default { "$name.zip" }
+            }
+            Compress-Archive -Path "$BASE_DIR/$name" -DestinationPath "$BASE_DIR/releases/$out" -Force
+          }
 
       # 6. Upload electron build artifact
       - uses: actions/upload-artifact@v4
