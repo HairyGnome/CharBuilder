@@ -94,21 +94,30 @@ jobs:
             $SourceDir = "dist/electron/Packaged"
           }
 
+          Write-Host "Source directory: $SourceDir"
           $ReleaseDir = "$SourceDir/releases"
           if (-not (Test-Path $ReleaseDir)) {
             New-Item -ItemType Directory -Force -Path $ReleaseDir | Out-Null
           }
 
-          Get-ChildItem -Path $SourceDir -Directory | Where-Object { $_.Name -notin @("UnPackaged", "releases") } | ForEach-Object {
+          $items = Get-ChildItem -Path $SourceDir -Directory | Where-Object { $_.Name -notin @("UnPackaged", "releases") }
+          Write-Host "Found $($items.Count) directories to archive"
+
+          $items | ForEach-Object {
             $dir = $_
             $zipName = if ($dir.Name -like "*win32*") { "Windows-x64.zip" } elseif ($dir.Name -like "*linux*") { "Linux-x64.zip" } elseif ($dir.Name -like "*darwin*") { "macOS-x64.zip" } else { "$($dir.Name).zip" }
             $zipPath = Join-Path $ReleaseDir $zipName
+            Write-Host "Archiving $($dir.Name) to $zipName"
             Compress-Archive -Path $dir.FullName -DestinationPath $zipPath -Force
             Write-Host "Created: $zipName"
           }
 
+          Write-Host "Contents of releases directory:"
+          Get-ChildItem -Path $ReleaseDir | ForEach-Object { Write-Host "  $($_.Name)" }
+
       # 6. Upload electron build artifact
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: electron-build-${{ matrix.os }}
           path: dist/electron/releases/*.zip
