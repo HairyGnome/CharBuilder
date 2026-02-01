@@ -109,7 +109,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: electron-build
-          path: dist/electron
+          path: dist/electron/releases
 
       # 2. Create Release and Upload Artifacts
       - name: Create Release and Upload Artifacts
