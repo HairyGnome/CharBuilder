@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
 
       # 3. Install dependencies
       - run: npm ci
@@ -35,7 +35,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/pwa  # Adjust if using SSR/PWA
+          publish_dir: dist/pwa # Adjust if using SSR/PWA
           publish_branch: gh-pages
           force_orphan: true
 
@@ -44,20 +44,12 @@ jobs:
         run: npm run electron:build
 
       # 7. Create Release and Upload Electron Build
-      - name: Create Release
-        id: create_release
+      - name: Create Release and Upload Artifacts
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ github.run_number }}
           name: Electron Build v${{ github.run_number }}
           body: Electron build for commit ${{ github.sha }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload Electron Build
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ github.run_number }}
-          files: dist/electron/Packaged/*  # Adjust path if needed
+          files: dist/electron/**/*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
