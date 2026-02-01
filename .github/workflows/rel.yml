@@ -159,6 +159,6 @@ jobs:
           tag_name: v${{ github.run_number }}
           name: Electron Build v${{ github.run_number }}
           body: Electron build for commit ${{ github.sha }}
-          files: dist/electron/releases/*.zip
+          files: dist/electron/releases/**/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
