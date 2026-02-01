@@ -31,7 +31,7 @@ jobs:
         run: npm run web:build
 
       # 5. Upload web build artifact
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: web-build
           path: dist/pwa
@@ -68,17 +68,17 @@ jobs:
           done
 
       # 6. Upload electron build artifact
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: electron-build
-          path: dist/electron/*.tar.gz
+          path: dist/electron/*.zip
 
   deploy-web:
     needs: build-web
     runs-on: ubuntu-latest
     steps:
       # 1. Download web build
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: web-build
           path: dist/pwa
@@ -97,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # 1. Download electron build
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: electron-build
           path: dist/electron
