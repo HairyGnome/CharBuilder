@@ -95,17 +95,29 @@ jobs:
           }
           Write-Host "BASE_DIR: $($BASE_DIR)"
           Write-Host "Contents of $($BASE_DIR):"
-            $out = switch -Wildcard ($name) {
-              "*win32*" { "Windows-x64.zip" }
-              "*linux*" { "Linux-x64.zip" }
-              "*darwin*" { "macOS-x64.zip" }
-              default { "$name.zip" }
+          Get-ChildItem -Path $BASE_DIR -Directory | ForEach-Object { Write-Host "  $($_.Name)" }
+
+          if (-not (Test-Path "$BASE_DIR/releases")) {
+            New-Item -ItemType Directory -Path "$BASE_DIR/releases" | Out-Null
+          }
+
+          Get-ChildItem -Path $BASE_DIR -Directory | Where-Object { $_.Name -ne "UnPackaged" -and $_.Name -ne "releases" } | ForEach-Object {
+            $name = $_.Name
+            if ($name -like "*win32*") {
+              $out = "Windows-x64.zip"
+            } elseif ($name -like "*linux*") {
+              $out = "Linux-x64.zip"
+            } elseif ($name -like "*darwin*") {
+              $out = "macOS-x64.zip"
+            } else {
+              $out = "$name.zip"
             }
-            Write-Host "Output: $out"
+            Write-Host "Archiving $name to $out"
             Compress-Archive -Path "$BASE_DIR/$name" -DestinationPath "$BASE_DIR/releases/$out" -Force
           }
-          Write-Host "Final contents of releases:"
-          Get-ChildItem -Path "$BASE_DIR/releases" | ForEach-Object { Write-Host "  $_" }
+
+          Write-Host "Final releases:"
+          Get-ChildItem -Path "$BASE_DIR/releases" | ForEach-Object { Write-Host "  $($_.Name)" }
 
       # 6. Upload electron build artifact
       - uses: actions/upload-artifact@v4
