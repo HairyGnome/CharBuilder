@@ -62,10 +62,15 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y zip
-          cd dist/electron
-          mkdir -p releases
+          BASE_DIR="dist/electron"
+          if [ -d "dist/electron/Packaged" ]; then
+            BASE_DIR="dist/electron/Packaged"
+          fi
+          cd "$BASE_DIR"
+          mkdir -p ../releases
           for dir in */; do
             [ "$dir" = "releases/" ] && continue
+            [ "$dir" = "UnPackaged/" ] && continue
             name="${dir%/}"
             case "$name" in
               *win32*) out="Windows-x64.zip" ;;
@@ -73,7 +78,7 @@ jobs:
               *darwin*|*mac*) out="macOS-x64.zip" ;;
               *) out="${name}.zip" ;;
             esac
-            zip -r "releases/$out" "$name"
+            zip -r "../releases/$out" "$name"
           done
 
       # 6. Upload electron build artifact
