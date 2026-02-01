@@ -120,7 +120,7 @@ jobs:
         if: always()
         with:
           name: electron-build-${{ matrix.os }}
-          path: dist/electron/releases/*.zip
+          path: dist/electron/**/releases/*.zip
 
   deploy-web:
     needs: build-web
