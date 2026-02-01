@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import type { AbilityScores, CharacterState, Transaction } from "src/models/types";
 import { useDataStore } from "./data-store";
+import { ArmorCategory } from "src/models/items/armor_types";
 
 export const useCharacterStore = defineStore("characterStore", {
   state(): CharacterState {
@@ -42,7 +43,11 @@ export const useCharacterStore = defineStore("characterStore", {
         tempHp: 0,
       },
       weapons: ["longsword", "crossbow,_heavy"] as string[],
-      armors: ["half_plate"] as string[],
+      defense: {
+        equippedArmor: null,
+        equippedShield: null,
+        armors: ["half_plate", "buckler", "chain_mail"] as string[],
+      },
       money: {
         gold: 0,
         silver: 0,
@@ -53,6 +58,44 @@ export const useCharacterStore = defineStore("characterStore", {
   },
 
   getters: {
+    getArmors(state: CharacterState) {
+      return state.defense.armors.filter((armorName) => {
+        const dataStore = useDataStore();
+        const armor = dataStore.getArmorByName(armorName);
+        return armor && armor.category !== ArmorCategory.SHIELD;
+      });
+    },
+    getShields(state: CharacterState) {
+      return state.defense.armors.filter((armorName) => {
+        const dataStore = useDataStore();
+        const armor = dataStore.getArmorByName(armorName);
+        return armor && armor.category === ArmorCategory.SHIELD;
+      });
+    },
+    getDv(): number {
+      const dataStore = useDataStore();
+      let dv = 10;
+      const equippedArmorName = this.defense.equippedArmor;
+      const equippedShieldName = this.defense.equippedShield;
+      if (equippedArmorName) {
+        const armor = dataStore.getArmorByName(equippedArmorName);
+        if (!armor) throw new Error(`Equipped armor ${equippedArmorName} not found in data store`);
+        dv = armor.baseDv;
+        if (armor.category === ArmorCategory.LIGHT) {
+          dv += this.getAbilityScoreModifier("dex");
+        } else if (armor.category === ArmorCategory.MEDIUM) {
+          dv += Math.min(this.getAbilityScoreModifier("dex"), 2);
+        }
+      }
+      if (equippedShieldName) {
+        const shield = dataStore.getArmorByName(equippedShieldName);
+        if (!shield)
+          throw new Error(`Equipped shield ${equippedShieldName} not found in data store`);
+        dv += shield.baseDv;
+      }
+      return dv;
+    },
+
     getAbilityScoreModifier:
       (state: CharacterState) =>
       (ability: keyof AbilityScores): number => {

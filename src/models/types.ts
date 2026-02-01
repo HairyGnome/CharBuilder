@@ -90,7 +90,11 @@ export type CharacterState = {
   };
   hp: HP;
   weapons: string[];
-  armors: string[];
+  defense: {
+    equippedArmor: string | null;
+    equippedShield: string | null;
+    armors: string[];
+  };
   money: {
     gold: number;
     silver: number;
