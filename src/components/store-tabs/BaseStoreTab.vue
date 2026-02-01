@@ -43,6 +43,10 @@ import { isFociData, type FociData } from "src/models/items/foci_types";
 import { isToolData, type ToolData } from "src/models/items/tool_types";
 import { isWeaponData, type WeaponData } from "src/models/items/weapon_types";
 import { defineComponent, type PropType } from "vue";
+import { ArmorCategory } from "src/models/items/armor_types";
+import { useCharacterStore } from "src/stores/character_store";
+
+const characterStore = useCharacterStore();
 
 export default defineComponent({
   name: "BaseStoreTab",
@@ -92,11 +96,14 @@ export default defineComponent({
         };
       }
       if (isArmorData(this.selectedItem)) {
-        return {
-          cost: this.selectedItem.cost,
+        const result: Record<string, string | number> = {
           name: this.selectedItem.name.unslugify().capitalize(),
-          armor: `${this.selectedItem.armor.amount}d${this.selectedItem.armor.type}`,
+          cost: this.selectedItem.cost,
+          category: this.selectedItem.category.unslugify().capitalize(),
+          armor: this.selectedItem.armor,
           bulk: this.selectedItem.bulk === 0.1 ? "L" : this.selectedItem.bulk,
+          vigor: this.selectedItem.vigor ?? "-",
+          clumsy: this.selectedItem.clumsy ?? "-",
           properties:
             this.selectedItem.properties.length > 0
               ? this.selectedItem.properties.map((p) => p.unslugify().capitalize()).join(", ")
@@ -104,6 +111,12 @@ export default defineComponent({
           special: this.selectedItem.special.unslugify().capitalize(),
           mastery: this.selectedItem.mastery.unslugify().capitalize(),
         };
+
+        if (this.selectedItemDvText !== undefined) {
+          result.dodge_value = this.selectedItemDvText;
+        }
+
+        return result;
       }
       if (isToolData(this.selectedItem)) {
         return {
@@ -120,6 +133,38 @@ export default defineComponent({
         };
       }
       return {};
+    },
+
+    selectedItemDvModifier(): number | undefined {
+      if (this.selectedItem && isArmorData(this.selectedItem)) {
+        switch (this.selectedItem.category) {
+          case ArmorCategory.LIGHT:
+            return characterStore.getAbilityScoreModifier("dex");
+          case ArmorCategory.MEDIUM:
+            return Math.floor(characterStore.getAbilityScoreModifier("dex") / 2);
+          default:
+            return undefined;
+        }
+      }
+      return undefined;
+    },
+
+    selectedItemDvText(): string | undefined {
+      if (!this.selectedItem || !isArmorData(this.selectedItem)) {
+        return undefined;
+      }
+
+      const dvModifier = this.selectedItemDvModifier;
+      if (dvModifier === undefined) {
+        return undefined;
+      }
+      if (this.selectedItem.category === ArmorCategory.SHIELD) {
+        return `+${dvModifier}`;
+      }
+      if (this.selectedItem.category === ArmorCategory.HEAVY) {
+        return this.selectedItem.baseDv.toString();
+      }
+      return `${this.selectedItem.baseDv} + ${dvModifier}`;
     },
   },
 });

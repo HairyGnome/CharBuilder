@@ -5,9 +5,12 @@
         <div class="col">Name</div>
         <div class="col">Armor</div>
         <div class="col">Bulk</div>
+        <div class="col">Vigor</div>
+        <div class="col">Clumsy</div>
         <div class="col">Properties</div>
         <div class="col">Special</div>
         <div class="col">Mastery</div>
+        <div class="col">Equipped</div>
       </q-card-section>
     </q-card>
     <q-separator />
@@ -45,7 +48,7 @@ export default defineComponent({
 
   computed: {
     armors() {
-      return characterStore.armors;
+      return [...characterStore.getArmors, ...characterStore.getShields];
     },
   },
 });

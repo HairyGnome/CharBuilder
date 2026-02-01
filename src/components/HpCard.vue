@@ -74,8 +74,7 @@ export default defineComponent({
     },
 
     dodgeValue(): number {
-      const dexMod = characterStore.getAbilityScoreModifier("dex");
-      return 10 + dexMod;
+      return characterStore.getDv;
     },
   },
 });

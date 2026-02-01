@@ -1,26 +1,49 @@
 [
   {
     "cost": 750,
+    "category": "medium",
     "name": "half_plate",
-    "armor": {
-      "amount": 6,
-      "type": 8
-    },
+    "baseDv": 15,
+    "armor": 5,
     "bulk": 3,
+    "vigor": 3,
     "properties": [],
     "special": "form_fitting",
     "mastery": "superior_defense"
   },
   {
     "cost": 75,
+    "category": "heavy",
     "name": "chain_mail",
-    "armor": {
-      "amount": 7,
-      "type": 10
-    },
+    "baseDv": 16,
+    "armor": 6,
     "bulk": 2,
+    "vigor": 4,
+    "clumsy": 2,
     "properties": [],
     "special": "hidden_sleeves",
     "mastery": "quieted_metal"
+  },
+  {
+    "cost": 5,
+    "category": "light",
+    "name": "reinforced_cloth",
+    "baseDv": 11,
+    "armor": 1,
+    "bulk": 0.1,
+    "properties": ["comfortable", "concealed"],
+    "special": "mana_threads",
+    "mastery": "aether_exhaust"
+  },
+  {
+    "cost": 5,
+    "category": "shield",
+    "name": "buckler",
+    "baseDv": 1,
+    "armor": 1,
+    "bulk": 0.1,
+    "properties": [],
+    "special": "riposte",
+    "mastery": "improved_riposte"
   }
 ]
