@@ -89,35 +89,23 @@ jobs:
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
-          $BASE_DIR = "dist/electron"
+          $SourceDir = "dist/electron"
           if (Test-Path "dist/electron/Packaged") {
-            $BASE_DIR = "dist/electron/Packaged"
-          }
-          Write-Host "BASE_DIR: $($BASE_DIR)"
-          Write-Host "Contents of $($BASE_DIR):"
-          Get-ChildItem -Path $BASE_DIR -Directory | ForEach-Object { Write-Host "  $($_.Name)" }
-
-          if (-not (Test-Path "$BASE_DIR/releases")) {
-            New-Item -ItemType Directory -Path "$BASE_DIR/releases" | Out-Null
+            $SourceDir = "dist/electron/Packaged"
           }
 
-          Get-ChildItem -Path $BASE_DIR -Directory | Where-Object { $_.Name -ne "UnPackaged" -and $_.Name -ne "releases" } | ForEach-Object {
-            $name = $_.Name
-            if ($name -like "*win32*") {
-              $out = "Windows-x64.zip"
-            } elseif ($name -like "*linux*") {
-              $out = "Linux-x64.zip"
-            } elseif ($name -like "*darwin*") {
-              $out = "macOS-x64.zip"
-            } else {
-              $out = "$name.zip"
-            }
-            Write-Host "Archiving $name to $out"
-            Compress-Archive -Path "$BASE_DIR/$name" -DestinationPath "$BASE_DIR/releases/$out" -Force
+          $ReleaseDir = "$SourceDir/releases"
+          if (-not (Test-Path $ReleaseDir)) {
+            New-Item -ItemType Directory -Force -Path $ReleaseDir | Out-Null
           }
 
-          Write-Host "Final releases:"
-          Get-ChildItem -Path "$BASE_DIR/releases" | ForEach-Object { Write-Host "  $($_.Name)" }
+          Get-ChildItem -Path $SourceDir -Directory | Where-Object { $_.Name -notin @("UnPackaged", "releases") } | ForEach-Object {
+            $dir = $_
+            $zipName = if ($dir.Name -like "*win32*") { "Windows-x64.zip" } elseif ($dir.Name -like "*linux*") { "Linux-x64.zip" } elseif ($dir.Name -like "*darwin*") { "macOS-x64.zip" } else { "$($dir.Name).zip" }
+            $zipPath = Join-Path $ReleaseDir $zipName
+            Compress-Archive -Path $dir.FullName -DestinationPath $zipPath -Force
+            Write-Host "Created: $zipName"
+          }
 
       # 6. Upload electron build artifact
       - uses: actions/upload-artifact@v4
