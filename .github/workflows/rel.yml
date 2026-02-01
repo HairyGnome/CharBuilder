@@ -57,21 +57,32 @@ jobs:
       - name: Build Electron App
         run: npm run electron:build
 
-      # 5. Create compressed archives of packaged apps
+      # 5. Create archives and rename for release
       - name: Create Archives
         run: |
           cd dist/electron
-          for dir in */; do
-            if [ -d "$dir" ]; then
-              zip -r "${dir%/}.zip" "$dir"
-            fi
-          done
+          mkdir -p releases
+
+          # Windows
+          if [ -d "CharBuilder-win32-x64" ]; then
+            zip -r releases/Windows-x64.zip CharBuilder-win32-x64
+          fi
+
+          # Linux
+          if [ -d "CharBuilder-linux-x64" ]; then
+            zip -r releases/Linux-x64.zip CharBuilder-linux-x64
+          fi
+
+          # macOS (if built on mac runner)
+          if [ -d "CharBuilder-darwin-x64" ]; then
+            zip -r releases/macOS-x64.zip CharBuilder-darwin-x64
+          fi
 
       # 6. Upload electron build artifact
       - uses: actions/upload-artifact@v4
         with:
           name: electron-build
-          path: dist/electron/*.zip
+          path: dist/electron/releases/*.zip
 
   deploy-web:
     needs: build-web
@@ -109,6 +120,6 @@ jobs:
           tag_name: v${{ github.run_number }}
           name: Electron Build v${{ github.run_number }}
           body: Electron build for commit ${{ github.sha }}
-          files: dist/electron/*.zip
+          files: dist/electron/releases/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
