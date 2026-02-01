@@ -43,13 +43,23 @@ jobs:
       - name: Build Electron App
         run: npm run electron:build
 
-      # 7. Create Release and Upload Electron Build
+      # 7. Create compressed archives of packaged apps
+      - name: Create Archives
+        run: |
+          cd dist/electron
+          for dir in */; do
+            if [ -d "$dir" ]; then
+              tar -czf "${dir%/}.tar.gz" "$dir"
+            fi
+          done
+
+      # 8. Create Release and Upload Artifacts
       - name: Create Release and Upload Artifacts
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ github.run_number }}
           name: Electron Build v${{ github.run_number }}
           body: Electron build for commit ${{ github.sha }}
-          files: dist/electron/**/*
+          files: dist/electron/*.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
