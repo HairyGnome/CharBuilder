@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
+  build-web:
     runs-on: ubuntu-latest
     env:
       NODE_VERSION: 24
@@ -30,36 +30,85 @@ jobs:
       - name: Build Quasar Web
         run: npm run web:build
 
-      # 5. Deploy to GitHub Pages
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      # 5. Upload web build artifact
+      - uses: actions/upload-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/pwa # Adjust if using SSR/PWA
-          publish_branch: gh-pages
-          force_orphan: true
+          name: web-build
+          path: dist/pwa
 
-      # 6. Build Electron app
+  build-electron:
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 24
+    steps:
+      # 1. Checkout code
+      - uses: actions/checkout@v3
+
+      # 2. Setup Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      # 3. Install dependencies
+      - run: npm ci
+
+      # 4. Build Electron app
       - name: Build Electron App
         run: npm run electron:build
 
-      # 7. Create compressed archives of packaged apps
+      # 5. Create compressed archives of packaged apps
       - name: Create Archives
         run: |
           cd dist/electron
           for dir in */; do
             if [ -d "$dir" ]; then
-              tar -czf "${dir%/}.tar.gz" "$dir"
+              zip -r "${dir%/}.zip" "$dir"
             fi
           done
 
-      # 8. Create Release and Upload Artifacts
+      # 6. Upload electron build artifact
+      - uses: actions/upload-artifact@v3
+        with:
+          name: electron-build
+          path: dist/electron/*.tar.gz
+
+  deploy-web:
+    needs: build-web
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Download web build
+      - uses: actions/download-artifact@v3
+        with:
+          name: web-build
+          path: dist/pwa
+
+      # 2. Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: dist/pwa
+          publish_branch: gh-pages
+          force_orphan: true
+
+  release:
+    needs: build-electron
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Download electron build
+      - uses: actions/download-artifact@v3
+        with:
+          name: electron-build
+          path: dist/electron
+
+      # 2. Create Release and Upload Artifacts
       - name: Create Release and Upload Artifacts
         uses: softprops/action-gh-release@v1
         with:
           tag_name: v${{ github.run_number }}
           name: Electron Build v${{ github.run_number }}
           body: Electron build for commit ${{ github.sha }}
-          files: dist/electron/*.tar.gz
+          files: dist/electron/*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
