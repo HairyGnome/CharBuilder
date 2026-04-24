@@ -83,8 +83,6 @@ const characterStore = useCharacterStore();
 export default defineComponent({
   name: "AbilityScoreArrayDialog",
 
-  props: {},
-
   data() {
     return {
       selectedAbilityScoreArray: "Specialist",

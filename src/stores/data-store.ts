@@ -68,16 +68,21 @@ export const useDataStore = defineStore("dataStore", {
 
     getWeaponByName(name: string): WeaponData | null {
       const weapon = this.weapons.find((w) => w.name === name);
-      return weapon || null;
+      return weapon ?? null;
     },
 
     getClassByName(name: string): ClassData | null {
       const classData = this.classes.find((c) => c.name === name);
-      return classData || null;
+      return classData ?? null;
     },
     getArmorByName(name: string): ArmorData | null {
       const armor = this.armors.find((a) => a.name === name);
-      return armor || null;
+      return armor ?? null;
+    },
+
+    getToolByName(name: string): ToolData | null {
+      const tool = this.tools.find((a) => a.name === name);
+      return tool ?? null;
     },
   },
 });
