@@ -48,6 +48,10 @@ export const useCharacterStore = defineStore("characterStore", {
         equippedShield: null,
         armors: ["half_plate", "buckler", "chain_mail"] as string[],
       },
+      tools: [
+        { name: "mason's_tool", chargeLeft: -1 },
+        { name: "disguise_kit", chargeLeft: 5 },
+      ],
       money: {
         gold: 0,
         silver: 0,
@@ -71,6 +75,9 @@ export const useCharacterStore = defineStore("characterStore", {
         const armor = dataStore.getArmorByName(armorName);
         return armor && armor.category === ArmorCategory.SHIELD;
       });
+    },
+    getTools(state: CharacterState) {
+      return state.tools;
     },
     getDv(): number {
       const dataStore = useDataStore();
@@ -170,6 +177,22 @@ export const useCharacterStore = defineStore("characterStore", {
     // calculateMaxHealth() {
     //   const maxHealth =
     // }
+
+    useTool(toolName: string): boolean {
+      const tool = this.tools.find((t) => t.name === toolName);
+      if (!tool) {
+        console.warn(`Tool ${toolName} not found`);
+        return false;
+      }
+      if (tool.chargeLeft === 0) {
+        console.warn(`Tool ${toolName} has no charges left`);
+        return false;
+      }
+      if (tool.chargeLeft > 0) {
+        tool.chargeLeft -= 1;
+      }
+      return true;
+    },
 
     adjustHealth(value: number) {
       this.hp.currentHp += value;

@@ -3,7 +3,7 @@
     <q-tabs v-model="tab" dense align="justify">
       <q-tab name="weapons" label="Weapons" />
       <q-tab name="defense" label="Defense" />
-      <q-tab name="gear" label="Gear" />
+      <q-tab name="tools" label="Tools" />
       <q-tab name="purse" label="Purse" />
       <q-tab name="spells" label="Spells" />
       <q-tab name="details" label="Details" />
@@ -17,8 +17,8 @@
       <q-tab-panel name="defense">
         <armor-page style="height: 100%" />
       </q-tab-panel>
-      <q-tab-panel name="gear">
-        <gear-page-not-implemented />
+      <q-tab-panel name="tools">
+        <tool-page style="height: 100%" />
       </q-tab-panel>
       <q-tab-panel name="purse">
         <purse-page style="height: 100%" />
@@ -43,10 +43,12 @@ import WeaponsPage from "./gear-pages/weapons-page/WeaponsPage.vue";
 import FeaturesPage from "./gear-pages/features-page/FeaturesPage.vue";
 import PursePage from "./gear-pages/purse-page/PursePage.vue";
 import ArmorPage from "./gear-pages/armor-page/ArmorPage.vue";
+import ToolPage from "./gear-pages/tools-page/ToolPage.vue";
+
 export default defineComponent({
   name: "GearCard",
 
-  components: { GearPageNotImplemented, WeaponsPage, PursePage, FeaturesPage, ArmorPage },
+  components: { GearPageNotImplemented, ToolPage, WeaponsPage, PursePage, FeaturesPage, ArmorPage },
   data() {
     return {
       tab: "weapons",
