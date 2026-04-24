@@ -95,12 +95,18 @@ export type CharacterState = {
     equippedShield: string | null;
     armors: string[];
   };
+  tools: Tool[];
   money: {
     gold: number;
     silver: number;
     copper: number;
     transactionHistory: Array<Transaction>;
   };
+};
+
+export type Tool = {
+  name: string;
+  chargeLeft: number;
 };
 
 export type Transaction = {
