@@ -22,5 +22,29 @@
       "3": ["martial_archetype"],
       "5": ["glory", "indomitable"]
     }
+  },
+  {
+    "name": "cleric",
+    "label": "Cleric",
+    "hitDie": 8,
+    "roles": ["magic"],
+    "proficiencies": {
+      "armor": ["light", "medium", "shield"],
+      "weapons": ["simple"],
+      "saves": ["wis", "cha"],
+      "skills": {
+        "choose": 1
+      },
+      "tools": {
+        "choose": 1,
+        "granted": []
+      }
+    },
+    "feats": {
+      "1": ["deity", "domain_spells", "blessing_of_the_chosen"],
+      "2": ["channel_divinity", "hymn"],
+      "3": ["clerical_archetype"],
+      "5": ["minor_miracle", "domain_spells"]
+    }
   }
 ]
