@@ -4,6 +4,7 @@
     "label": "Fighter",
     "hitDie": 10,
     "roles": ["martial", "mundane"],
+    "wellspring": [],
     "proficiencies": {
       "armor": ["light", "medium", "shield"],
       "weapons": ["simple", "martial"],
@@ -28,6 +29,7 @@
     "label": "Cleric",
     "hitDie": 8,
     "roles": ["magic"],
+    "wellspring": ["divine"],
     "proficiencies": {
       "armor": ["light", "medium", "shield"],
       "weapons": ["simple"],

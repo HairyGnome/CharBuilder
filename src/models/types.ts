@@ -142,6 +142,7 @@ export type ClassData = {
   label: string;
   hitDie: number;
   roles: string[];
+  wellspring: string[];
   proficiencies: {
     armor: {
       choose?: number;
