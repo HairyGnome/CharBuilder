@@ -84,5 +84,10 @@ export const useDataStore = defineStore("dataStore", {
       const tool = this.tools.find((a) => a.name === name);
       return tool ?? null;
     },
+
+    getFociByName(name: string): FociData | null {
+      const foci = this.foci.find((f) => f.name === name);
+      return foci ?? null;
+    },
   },
 });

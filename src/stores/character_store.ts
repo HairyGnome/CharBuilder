@@ -52,6 +52,7 @@ export const useCharacterStore = defineStore("characterStore", {
         { name: "mason's_tool", chargeLeft: -1 },
         { name: "disguise_kit", chargeLeft: 5 },
       ],
+      foci: ["staff"],
       money: {
         gold: 0,
         silver: 0,

@@ -96,6 +96,7 @@ export type CharacterState = {
     armors: string[];
   };
   tools: Tool[];
+  foci: string[];
   money: {
     gold: number;
     silver: number;
