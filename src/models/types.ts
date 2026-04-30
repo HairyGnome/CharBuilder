@@ -142,7 +142,7 @@ export type ClassData = {
   label: string;
   hitDie: number;
   roles: string[];
-  wellspring: string[];
+  wellspring: Wellspring[];
   proficiencies: {
     armor: {
       choose?: number;
@@ -166,3 +166,21 @@ export type ClassData = {
     [level: number]: string[];
   };
 };
+
+export type SpellData = {
+  name: string;
+  level: 0 | 1 | 2;
+  wellspring: Wellspring[];
+  time: string;
+  ritual: boolean;
+  school: string;
+  conentration: boolean;
+  range: string;
+};
+
+export enum Wellspring {
+  ARCANE = "arcane",
+  DIVINE = "divine",
+  PRIMAL = "primal",
+  OCCULT = "occult",
+}
