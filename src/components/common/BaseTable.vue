@@ -7,11 +7,13 @@
       row-key="name"
       class="base-table full-width"
       flat
-      hide-bottom
+      hide-pagination
       :pagination="pagination"
     >
       <template v-slot:no-data>
-        <div class="text-center q-pa-md">No data to display</div>
+        <div class="text-center q-pa-md full-width text-h6">
+          No data to display with current filters...
+        </div>
       </template>
       <template v-slot:top-right>
         <div class="row" v-if="hasFilters">
@@ -46,7 +48,12 @@
                     class="col-6"
                   />
                   <div class="col-12 row justify-end">
-                    <q-btn color="primary" label="Reset" @click="resetFilters" />
+                    <q-btn
+                      color="primary"
+                      label="Reset"
+                      :disable="filtersEmpty"
+                      @click="resetFilters"
+                    />
                   </div>
                 </q-card-section>
               </q-card>
@@ -147,6 +154,14 @@ export default defineComponent({
     },
     hasFilters(): boolean {
       return this.searchFilters.length > 0 || this.selectFilters.length > 0;
+    },
+
+    filtersEmpty(): boolean {
+      const noSearchTerm = this.searchTerm.trim() === "";
+      const noSelectedFilters = Object.values(this.selectedFilters).every(
+        (val) => val === null || val === undefined || val === "",
+      );
+      return noSearchTerm && noSelectedFilters;
     },
 
     filteredData(): unknown[] {
