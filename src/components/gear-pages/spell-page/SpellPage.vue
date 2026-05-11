@@ -1,39 +1,47 @@
 <template>
-  <q-card-section class="armor-page">
-    <q-card class="q-px-md" flat>
-      <q-card-section class="column items-center q-gutter-y-lg text-center text-h5">
-        <div class="text-h3">Aether Points</div>
-        <q-rating
-          v-model="ap"
-          :max="10"
-          color="primary"
-          size="xl"
-          icon="mdi-cards-diamond-outline"
-          icon-selected="mdi-cards-diamond"
-        />
-      </q-card-section>
-      <q-card-section v-if="hasCantrips">
-        <base-table title="Cantrips" :columns="columns" :data="cantrips" />
-      </q-card-section>
-      <q-card-section v-if="hasLevel1Spells">
-        <q-separator />
-        <base-table title="Level 1 Spells" :columns="columns" :data="level1Spells" />
-      </q-card-section>
-      <q-card-section v-if="hasLevel2Spells">
-        <q-separator />
-        <base-table title="Level 2 Spells" :columns="columns" :data="level2Spells" />
-      </q-card-section>
-    </q-card>
-    <q-scroll-area class="spell-scroll column">
-      <spell-card v-for="(spell, idx) in spells" :key="idx" :spell="spell" />
-    </q-scroll-area>
-  </q-card-section>
+  <q-scroll-area class="spell-page">
+    <q-card-section>
+      <q-card class="q-px-md" flat>
+        <q-card-section class="column items-center q-gutter-y-lg text-center text-h5">
+          <div class="text-h3">Aether Points</div>
+          <q-rating
+            v-model="aetherPoints"
+            :max="getMaxAetherPoints"
+            color="primary"
+            size="xl"
+            icon="mdi-cards-diamond-outline"
+            icon-selected="mdi-cards-diamond"
+          />
+        </q-card-section>
+        <q-card-section v-if="hasCantrips">
+          <base-table
+            title="Cantrips"
+            :columns="columns"
+            :data="cantrips"
+            :search-filters="searchFilters"
+            :select-filters="selectFilters"
+          />
+        </q-card-section>
+        <q-card-section v-if="hasLevel1Spells">
+          <q-separator />
+          <base-table title="Level 1 Spells" :columns="columns" :data="level1Spells" />
+        </q-card-section>
+        <q-card-section v-if="hasLevel2Spells">
+          <q-separator />
+          <base-table title="Level 2 Spells" :columns="columns" :data="level2Spells" />
+        </q-card-section>
+      </q-card>
+      <q-scroll-area class="spell-scroll column">
+        <spell-card v-for="(spell, idx) in spells" :key="idx" :spell="spell" />
+      </q-scroll-area>
+    </q-card-section>
+  </q-scroll-area>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useCharacterStore } from "src/stores/character_store";
-import { mapState } from "pinia";
+import { mapState, mapWritableState } from "pinia";
 import { useDataStore } from "src/stores/data-store";
 import type { SpellData } from "src/models/types";
 import BaseTable from "src/components/common/BaseTable.vue";
@@ -85,6 +93,9 @@ const columns = [
   },
 ];
 
+const searchFilters = ["name"];
+const selectFilters = ["time", "ritual", "school", "concentration", "range"];
+
 export default defineComponent({
   name: "SpellPage",
 
@@ -94,11 +105,14 @@ export default defineComponent({
     return {
       ap: 0,
       columns,
+      searchFilters,
+      selectFilters,
     };
   },
 
   computed: {
-    ...mapState(useCharacterStore, ["spells"]),
+    ...mapState(useCharacterStore, ["spells", "getMaxAetherPoints"]),
+    ...mapWritableState(useCharacterStore, ["aetherPoints"]),
 
     spellData() {
       return dataStore.getSpellsByNames(this.spells);

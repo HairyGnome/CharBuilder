@@ -98,6 +98,7 @@ export type CharacterState = {
   tools: Tool[];
   foci: string[];
   spells: string[];
+  aetherPoints: number;
   money: {
     gold: number;
     silver: number;
