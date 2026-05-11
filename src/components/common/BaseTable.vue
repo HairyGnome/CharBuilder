@@ -8,9 +8,11 @@
       class="base-table full-width"
       flat
       hide-bottom
-      virtual-scroll
-      :rows-per-page="10"
+      :pagination="pagination"
     >
+      <template v-slot:no-data>
+        <div class="text-center q-pa-md">No data to display</div>
+      </template>
       <template v-slot:top-right>
         <div class="row" v-if="hasFilters">
           <q-btn size="md" flat icon="mdi-filter">
@@ -131,6 +133,9 @@ export default defineComponent({
       showFilter: false,
       searchTerm: "",
       selectedFilters: {} as Record<string, unknown>,
+      pagination: {
+        rowsPerPage: 0,
+      },
     };
   },
 
@@ -144,14 +149,11 @@ export default defineComponent({
     },
 
     filteredData(): unknown[] {
-      if (!this.searchTerm) {
-        return this.data;
-      }
       const lowerSearchTerm = this.searchTerm.toLowerCase();
       const searchableColumns = this.searchFilters.length
         ? this.columns.filter((col) => this.searchFilters.includes(col.name))
         : this.columns;
-      const filteredData = this.data.filter((row) =>
+      let filteredData = this.data.filter((row) =>
         searchableColumns.some((col) => {
           const value =
             typeof col.field === "function"
@@ -160,6 +162,21 @@ export default defineComponent({
           return String(value).toLowerCase().includes(lowerSearchTerm);
         }),
       );
+      for (const filter of this.selectFilters) {
+        const selectedValue = this.selectedFilters[filter];
+        if (selectedValue) {
+          const col = this.columns.find((c) => c.name === filter);
+          if (col) {
+            filteredData = filteredData.filter((row) => {
+              const value =
+                typeof col.field === "function"
+                  ? col.field(row)
+                  : (row as Record<string, unknown>)[col.field];
+              return (value as string) === (selectedValue as string);
+            });
+          }
+        }
+      }
       return filteredData;
     },
 

@@ -23,17 +23,27 @@
           />
         </q-card-section>
         <q-card-section v-if="hasLevel1Spells">
-          <q-separator />
-          <base-table title="Level 1 Spells" :columns="columns" :data="level1Spells" />
+          <q-separator class="q-mx-md" />
+          <base-table
+            title="Level 1 Spells"
+            :columns="columns"
+            :data="level1Spells"
+            :search-filters="searchFilters"
+            :select-filters="selectFilters"
+          />
         </q-card-section>
         <q-card-section v-if="hasLevel2Spells">
-          <q-separator />
-          <base-table title="Level 2 Spells" :columns="columns" :data="level2Spells" />
+          <q-separator class="q-mx-md" />
+          <base-table
+            title="Level 2 Spells"
+            :columns="columns"
+            :data="level2Spells"
+            :search-filters="searchFilters"
+            :select-filters="selectFilters"
+          />
         </q-card-section>
       </q-card>
-      <q-scroll-area class="spell-scroll column">
-        <spell-card v-for="(spell, idx) in spells" :key="idx" :spell="spell" />
-      </q-scroll-area>
+      <q-card-section></q-card-section>
     </q-card-section>
   </q-scroll-area>
 </template>
