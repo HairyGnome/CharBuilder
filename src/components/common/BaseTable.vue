@@ -42,6 +42,7 @@
                     :options="filterOptions[filter]"
                     dense
                     outlined
+                    clearable
                     class="col-6"
                   />
                   <div class="col-12 row justify-end">
