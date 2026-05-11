@@ -25,7 +25,7 @@
         <purse-page style="height: 100%" />
       </q-tab-panel>
       <q-tab-panel name="spells">
-        <gear-page-not-implemented />
+        <spell-page style="height: 100%" />
       </q-tab-panel>
       <q-tab-panel name="details">
         <gear-page-not-implemented />
@@ -49,6 +49,7 @@ import PursePage from "./gear-pages/purse-page/PursePage.vue";
 import ArmorPage from "./gear-pages/armor-page/ArmorPage.vue";
 import ToolPage from "./gear-pages/tools-page/ToolPage.vue";
 import FociPage from "./gear-pages/foci-page/FociPage.vue";
+import SpellPage from "./gear-pages/spell-page/SpellPage.vue";
 
 export default defineComponent({
   name: "GearCard",
@@ -61,6 +62,7 @@ export default defineComponent({
     PursePage,
     FeaturesPage,
     ArmorPage,
+    SpellPage,
   },
   data() {
     return {

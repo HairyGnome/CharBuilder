@@ -53,6 +53,21 @@ export const useCharacterStore = defineStore("characterStore", {
         { name: "disguise_kit", chargeLeft: 5 },
       ],
       foci: ["staff"],
+      spells: [
+        "blade_ward",
+        "detect_magic",
+        "dragon's_breath",
+        "acid_splash",
+        "chill_touch",
+        "control_flames",
+        "create_bonfire",
+        "dancing_lights",
+        "fire_bolt",
+        "friends",
+        "frostbite",
+        "gust",
+        "infestation",
+      ],
       money: {
         gold: 0,
         silver: 0,
@@ -136,6 +151,10 @@ export const useCharacterStore = defineStore("characterStore", {
         dataStore.ancestries[this.ancestry.ancestry]?.rolePassives ?? {};
       const result = roles.map((role) => rolePassives[role] || "");
       return result.filter((role) => role !== "");
+    },
+
+    getMaxAetherPoints: (state: CharacterState): number => {
+      return state.class === "sorcerer" ? 11 : 10;
     },
   },
 
