@@ -97,6 +97,7 @@ export type CharacterState = {
   };
   tools: Tool[];
   foci: string[];
+  spells: string[];
   money: {
     gold: number;
     silver: number;
@@ -133,6 +134,7 @@ export type Data = {
   armors: ArmorData[];
   tools: ToolData[];
   foci: FociData[];
+  spells: SpellData[];
   feats: Feat[];
   hyperlinks: { [key: string]: string };
 };
@@ -174,7 +176,7 @@ export type SpellData = {
   time: string;
   ritual: boolean;
   school: string;
-  conentration: boolean;
+  concentration: string;
   range: string;
 };
 

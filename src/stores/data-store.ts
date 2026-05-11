@@ -8,6 +8,7 @@ import type {
   Feat,
   LineageData,
   RegionData,
+  SpellData,
 } from "src/models/types";
 import type { WeaponData } from "src/models/items/weapon_types";
 import type { FociData } from "src/models/items/foci_types";
@@ -23,6 +24,7 @@ export const useDataStore = defineStore("dataStore", {
       armors: [],
       tools: [],
       foci: [],
+      spells: [],
       feats: [],
       hyperlinks: {},
     };
@@ -31,6 +33,8 @@ export const useDataStore = defineStore("dataStore", {
   getters: {},
 
   actions: {
+    /* Setters */
+
     setClasses(classes: object) {
       this.classes = classes as ClassData[];
     },
@@ -55,12 +59,18 @@ export const useDataStore = defineStore("dataStore", {
     setFoci(foci: object) {
       this.foci = foci as FociData[];
     },
+    setSpells(spells: object) {
+      this.spells = spells as SpellData[];
+    },
     setFeats(feats: object) {
       this.feats = feats as Feat[];
     },
     setHyperlinks(hyperlinks: object) {
       this.hyperlinks = hyperlinks as Record<string, string>;
     },
+
+    /* Individual Getters */
+
     getHyperlink(item: string): string | undefined {
       const link = this.hyperlinks[item];
       return link;
@@ -88,6 +98,11 @@ export const useDataStore = defineStore("dataStore", {
     getFociByName(name: string): FociData | null {
       const foci = this.foci.find((f) => f.name === name);
       return foci ?? null;
+    },
+
+    /* Array Getters */
+    getSpellsByNames(names: string[]): SpellData[] {
+      return this.spells.filter((spell) => names.includes(spell.name));
     },
   },
 });
