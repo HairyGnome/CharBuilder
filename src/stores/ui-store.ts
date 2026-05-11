@@ -8,6 +8,7 @@ export const useUiStore = defineStore("uiStore", {
       storeDialogShow: false,
       abilityScoreImprovementDialogShow: false,
       featSelectDialogShow: false,
+      manageSpellsDialogShow: false,
     };
   },
 
@@ -20,6 +21,11 @@ export const useUiStore = defineStore("uiStore", {
 
     openFeatSelectDialog() {
       this.featSelectDialogShow = true;
+    },
+
+    openManageSpellsDialog() {
+      this.manageSpellsDialogShow = true;
+      console.log("Opening Manage Spells Dialog");
     },
   },
 });

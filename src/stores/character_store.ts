@@ -60,8 +60,6 @@ export const useCharacterStore = defineStore("characterStore", {
         "acid_splash",
         "chill_touch",
         "control_flames",
-        "create_bonfire",
-        "dancing_lights",
         "fire_bolt",
         "friends",
         "frostbite",

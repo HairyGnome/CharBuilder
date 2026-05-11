@@ -1,5 +1,5 @@
 <template>
-  <q-scroll-area class="spell-page">
+  <q-scroll-area class="full-height-scroll">
     <q-card-section>
       <q-card class="q-px-md" flat>
         <q-card-section class="column items-center q-gutter-y-lg text-center text-h5">
@@ -43,7 +43,9 @@
           />
         </q-card-section>
       </q-card>
-      <q-card-section></q-card-section>
+      <q-card-section class="row justify-end">
+        <q-btn size="lg" label="Manage Spells" color="primary" @click="openManageSpellsDialog" />
+      </q-card-section>
     </q-card-section>
   </q-scroll-area>
 </template>
@@ -51,10 +53,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useCharacterStore } from "src/stores/character_store";
-import { mapState, mapWritableState } from "pinia";
+import { mapActions, mapState, mapWritableState } from "pinia";
 import { useDataStore } from "src/stores/data-store";
 import type { SpellData } from "src/models/types";
 import BaseTable from "src/components/common/BaseTable.vue";
+import { useUiStore } from "src/stores/ui-store";
 
 const dataStore = useDataStore();
 
@@ -148,19 +151,9 @@ export default defineComponent({
       return this.level2Spells.length > 0;
     },
   },
+
+  methods: {
+    ...mapActions(useUiStore, ["openManageSpellsDialog"]),
+  },
 });
 </script>
-
-<style scoped>
-.spell-page {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.spell-scroll {
-  flex: 1 1 auto;
-  min-height: 0;
-}
-</style>
