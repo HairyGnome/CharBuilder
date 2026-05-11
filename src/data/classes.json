@@ -4,6 +4,7 @@
     "label": "Fighter",
     "hitDie": 10,
     "roles": ["martial", "mundane"],
+    "wellspring": [],
     "proficiencies": {
       "armor": ["light", "medium", "shield"],
       "weapons": ["simple", "martial"],
@@ -21,6 +22,56 @@
       "2": ["action_surge"],
       "3": ["martial_archetype"],
       "5": ["glory", "indomitable"]
+    }
+  },
+  {
+    "name": "cleric",
+    "label": "Cleric",
+    "hitDie": 8,
+    "roles": ["magic"],
+    "wellspring": ["divine"],
+    "proficiencies": {
+      "armor": ["light", "medium", "shield"],
+      "weapons": ["simple"],
+      "saves": ["wis", "cha"],
+      "skills": {
+        "choose": 1
+      },
+      "tools": {
+        "choose": 1,
+        "granted": []
+      }
+    },
+    "feats": {
+      "1": ["deity", "domain_spells", "blessing_of_the_chosen"],
+      "2": ["channel_divinity", "hymn"],
+      "3": ["clerical_archetype"],
+      "5": ["minor_miracle", "domain_spells"]
+    }
+  },
+  {
+    "name": "sorcerer",
+    "label": "Sorcerer",
+    "hitDie": 6,
+    "roles": ["magic"],
+    "wellspring": ["draconic", "wild"],
+    "proficiencies": {
+      "armor": ["light"],
+      "weapons": ["simple"],
+      "saves": ["con", "cha"],
+      "skills": {
+        "choose": 1
+      },
+      "tools": {
+        "choose": 1,
+        "granted": []
+      }
+    },
+    "feats": {
+      "1": ["front_of_aether", "bloodline"],
+      "2": ["open_the_wellspring"],
+      "3": ["bloodline_manifest"],
+      "5": ["metamagic"]
     }
   }
 ]
