@@ -48,5 +48,30 @@
       "3": ["clerical_archetype"],
       "5": ["minor_miracle", "domain_spells"]
     }
+  },
+  {
+    "name": "sorcerer",
+    "label": "Sorcerer",
+    "hitDie": 6,
+    "roles": ["magic"],
+    "wellspring": ["draconic", "wild"],
+    "proficiencies": {
+      "armor": ["light"],
+      "weapons": ["simple"],
+      "saves": ["con", "cha"],
+      "skills": {
+        "choose": 1
+      },
+      "tools": {
+        "choose": 1,
+        "granted": []
+      }
+    },
+    "feats": {
+      "1": ["front_of_aether", "bloodline"],
+      "2": ["open_the_wellspring"],
+      "3": ["bloodline_manifest"],
+      "5": ["metamagic"]
+    }
   }
 ]

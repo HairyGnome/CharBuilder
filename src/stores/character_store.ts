@@ -68,6 +68,7 @@ export const useCharacterStore = defineStore("characterStore", {
         "gust",
         "infestation",
       ],
+      aetherPoints: 0,
       money: {
         gold: 0,
         silver: 0,
@@ -173,6 +174,9 @@ export const useCharacterStore = defineStore("characterStore", {
     },
     setClass(className: string) {
       this.class = className.toLowerCase();
+      if (this.aetherPoints > this.getMaxAetherPoints) {
+        this.aetherPoints = this.getMaxAetherPoints;
+      }
     },
     setBaseAbilityScores(abilityScores: AbilityScores) {
       this.abilityScores.baseScores = abilityScores;
