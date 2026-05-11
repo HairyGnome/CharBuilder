@@ -1,0 +1,132 @@
+[
+  {
+    "name": "blade_ward",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "reaction",
+    "ritual": false,
+    "school": "abjuration",
+    "concentration": "Yes",
+    "range": "self"
+  },
+  {
+    "name": "detect_magic",
+    "level": 1,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": true,
+    "school": "divination",
+    "concentration": "No",
+    "range": "self"
+  },
+  {
+    "name": "dragon's_breath",
+    "level": 2,
+    "wellspring": "arcane",
+    "time": "bonus_action",
+    "ritual": false,
+    "school": "transmutation",
+    "concentration": "Yes, up to 1 minute",
+    "range": "touch"
+  },
+  {
+    "name": "acid_splash",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": false,
+    "school": "evocation",
+    "concentration": "No",
+    "range": "60 feet"
+  },
+  {
+    "name": "chill_touch",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": false,
+    "school": "necromancy",
+    "concentration": "No",
+    "range": "touch"
+  },
+  {
+    "name": "control_flames",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": false,
+    "school": "transmutation",
+    "concentration": "No",
+    "range": "60 feet"
+  },
+  {
+    "name": "create_bonfire",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": false,
+    "school": "conjuration",
+    "concentration": "Yes",
+    "range": "60 feet"
+  },
+  {
+    "name": "dancing_lights",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": false,
+    "school": "illusion",
+    "concentration": "Yes",
+    "range": "120 feet"
+  },
+  {
+    "name": "fire_bolt",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": false,
+    "school": "evocation",
+    "concentration": "No",
+    "range": "120 feet"
+  },
+  {
+    "name": "friends",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": false,
+    "school": "enchantment",
+    "concentration": "Yes",
+    "range": "10 feet"
+  },
+  {
+    "name": "frostbite",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": false,
+    "school": "evocation",
+    "concentration": "No",
+    "range": "60 feet"
+  },
+  {
+    "name": "gust",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": false,
+    "school": "transmutation",
+    "concentration": "No",
+    "range": "30 feet"
+  },
+  {
+    "name": "infestation",
+    "level": 0,
+    "wellspring": "arcane",
+    "time": "action",
+    "ritual": false,
+    "school": "conjuration",
+    "concentration": "No",
+    "range": "30 feet"
+  }
+]

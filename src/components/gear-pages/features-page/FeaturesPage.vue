@@ -1,7 +1,7 @@
 <template>
   <q-card-section style="height: 100%">
     <q-scroll-area class="column" style="height: 100%">
-      <q-card-section>
+      <q-card-section v-if="hasAncestryAndLineageFeatures">
         <div class="text-h4">Ancestry & lineage features</div>
         <q-separator />
         <div class="column q-mt-sm">
@@ -13,7 +13,7 @@
           />
         </div>
       </q-card-section>
-      <q-card-section>
+      <q-card-section v-if="hasRoleFeatures">
         <div class="text-h4">Role features</div>
         <q-separator />
         <div class="column q-mt-sm">
@@ -25,7 +25,7 @@
           />
         </div>
       </q-card-section>
-      <q-card-section>
+      <q-card-section v-if="hasClassFeatures">
         <div class="text-h4">Class features</div>
         <q-separator />
         <div class="column q-mt-sm">
@@ -55,6 +55,18 @@ export default defineComponent({
 
     roleFeatures() {
       return characterStore.getRoleFeatures;
+    },
+
+    hasAncestryAndLineageFeatures() {
+      return this.ancestryAndLineageFeatures.length > 0;
+    },
+
+    hasRoleFeatures() {
+      return this.roleFeatures.length > 0;
+    },
+
+    hasClassFeatures() {
+      return false;
     },
   },
 });

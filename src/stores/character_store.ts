@@ -52,6 +52,21 @@ export const useCharacterStore = defineStore("characterStore", {
         { name: "mason's_tool", chargeLeft: -1 },
         { name: "disguise_kit", chargeLeft: 5 },
       ],
+      foci: ["staff"],
+      spells: [
+        "blade_ward",
+        "detect_magic",
+        "dragon's_breath",
+        "acid_splash",
+        "chill_touch",
+        "control_flames",
+        "fire_bolt",
+        "friends",
+        "frostbite",
+        "gust",
+        "infestation",
+      ],
+      aetherPoints: 0,
       money: {
         gold: 0,
         silver: 0,
@@ -136,6 +151,10 @@ export const useCharacterStore = defineStore("characterStore", {
       const result = roles.map((role) => rolePassives[role] || "");
       return result.filter((role) => role !== "");
     },
+
+    getMaxAetherPoints: (state: CharacterState): number => {
+      return state.class === "sorcerer" ? 11 : 10;
+    },
   },
 
   actions: {
@@ -153,6 +172,9 @@ export const useCharacterStore = defineStore("characterStore", {
     },
     setClass(className: string) {
       this.class = className.toLowerCase();
+      if (this.aetherPoints > this.getMaxAetherPoints) {
+        this.aetherPoints = this.getMaxAetherPoints;
+      }
     },
     setBaseAbilityScores(abilityScores: AbilityScores) {
       this.abilityScores.baseScores = abilityScores;

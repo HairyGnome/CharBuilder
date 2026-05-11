@@ -26,3 +26,14 @@ input[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
 }
+
+.q-tab__label {
+  font-size: 1.2rem;
+}
+
+.full-height-scroll {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}

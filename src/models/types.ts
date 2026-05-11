@@ -96,6 +96,9 @@ export type CharacterState = {
     armors: string[];
   };
   tools: Tool[];
+  foci: string[];
+  spells: string[];
+  aetherPoints: number;
   money: {
     gold: number;
     silver: number;
@@ -132,6 +135,7 @@ export type Data = {
   armors: ArmorData[];
   tools: ToolData[];
   foci: FociData[];
+  spells: SpellData[];
   feats: Feat[];
   hyperlinks: { [key: string]: string };
 };
@@ -141,6 +145,7 @@ export type ClassData = {
   label: string;
   hitDie: number;
   roles: string[];
+  wellspring: Wellspring[];
   proficiencies: {
     armor: {
       choose?: number;
@@ -164,3 +169,21 @@ export type ClassData = {
     [level: number]: string[];
   };
 };
+
+export type SpellData = {
+  name: string;
+  level: 0 | 1 | 2;
+  wellspring: Wellspring[];
+  time: string;
+  ritual: boolean;
+  school: string;
+  concentration: string;
+  range: string;
+};
+
+export enum Wellspring {
+  ARCANE = "arcane",
+  DIVINE = "divine",
+  PRIMAL = "primal",
+  OCCULT = "occult",
+}

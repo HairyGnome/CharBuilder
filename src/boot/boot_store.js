@@ -8,6 +8,7 @@ import weaponData from "src/data/weapons.json";
 import armorData from "src/data/armors.json";
 import toolData from "src/data/tools.json";
 import fociData from "src/data/foci.json";
+import spellData from "src/data/spells.json";
 import featData from "src/data/feats.json";
 import hyperlinks from "src/data/hyperlinks.json";
 
@@ -22,6 +23,7 @@ export default boot(() => {
   dataStore.setArmors(armorData);
   dataStore.setTools(toolData);
   dataStore.setFoci(fociData);
+  dataStore.setSpells(spellData);
   dataStore.setFeats(featData);
   dataStore.setHyperlinks(hyperlinks);
 });
