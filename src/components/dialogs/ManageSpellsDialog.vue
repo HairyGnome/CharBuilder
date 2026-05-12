@@ -1,6 +1,6 @@
 <template>
   <q-dialog v-model="manageSpellsDialogShow">
-    <q-card flat bordered style="width: fit-content; min-width: 800px" class="column">
+    <q-card flat bordered style="min-width: 800px; max-width: 800px">
       <q-card-section class="text-h3">Manage Spells</q-card-section>
       <q-card-section class="row justify-center">
         <q-card-section class="col-6">
@@ -124,8 +124,8 @@ export default defineComponent({
 <style scoped>
 .q-scrollarea {
   min-width: 300px;
-  min-height: 750px;
-  height: 750px;
+  min-height: 600px;
+  height: 600px;
 }
 .list-inner {
   padding: 8px 0;
